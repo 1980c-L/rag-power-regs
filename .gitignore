@@ -28,3 +28,7 @@ output/*/
 .env
 .env.*
 !.env.example
+
+# 从源码运行产生的本地环境与上游转换资料
+.venv/
+data/rag_learning/documents/
