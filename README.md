@@ -18,7 +18,7 @@
 | 检索基线 | BM25 + jieba 分词；展示原文片段、章节、来源链接和检索得分 |
 | 评测 | 自建 30 道题，其中 27 道有标准证据、3 道用于观察资料外问题；逐题保存命中结果 |
 | 对照实验 | 用本地 BGE 小模型 + FAISS 与 BM25 比较；固定语料、题目、检索深度与判据 |
-| 本地使用 | React 工作台、本机 Python API、用户资料库、批量问题与 CSV / DOCX 导出；另有 Streamlit 入口与 Windows 打包脚本 |
+| 本地使用 | React 工作台、本机 Python API、用户资料库、批量问题与 CSV / DOCX 导出；提供 Windows 打包脚本 |
 
 ```mermaid
 flowchart LR

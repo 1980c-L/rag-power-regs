@@ -11,7 +11,7 @@
      **真实模型请求为 0**：api_v3 的 base_url 被显式指到桩上，桩日志即请求台账。
 
 运行：
-    python verify_api_v3.py [--out <证据输出目录>]
+    python tests/verify_api_v3.py [--out <证据输出目录>]
 本文件内不写任何个人绝对路径；不读也不打印任何 API Key 内容（只用一个哨兵值验证"没泄漏"）。
 """
 from __future__ import annotations
@@ -27,7 +27,7 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent
+REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO))
 import rag_core as rc                                          # noqa: E402
 

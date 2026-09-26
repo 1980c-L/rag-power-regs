@@ -16,7 +16,7 @@
 本文件内不写任何个人绝对路径；批量状态目录与用户库目录都被隔离到系统临时目录。
 
 运行：
-    python verify_batch_jobs.py [--out <证据目录>] [--keep]
+    python tests/verify_batch_jobs.py [--out <证据目录>] [--keep]
 """
 from __future__ import annotations
 
@@ -36,7 +36,7 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent
+REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO))
 
 # ---------------- 测试隔离：必须在 import batch_jobs 之前设置环境变量 ----------------

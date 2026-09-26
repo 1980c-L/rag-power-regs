@@ -13,7 +13,7 @@
   6. 删除隔离：删除只影响我的资料库，内置库逐字节不变；
   7. 停止：只停本包记录的两个 PID，端口释放。
 
-运行：python verify_portable_package.py [--out <证据目录>] [--keep]
+运行：python tests/verify_portable_package.py [--out <证据目录>] [--keep]
 退出码：0 = 全部 PASS；1 = 有 FAIL。
 """
 from __future__ import annotations
@@ -31,7 +31,7 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent
+REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO))
 import rag_core as rc                                          # noqa: E402
 

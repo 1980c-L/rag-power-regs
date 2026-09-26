@@ -16,7 +16,7 @@
 本文件内不写任何个人绝对路径。
 
 运行：
-    python verify_exe_package.py --zip <release/RAG问答助手-x.y.z.zip> [--out <证据目录>] [--keep]
+    python tests/verify_exe_package.py --zip <release/RAG问答助手-x.y.z.zip> [--out <证据目录>] [--keep]
 """
 from __future__ import annotations
 
@@ -36,7 +36,7 @@ import urllib.request
 import zipfile
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent
+REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO))
 import rag_core as rc                                             # noqa: E402
 import batch_export as bx                                         # noqa: E402

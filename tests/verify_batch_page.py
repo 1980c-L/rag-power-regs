@@ -18,7 +18,7 @@
  10. 「未执行」「失败」「拒答」「完成」四种状态词同屏可区分。
 
 运行：
-    python verify_batch_page.py [--out <证据目录>] [--no-build]
+    python tests/verify_batch_page.py [--out <证据目录>] [--no-build]
 **全程零真实模型请求**：api_v3 的生成目标指向 tools/batch_stub_server.py。
 """
 from __future__ import annotations
@@ -35,7 +35,7 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent
+REPO = Path(__file__).resolve().parents[1]
 FRONTEND = REPO / "frontend_v3"
 URL = "http://127.0.0.1:5273"
 API_PORT = 5290

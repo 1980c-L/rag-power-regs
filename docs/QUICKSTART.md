@@ -63,17 +63,6 @@ cd ..
 
 源码下载后直接双击启动脚本不能替代依赖安装、资料导入和前端构建。未设置 `VITE_DATA_SOURCE=api` 时，前端使用模拟数据；看见页面不等于运行了真实检索。
 
-### 可选：使用 Streamlit 页面
-
-完成资料导入后，在相同 Python 环境执行：
-
-```powershell
-python -m pip install -r requirements.txt
-python -m streamlit run app.py
-```
-
-这是另一个本地入口，默认端口通常为 8501；不需要 Node.js。
-
 ## 4. 可选生成与资料导入
 
 不设置模型 Key 时，工作台可以展示检索证据。需要生成时，由使用者在启动后端前通过服务端环境变量配置 `DEEPSEEK_API_KEY`；可通过 `DEEPSEEK_BASE_URL`、`DEEPSEEK_MODEL` 指定兼容接口与模型。相关读取位置见 [config.py](../config.py)。Key 不放在前端 `VITE_*` 变量中。

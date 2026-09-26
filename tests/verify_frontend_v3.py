@@ -16,8 +16,8 @@
 并核对构建产物里有没有出现对应模式的标志文案，避免拿旧构建凑结论。
 
 运行：
-    python verify_frontend_v3.py --backend mock [--out <截图目录>] [--no-build]
-    python verify_frontend_v3.py --backend api  [--out <截图目录>] [--no-build]
+    python tests/verify_frontend_v3.py --backend mock [--out <截图目录>] [--no-build]
+    python tests/verify_frontend_v3.py --backend api  [--out <截图目录>] [--no-build]
 前置：frontend_v3 里已 `npm install`；api 模式会自动拉起本机桩与 api_v3.py。
 本文件内不写任何个人绝对路径。
 """
@@ -32,7 +32,7 @@ import time
 import urllib.request
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent
+REPO = Path(__file__).resolve().parents[1]
 FRONTEND = REPO / "frontend_v3"
 URL = "http://127.0.0.1:5273"
 WIDTHS = (1500, 1280)

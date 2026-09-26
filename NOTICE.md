@@ -18,7 +18,7 @@
 |---|---|
 | 关键词检索 | BM25 方法、jieba 分词 |
 | 本地向量实验 | BAAI/bge-small-zh-v1.5 的 Xenova ONNX 版本，ONNX Runtime、Transformers 分词器、FAISS |
-| 页面 | React、Vite、Streamlit |
+| 页面 | React、Vite |
 | 请求与导出 | requests、python-docx |
 | Windows 打包 | PyInstaller 与相关打包依赖 |
 

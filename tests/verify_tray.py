@@ -42,7 +42,7 @@ import urllib.request
 import zipfile
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent
+REPO = Path(__file__).resolve().parents[1]
 EXE_NAME = "RAG问答助手.exe"
 TRAY_CLASS = "RagPortableTrayWnd"
 API_PORT, WEB_PORT = 5280, 5273

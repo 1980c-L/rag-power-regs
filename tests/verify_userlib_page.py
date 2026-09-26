@@ -13,7 +13,7 @@
   7. 删除时点「确定」→ DELETE 请求发出、界面回到空库形态。
 
 计数独立（与 mock 39 / api 35 不合并）。全程零真实模型请求。
-运行：python verify_userlib_page.py [--out <证据目录>]
+运行：python tests/verify_userlib_page.py [--out <证据目录>]
 """
 from __future__ import annotations
 
@@ -26,7 +26,7 @@ import tempfile
 import time
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent
+REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO))
 
 API_PORT = 5280        # dist-api 构建时烧进的 API 地址，必须一致

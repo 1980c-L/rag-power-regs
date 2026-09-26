@@ -12,7 +12,7 @@
   - 测试数据全部落在临时目录（RAG_USER_LIBRARY_DIR），不污染真实 用户资料/。
 
 运行：
-    python verify_user_library.py [--out <证据输出目录>]
+    python tests/verify_user_library.py [--out <证据输出目录>]
 退出码：0 = 全部 PASS；1 = 有 FAIL（判据全项跑完再统一裁决，不中途停）。
 """
 from __future__ import annotations
@@ -30,7 +30,7 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent
+REPO = Path(__file__).resolve().parents[1]
 # 必须在 import rag_core / user_library 之前设好：注册表在 import 时确定路径
 _TMP_ROOT = Path(tempfile.mkdtemp(prefix="rag_userlib_verify_"))
 os.environ["RAG_USER_LIBRARY_DIR"] = str(_TMP_ROOT)

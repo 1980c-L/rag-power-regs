@@ -21,14 +21,13 @@
 | 向量对照 | [06_eval_vector.py](../06_eval_vector.py)、[vector_retriever.py](../vector_retriever.py) | 离线实验，复用基线判据；不是工作台默认检索 |
 | 资料导入 | [tools/import_rag_corpus.py](../tools/import_rag_corpus.py)、[语料清单](../data/rag_learning/corpus_manifest.json) | 固定上游版本与资料身份 |
 | 工作台 | [api_v3.py](../api_v3.py)、[frontend_v3/src](../frontend_v3/src) | 本机 API 与 React；前端有模拟/API 两种数据源 |
-| 早期页面 | [app.py](../app.py)、[app_v2.py](../app_v2.py) | Streamlit 入口，保留用于学习与历史演示 |
 | 用户资料 | [user_library.py](../user_library.py) | 独立的本机用户资料目录 |
 | 批量与导出 | [batch_jobs.py](../batch_jobs.py)、[batch_export.py](../batch_export.py) | 保存结果、状态与取消、CSV / DOCX |
 | Windows 交付 | [build_release.py](../build_release.py)、[launcher.py](../launcher.py)、[tray.py](../tray.py) | 打包、启停与托盘 |
-| 检查与样本 | 根目录 `verify_*.py`、[eval](../eval)、[output](../output) | 具体功能的回归脚本和逐题证据，按需查看 |
+| 检查与样本 | [tests](../tests/README.md)、[eval](../eval)、[output](../output) | 具体功能的回归脚本和逐题证据，按需查看 |
 
-## 为什么根目录还有不少脚本
+## 当前目录与历史材料
 
-仓库保留了从 CLI、Streamlit 到本地工作台的演进入口，以及独立功能的验证脚本。它们不都是日常运行所需文件。当前整理以首页和文档导航为主，保留运行路径，避免仅为减少文件数量就破坏脚本之间的引用。
+当前源码树以 React 工作台、本地 API、检索评测和 Windows 交付为主。当前功能的检查统一在 `tests/`；早期 Streamlit 页面、旧版验收材料、调试修补脚本和历史真实调用实验不再放在当前源码树。
 
-根目录的 [实验说明](../实验说明-真实RAG学习库基线.md)、[生成验证记录](../生成验证记录.md) 和 [托盘改动记录](../0.5.1-无窗口托盘-改动与验收.md) 是历史材料，保留当时的检查范围。了解当前项目先从首页与这组文档开始，不需要按编号读完整个历史。
+它们已保留在项目负责人的本地归档，也可以通过 [整理前的 Git 版本](https://github.com/1980c-L/rag-power-regs/tree/df86a094568e695d11a6deb5e93a49413054ba18) 查阅。历史材料说明的是当时的检查范围，不承担当前运行入口的作用。
