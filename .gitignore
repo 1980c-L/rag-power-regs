@@ -1,0 +1,30 @@
+# 仓库只放源码、文档与自编评测资产；运行时/构建产物一律不入库
+release/
+build_exe/
+dist/
+frontend_v3/dist/
+frontend_v3/dist-api/
+frontend_v3/node_modules/
+index/
+logs/
+.run/
+用户资料/
+
+# Python
+__pycache__/
+*.pyc
+
+# 二进制与打包产物
+*.zip
+*.exe
+*.dll
+*.pyd
+*.log
+
+# 评测证据子目录（里面是截图与日志；顶层报告与 CSV 仍入库）
+output/*/
+
+# 凭据（本仓库不含任何 key）
+.env
+.env.*
+!.env.example

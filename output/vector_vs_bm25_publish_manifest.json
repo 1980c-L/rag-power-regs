@@ -1,0 +1,39 @@
+{
+  "published_at": "2026-09-24T19:28:22+02:00",
+  "corpus_id": "rag_learning",
+  "corpus_fingerprint": "2bcead7a60490003ea28cdbafac2bc8e6d43f3f289420809b7c5d244e0ebc82d",
+  "field": "search_text",
+  "top_k": 5,
+  "gate": {
+    "baseline_report": "eval_report_rag_learning.json",
+    "baseline_sha256": "48dd24f2e68818a3c62cf467bfd716f53c40c0c260e3de19574cff7797018b61",
+    "bm25_recheck_identical": true
+  },
+  "retriever": {
+    "model_id": "Xenova/bge-small-zh-v1.5@onnx",
+    "onnx_sha256": "69a0b846f4f116b5e6aabf9546ea6754d02264f3211a13a1bd69b31b8040749a",
+    "dim": 512,
+    "pooling": "cls",
+    "normalize": "L2",
+    "query_template": "none"
+  },
+  "artifacts": [
+    {
+      "name": "eval_report_rag_learning_vector.json",
+      "bytes": 91507,
+      "sha256": "b669dd2fda2bc2e9b02c0ad91bcef95413fbfe7639666bec4f6c7f17489b9bff"
+    },
+    {
+      "name": "eval_report_rag_learning_bm25_recheck.json",
+      "bytes": 85729,
+      "sha256": "9366959ab1a1696faece6fb78a93358f65c5c9be66c890e9fde40881885db136"
+    },
+    {
+      "name": "vector_vs_bm25_detail.csv",
+      "bytes": 11504,
+      "sha256": "129544587cb98208913c523cf686730ac1f42d1b4627495fcab7686fe846cce1"
+    }
+  ],
+  "how_to_check": "python 06_eval_vector.py --corpus rag_learning --verify-published（退出 0 = 三件产物与清单成一套）",
+  "note": "清单是最后一步写的。清单缺失、或任一产物哈希与清单不符 → 本轮发布不算完成；不得只凭单个 JSON/CSV 存在就认定对照实验通过。"
+}

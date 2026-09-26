@@ -1,0 +1,71 @@
+{
+  "card_version": 1,
+  "phase": "第二阶段 B（少量真实生成）",
+  "status": "RUN_ONCE_EXECUTED",
+  "confirmed_by_user": true,
+  "confirmed_at": "2026-09-20",
+  "run_log": {
+    "executed_at": "2026-09-20",
+    "mode": "real",
+    "requests_sent": 4,
+    "requests_budget": 4,
+    "retries": 0,
+    "aborted": null,
+    "budget_sufficient": true,
+    "budget_note": "4 次一次成功、0 重试、0 中断：本轮目标（验证真实生成链路 + 给 S4 补最小样本）没有出现配额不足。任何进一步的真实调用（包括用浏览器跑一次以补齐「页面↔接口↔真实模型」三跳）都属于新预算，必须先改本卡并再次获得用户同意。",
+    "evidence": "独立复审\\36-证据-第二阶段B真实调用\\（real_gen_ledger_real.jsonl / real_gen_result_real.json / real_gen_summary_real.md / api_v3_real.log）"
+  },
+  "confirmed_evidence": "用户 2026-09-20 明确指示「跑」，并在同一句里确认知晓本卡上限（“虽然 codex 明确要求了最多 4 次”）；执行器据此以 --confirm 逐字匹配本卡短语后发动。",
+  "confirm_phrase": "按最多 4 次、0 重试执行",
+  "_comment": "本卡是 34 号复审冻结的最小调用卡。max_requests=4 / max_retries=0 是复审冻结值，执行器硬校验、不许运行期放宽；若实测确实不够，必须先改本卡数值并再获用户同意。",
+  "provider": "DeepSeek OpenAI-compatible API",
+  "model": "deepseek-chat",
+  "credential_ref": "服务端环境变量 DEEPSEEK_API_KEY（只在服务端进程读取；不读值、不回显、不写入证据）",
+  "base_url_source": "服务端 config.py 的 DEEPSEEK_BASE_URL（不接受前端传入）",
+  "max_requests": 4,
+  "max_retries": 0,
+  "stop_conditions": [
+    "任何 401 / 403（鉴权失败）",
+    "限流（429 或等价错误）",
+    "网络错误 / 超时",
+    "返回结构异常（缺少 choices[0].message.content 等）",
+    "凭据或目标地址漂移（Key 缺失、base_url 变成非预期值）",
+    "调用计数将超过 max_requests"
+  ],
+  "output_policy": "只保留问题、检索证据 id、回答、引用、状态与耗时；不记录请求头、不记录 Key、不记录任何凭据形式的内容",
+  "purpose": "验证真实 API 的页面/接口链路；给 S4「无依据不伪造」补一个有变化的最小样本；不据此宣称长期生成质量或整体稳定性",
+  "cases": [
+    {
+      "id": "B0",
+      "kind": "有依据正常题",
+      "corpus_id": "rag_learning",
+      "mode": "generate",
+      "top_k": 3,
+      "question": "RAG 评估三元组包含哪三个维度？"
+    },
+    {
+      "id": "B1",
+      "kind": "资料外 · 项目参数",
+      "corpus_id": "rag_learning",
+      "mode": "generate",
+      "top_k": 3,
+      "question": "本项目现在为什么把切分上限设成 400 字符？"
+    },
+    {
+      "id": "B2",
+      "kind": "资料外 · 规模延迟",
+      "corpus_id": "rag_learning",
+      "mode": "generate",
+      "top_k": 3,
+      "question": "本项目在十万份文档规模下的检索延迟是多少毫秒？"
+    },
+    {
+      "id": "B3",
+      "kind": "资料外 · 无关领域",
+      "corpus_id": "rag_learning",
+      "mode": "generate",
+      "top_k": 3,
+      "question": "红烧肉怎么做才好吃？"
+    }
+  ]
+}

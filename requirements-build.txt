@@ -1,0 +1,4 @@
+# 便携 EXE 构建环境（47 号方案阶段 C）。只在出包机上安装，不随发行包分发。
+-r requirements-api.txt
+# 版本固定：换机器重装也必须得到同一份 PyInstaller（构建行为可复现）
+pyinstaller==6.22.3

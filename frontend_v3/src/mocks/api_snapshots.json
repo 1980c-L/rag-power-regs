@@ -1,0 +1,2284 @@
+{
+  "schema_version": 2,
+  "data_source": "mock",
+  "mock_note": "第一阶段本地示例数据：数值来自 rag_core 的真实检索快照与本项目已记录的真实回答原文，没有编造分数或引用 id；但未接入真实语料与模型调用。",
+  "generation_verified": false,
+  "unverified_note": "生成层尚未完成正式验证：离线验收里「无依据不伪造」（S4）是**尚未验证（NOT VALIDATED）**，不是已执行且失败；目前只有单轮 8 例用户侧样本。",
+  "api_key_configured_default": null,
+  "top_k_choices": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "corpora": [
+    {
+      "corpus_id": "rag_learning",
+      "name": "RAG 技术学习库",
+      "note": "Datawhale《All-in-RAG》第一批 10 篇，带来源 / 版本 / 许可元数据",
+      "source_count": 10,
+      "chunk_count": 471,
+      "total_chars": 71147,
+      "version": "583a61b（CC BY-NC-SA 4.0（署名-非商业性使用-相同方式共享 4.0 国际））",
+      "tokenizer": "jieba",
+      "params": {
+        "chunk_max_chars": 400,
+        "top_k_default": 3,
+        "bm25_k1": 1.5,
+        "bm25_b": 0.75
+      },
+      "chunking_note": "按 Markdown 标题分节 → 按空行分段（相邻列表合并）→ 超过上限再按字数切；chunk id = {来源}#s{节}p{段}",
+      "license_note": "Datawhale《All-in-RAG》，许可 CC BY-NC-SA 4.0（署名 · 非商业 · 相同方式共享）",
+      "is_sample_only": false,
+      "warning": ""
+    },
+    {
+      "corpus_id": "power_demo",
+      "name": "电力示例库",
+      "note": "示例语料（约 3.4 KB，无来源元数据），仅用于演示流程跑通",
+      "source_count": 1,
+      "chunk_count": 12,
+      "total_chars": 1144,
+      "version": "无版本（示例语料）",
+      "tokenizer": "jieba",
+      "params": {
+        "chunk_max_chars": 400,
+        "top_k_default": 3,
+        "bm25_k1": 1.5,
+        "bm25_b": 0.75
+      },
+      "chunking_note": "按空行分段 → 超过上限再按字数切；chunk id = {文件名}#P{段}（无标题层级）",
+      "license_note": "",
+      "is_sample_only": true,
+      "warning": "示例资料，不是正式规程，不可用于现场作业或安全决策。"
+    }
+  ],
+  "default_corpus": "rag_learning",
+  "scenarios": {
+    "learning_triad": {
+      "request": {
+        "question": "RAG 评估三元组包含哪三个维度？",
+        "corpus_id": "rag_learning",
+        "mode": "generate",
+        "top_k": 3
+      },
+      "recorded_top_k": 3,
+      "by_top_k": {
+        "1": {
+          "hits": [
+            {
+              "id": "air-evaluation#s2p1",
+              "origin": "hit",
+              "rank": 1,
+              "score": 22.0627,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "该架构包含以下三个维度，并在 **TruLens** [^1]等工具中有深入的应用："
+            }
+          ],
+          "neighbors": [
+            {
+              "id": "air-evaluation#s2p2",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "（1）**上下文相关性 (Context Relevance)**\n- **评估目标：** 检索器（Retriever）的性能。\n- **核心问题：** 检索到的上下文内容，是否与用户的查询（Query）高度相关？\n- **重要性：** 检索是RAG应用在响应用户查询时的第一步。如果检索回来的上下文充满了噪声或无关信息，那么无论后续的生成模型多么强大，都没法做出正确答案。"
+            },
+            {
+              "id": "air-evaluation#s2p3",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "（2）**忠实度 / 可信度 (Faithfulness / Groundedness)**\n- **评估目标：** 生成器的可靠性。\n- **核心问题：** 生成的答案是否完全基于所提供的上下文信息？\n- **重要性：** 这个维度主要在于量化LLM的“幻觉”程度。一个高忠实度的回答意味着模型严格遵守了上下文，没有捏造或歪曲事实。如果忠实度得分低，说明LLM在回答时“自由发挥”过度，引入了外部知识或不实信息。"
+            }
+          ],
+          "answer": "RAG 评估三元组包含以下三个维度：\n\n1. **上下文相关性 (Context Relevance)**：评估检索器（Retriever）的性能，核心问题是检索到的上下文内容是否与用户的查询（Query）高度相关 [air-evaluation#s2p2]。\n\n2. **忠实度 / 可信度 (Faithfulness / Groundedness)**：评估生成器的可靠性，核心问题是生成的答案是否完全基于所提供的上下文信息 [air-evaluation#s2p3]。\n\n3. **答案相关性 (Answer Relevance)**：评估系统的端到端（End-to-End）表现，核心问题是最终生成的答案是否直接、完整且有效地回答了用户的原始问题 [air-evaluation#s2p4]。\n\n这三个维度共同构成了 RAG 三元组这一诊断视角，通过对它们的评估，可以初步判断问题主要来自检索还是生成环节 [air-evaluation#s2p6]。需要注意的是，RAG 三元组是一种诊断视角，并不是完整的评估清单，实际项目通常还需要关注答案正确性与完整性、不可回答问题的拒答能力、鲁棒性，以及延迟、吞吐量和调用成本等系统指标 [air-evaluation#s2p7]。",
+          "refs": [
+            "air-evaluation#s2p2",
+            "air-evaluation#s2p3"
+          ],
+          "ref_occurrences": 5,
+          "context_chars": {
+            "total": 436,
+            "hit": 42,
+            "max": 4000,
+            "radius": 2
+          },
+          "elapsed_ms": {
+            "retrieve": null,
+            "generate": 3700
+          },
+          "recorded_from": "21 号证据 01-三元组.json（真实模型输出，逐字节写入）"
+        },
+        "2": {
+          "hits": [
+            {
+              "id": "air-evaluation#s2p1",
+              "origin": "hit",
+              "rank": 1,
+              "score": 22.0627,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "该架构包含以下三个维度，并在 **TruLens** [^1]等工具中有深入的应用："
+            },
+            {
+              "id": "air-evaluation#s2p6",
+              "origin": "hit",
+              "rank": 2,
+              "score": 19.6277,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "通过对这三个维度进行评估，可以初步判断问题主要来自检索还是生成环节。"
+            }
+          ],
+          "neighbors": [
+            {
+              "id": "air-evaluation#s2p2",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "（1）**上下文相关性 (Context Relevance)**\n- **评估目标：** 检索器（Retriever）的性能。\n- **核心问题：** 检索到的上下文内容，是否与用户的查询（Query）高度相关？\n- **重要性：** 检索是RAG应用在响应用户查询时的第一步。如果检索回来的上下文充满了噪声或无关信息，那么无论后续的生成模型多么强大，都没法做出正确答案。"
+            },
+            {
+              "id": "air-evaluation#s2p3",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "（2）**忠实度 / 可信度 (Faithfulness / Groundedness)**\n- **评估目标：** 生成器的可靠性。\n- **核心问题：** 生成的答案是否完全基于所提供的上下文信息？\n- **重要性：** 这个维度主要在于量化LLM的“幻觉”程度。一个高忠实度的回答意味着模型严格遵守了上下文，没有捏造或歪曲事实。如果忠实度得分低，说明LLM在回答时“自由发挥”过度，引入了外部知识或不实信息。"
+            },
+            {
+              "id": "air-evaluation#s2p4",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "（3）**答案相关性 (Answer Relevance)**\n- **评估目标：** 系统的端到端（End-to-End）表现。\n- **核心问题：** 最终生成的答案是否直接、完整且有效地回答了用户的原始问题？\n- **重要性：** 这是用户最直观的感受。一个答案可能完全基于上下文（高忠实度），但如果它答非所问，或者只回答了问题的一部分，那么这个答案的相关性就很低。例如，当用户问“法国在哪里，首都是哪里？”，如果答案只是“法国在西欧”，那么虽然忠实度高，但答案相关性很低。"
+            },
+            {
+              "id": "air-evaluation#s2p5",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "> 你可能觉得忠实度和答案相关性很相似，但它们的侧重点是不同的。忠实度更关注模型是否严格遵循了上下文，而答案相关性则更关注模型是否直接、完整且有效地回答了问题。"
+            },
+            {
+              "id": "air-evaluation#s2p7",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "> **需要注意：** RAG三元组是一种诊断视角，并不是完整的评估清单。实际项目通常还需要关注答案正确性与完整性、不可回答问题的拒答能力、鲁棒性，以及延迟、吞吐量和调用成本等系统指标。"
+            }
+          ],
+          "answer": "RAG 评估三元组包含以下三个维度：\n\n1. **上下文相关性 (Context Relevance)**：评估检索器（Retriever）的性能，核心问题是检索到的上下文内容是否与用户的查询（Query）高度相关 [air-evaluation#s2p2]。\n\n2. **忠实度 / 可信度 (Faithfulness / Groundedness)**：评估生成器的可靠性，核心问题是生成的答案是否完全基于所提供的上下文信息 [air-evaluation#s2p3]。\n\n3. **答案相关性 (Answer Relevance)**：评估系统的端到端（End-to-End）表现，核心问题是最终生成的答案是否直接、完整且有效地回答了用户的原始问题 [air-evaluation#s2p4]。\n\n这三个维度共同构成了 RAG 三元组这一诊断视角，通过对它们的评估，可以初步判断问题主要来自检索还是生成环节 [air-evaluation#s2p6]。需要注意的是，RAG 三元组是一种诊断视角，并不是完整的评估清单，实际项目通常还需要关注答案正确性与完整性、不可回答问题的拒答能力、鲁棒性，以及延迟、吞吐量和调用成本等系统指标 [air-evaluation#s2p7]。",
+          "refs": [
+            "air-evaluation#s2p2",
+            "air-evaluation#s2p3",
+            "air-evaluation#s2p4",
+            "air-evaluation#s2p6",
+            "air-evaluation#s2p7"
+          ],
+          "ref_occurrences": 5,
+          "context_chars": {
+            "total": 883,
+            "hit": 76,
+            "max": 4000,
+            "radius": 2
+          },
+          "elapsed_ms": {
+            "retrieve": null,
+            "generate": 3700
+          },
+          "recorded_from": "21 号证据 01-三元组.json（真实模型输出，逐字节写入）"
+        },
+        "3": {
+          "hits": [
+            {
+              "id": "air-evaluation#s2p1",
+              "origin": "hit",
+              "rank": 1,
+              "score": 22.0627,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "该架构包含以下三个维度，并在 **TruLens** [^1]等工具中有深入的应用："
+            },
+            {
+              "id": "air-evaluation#s2p6",
+              "origin": "hit",
+              "rank": 2,
+              "score": 19.6277,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "通过对这三个维度进行评估，可以初步判断问题主要来自检索还是生成环节。"
+            },
+            {
+              "id": "air-evaluation#s1p4",
+              "origin": "hit",
+              "rank": 3,
+              "score": 13.1323,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "第一节 评估介绍",
+              "text": "本节将探讨RAG评估的理念与方法：先用 **“RAG三元组（RAG Triad）”** 理解核心质量维度，再给出一套可以持续迭代的工程化评估工作流。"
+            }
+          ],
+          "neighbors": [
+            {
+              "id": "air-evaluation#s2p2",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "（1）**上下文相关性 (Context Relevance)**\n- **评估目标：** 检索器（Retriever）的性能。\n- **核心问题：** 检索到的上下文内容，是否与用户的查询（Query）高度相关？\n- **重要性：** 检索是RAG应用在响应用户查询时的第一步。如果检索回来的上下文充满了噪声或无关信息，那么无论后续的生成模型多么强大，都没法做出正确答案。"
+            },
+            {
+              "id": "air-evaluation#s2p3",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "（2）**忠实度 / 可信度 (Faithfulness / Groundedness)**\n- **评估目标：** 生成器的可靠性。\n- **核心问题：** 生成的答案是否完全基于所提供的上下文信息？\n- **重要性：** 这个维度主要在于量化LLM的“幻觉”程度。一个高忠实度的回答意味着模型严格遵守了上下文，没有捏造或歪曲事实。如果忠实度得分低，说明LLM在回答时“自由发挥”过度，引入了外部知识或不实信息。"
+            },
+            {
+              "id": "air-evaluation#s2p4",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "（3）**答案相关性 (Answer Relevance)**\n- **评估目标：** 系统的端到端（End-to-End）表现。\n- **核心问题：** 最终生成的答案是否直接、完整且有效地回答了用户的原始问题？\n- **重要性：** 这是用户最直观的感受。一个答案可能完全基于上下文（高忠实度），但如果它答非所问，或者只回答了问题的一部分，那么这个答案的相关性就很低。例如，当用户问“法国在哪里，首都是哪里？”，如果答案只是“法国在西欧”，那么虽然忠实度高，但答案相关性很低。"
+            },
+            {
+              "id": "air-evaluation#s2p5",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "> 你可能觉得忠实度和答案相关性很相似，但它们的侧重点是不同的。忠实度更关注模型是否严格遵循了上下文，而答案相关性则更关注模型是否直接、完整且有效地回答了问题。"
+            },
+            {
+              "id": "air-evaluation#s2p7",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "> **需要注意：** RAG三元组是一种诊断视角，并不是完整的评估清单。实际项目通常还需要关注答案正确性与完整性、不可回答问题的拒答能力、鲁棒性，以及延迟、吞吐量和调用成本等系统指标。"
+            },
+            {
+              "id": "air-evaluation#s1p2",
+              "origin": "neighbor",
+              "rank": 3,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "第一节 评估介绍",
+              "text": "评估之所以关键，是因为它回答了RAG开发与应用中的一系列核心问题："
+            },
+            {
+              "id": "air-evaluation#s1p3",
+              "origin": "neighbor",
+              "rank": 3,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "第一节 评估介绍",
+              "text": "- **对于开发者：** 如何量化地追踪、迭代并提升RAG应用的性能？当系统出现“幻觉”或答非所问时，如何快速定位问题根源？\n- **对于用户或决策者：** 面对两个不同的RAG应用，如何客观地评判孰优孰劣？"
+            }
+          ],
+          "answer": "RAG 评估三元组包含以下三个维度：\n\n1. **上下文相关性 (Context Relevance)**：评估检索器（Retriever）的性能，核心问题是检索到的上下文内容是否与用户的查询（Query）高度相关 [air-evaluation#s2p2]。\n\n2. **忠实度 / 可信度 (Faithfulness / Groundedness)**：评估生成器的可靠性，核心问题是生成的答案是否完全基于所提供的上下文信息 [air-evaluation#s2p3]。\n\n3. **答案相关性 (Answer Relevance)**：评估系统的端到端（End-to-End）表现，核心问题是最终生成的答案是否直接、完整且有效地回答了用户的原始问题 [air-evaluation#s2p4]。\n\n这三个维度共同构成了 RAG 三元组这一诊断视角，通过对它们的评估，可以初步判断问题主要来自检索还是生成环节 [air-evaluation#s2p6]。需要注意的是，RAG 三元组是一种诊断视角，并不是完整的评估清单，实际项目通常还需要关注答案正确性与完整性、不可回答问题的拒答能力、鲁棒性，以及延迟、吞吐量和调用成本等系统指标 [air-evaluation#s2p7]。",
+          "refs": [
+            "air-evaluation#s2p2",
+            "air-evaluation#s2p3",
+            "air-evaluation#s2p4",
+            "air-evaluation#s2p6",
+            "air-evaluation#s2p7"
+          ],
+          "ref_occurrences": 5,
+          "context_chars": {
+            "total": 1094,
+            "hit": 150,
+            "max": 4000,
+            "radius": 2
+          },
+          "elapsed_ms": {
+            "retrieve": null,
+            "generate": 3700
+          },
+          "recorded_from": "21 号证据 01-三元组.json（真实模型输出，逐字节写入）"
+        },
+        "4": {
+          "hits": [
+            {
+              "id": "air-evaluation#s2p1",
+              "origin": "hit",
+              "rank": 1,
+              "score": 22.0627,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "该架构包含以下三个维度，并在 **TruLens** [^1]等工具中有深入的应用："
+            },
+            {
+              "id": "air-evaluation#s2p6",
+              "origin": "hit",
+              "rank": 2,
+              "score": 19.6277,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "通过对这三个维度进行评估，可以初步判断问题主要来自检索还是生成环节。"
+            },
+            {
+              "id": "air-evaluation#s1p4",
+              "origin": "hit",
+              "rank": 3,
+              "score": 13.1323,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "第一节 评估介绍",
+              "text": "本节将探讨RAG评估的理念与方法：先用 **“RAG三元组（RAG Triad）”** 理解核心质量维度，再给出一套可以持续迭代的工程化评估工作流。"
+            },
+            {
+              "id": "air-evaluation#s6p1",
+              "origin": "hit",
+              "rank": 4,
+              "score": 11.0436,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "二、评估工作流 > 2.3 响应评估",
+              "text": "响应评估覆盖了RAG三元组中的 **忠实度** 和 **答案相关性**。此环节通常采用 **端到端** 的评估范式，因为它直接衡量用户感知的最终输出质量。无论采用何种评估方法，都主要围绕以下两个核心维度展开。"
+            }
+          ],
+          "neighbors": [
+            {
+              "id": "air-evaluation#s2p2",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "（1）**上下文相关性 (Context Relevance)**\n- **评估目标：** 检索器（Retriever）的性能。\n- **核心问题：** 检索到的上下文内容，是否与用户的查询（Query）高度相关？\n- **重要性：** 检索是RAG应用在响应用户查询时的第一步。如果检索回来的上下文充满了噪声或无关信息，那么无论后续的生成模型多么强大，都没法做出正确答案。"
+            },
+            {
+              "id": "air-evaluation#s2p3",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "（2）**忠实度 / 可信度 (Faithfulness / Groundedness)**\n- **评估目标：** 生成器的可靠性。\n- **核心问题：** 生成的答案是否完全基于所提供的上下文信息？\n- **重要性：** 这个维度主要在于量化LLM的“幻觉”程度。一个高忠实度的回答意味着模型严格遵守了上下文，没有捏造或歪曲事实。如果忠实度得分低，说明LLM在回答时“自由发挥”过度，引入了外部知识或不实信息。"
+            },
+            {
+              "id": "air-evaluation#s2p4",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "（3）**答案相关性 (Answer Relevance)**\n- **评估目标：** 系统的端到端（End-to-End）表现。\n- **核心问题：** 最终生成的答案是否直接、完整且有效地回答了用户的原始问题？\n- **重要性：** 这是用户最直观的感受。一个答案可能完全基于上下文（高忠实度），但如果它答非所问，或者只回答了问题的一部分，那么这个答案的相关性就很低。例如，当用户问“法国在哪里，首都是哪里？”，如果答案只是“法国在西欧”，那么虽然忠实度高，但答案相关性很低。"
+            },
+            {
+              "id": "air-evaluation#s2p5",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "> 你可能觉得忠实度和答案相关性很相似，但它们的侧重点是不同的。忠实度更关注模型是否严格遵循了上下文，而答案相关性则更关注模型是否直接、完整且有效地回答了问题。"
+            },
+            {
+              "id": "air-evaluation#s2p7",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "> **需要注意：** RAG三元组是一种诊断视角，并不是完整的评估清单。实际项目通常还需要关注答案正确性与完整性、不可回答问题的拒答能力、鲁棒性，以及延迟、吞吐量和调用成本等系统指标。"
+            },
+            {
+              "id": "air-evaluation#s1p2",
+              "origin": "neighbor",
+              "rank": 3,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "第一节 评估介绍",
+              "text": "评估之所以关键，是因为它回答了RAG开发与应用中的一系列核心问题："
+            },
+            {
+              "id": "air-evaluation#s1p3",
+              "origin": "neighbor",
+              "rank": 3,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "第一节 评估介绍",
+              "text": "- **对于开发者：** 如何量化地追踪、迭代并提升RAG应用的性能？当系统出现“幻觉”或答非所问时，如何快速定位问题根源？\n- **对于用户或决策者：** 面对两个不同的RAG应用，如何客观地评判孰优孰劣？"
+            }
+          ],
+          "answer": "RAG 评估三元组包含以下三个维度：\n\n1. **上下文相关性 (Context Relevance)**：评估检索器（Retriever）的性能，核心问题是检索到的上下文内容是否与用户的查询（Query）高度相关 [air-evaluation#s2p2]。\n\n2. **忠实度 / 可信度 (Faithfulness / Groundedness)**：评估生成器的可靠性，核心问题是生成的答案是否完全基于所提供的上下文信息 [air-evaluation#s2p3]。\n\n3. **答案相关性 (Answer Relevance)**：评估系统的端到端（End-to-End）表现，核心问题是最终生成的答案是否直接、完整且有效地回答了用户的原始问题 [air-evaluation#s2p4]。\n\n这三个维度共同构成了 RAG 三元组这一诊断视角，通过对它们的评估，可以初步判断问题主要来自检索还是生成环节 [air-evaluation#s2p6]。需要注意的是，RAG 三元组是一种诊断视角，并不是完整的评估清单，实际项目通常还需要关注答案正确性与完整性、不可回答问题的拒答能力、鲁棒性，以及延迟、吞吐量和调用成本等系统指标 [air-evaluation#s2p7]。",
+          "refs": [
+            "air-evaluation#s2p2",
+            "air-evaluation#s2p3",
+            "air-evaluation#s2p4",
+            "air-evaluation#s2p6",
+            "air-evaluation#s2p7"
+          ],
+          "ref_occurrences": 5,
+          "context_chars": {
+            "total": 1198,
+            "hit": 254,
+            "max": 4000,
+            "radius": 2
+          },
+          "elapsed_ms": {
+            "retrieve": null,
+            "generate": 3700
+          },
+          "recorded_from": "21 号证据 01-三元组.json（真实模型输出，逐字节写入）"
+        },
+        "5": {
+          "hits": [
+            {
+              "id": "air-evaluation#s2p1",
+              "origin": "hit",
+              "rank": 1,
+              "score": 22.0627,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "该架构包含以下三个维度，并在 **TruLens** [^1]等工具中有深入的应用："
+            },
+            {
+              "id": "air-evaluation#s2p6",
+              "origin": "hit",
+              "rank": 2,
+              "score": 19.6277,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "通过对这三个维度进行评估，可以初步判断问题主要来自检索还是生成环节。"
+            },
+            {
+              "id": "air-evaluation#s1p4",
+              "origin": "hit",
+              "rank": 3,
+              "score": 13.1323,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "第一节 评估介绍",
+              "text": "本节将探讨RAG评估的理念与方法：先用 **“RAG三元组（RAG Triad）”** 理解核心质量维度，再给出一套可以持续迭代的工程化评估工作流。"
+            },
+            {
+              "id": "air-evaluation#s6p1",
+              "origin": "hit",
+              "rank": 4,
+              "score": 11.0436,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "二、评估工作流 > 2.3 响应评估",
+              "text": "响应评估覆盖了RAG三元组中的 **忠实度** 和 **答案相关性**。此环节通常采用 **端到端** 的评估范式，因为它直接衡量用户感知的最终输出质量。无论采用何种评估方法，都主要围绕以下两个核心维度展开。"
+            },
+            {
+              "id": "air-rag-intro#s14p2",
+              "origin": "hit",
+              "rank": 5,
+              "score": 10.9305,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "三、如何上手 RAG？ > 3.4 进阶与挑战",
+              "text": "（1）**评估维度与挑战**"
+            }
+          ],
+          "neighbors": [
+            {
+              "id": "air-evaluation#s2p2",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "（1）**上下文相关性 (Context Relevance)**\n- **评估目标：** 检索器（Retriever）的性能。\n- **核心问题：** 检索到的上下文内容，是否与用户的查询（Query）高度相关？\n- **重要性：** 检索是RAG应用在响应用户查询时的第一步。如果检索回来的上下文充满了噪声或无关信息，那么无论后续的生成模型多么强大，都没法做出正确答案。"
+            },
+            {
+              "id": "air-evaluation#s2p3",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "（2）**忠实度 / 可信度 (Faithfulness / Groundedness)**\n- **评估目标：** 生成器的可靠性。\n- **核心问题：** 生成的答案是否完全基于所提供的上下文信息？\n- **重要性：** 这个维度主要在于量化LLM的“幻觉”程度。一个高忠实度的回答意味着模型严格遵守了上下文，没有捏造或歪曲事实。如果忠实度得分低，说明LLM在回答时“自由发挥”过度，引入了外部知识或不实信息。"
+            },
+            {
+              "id": "air-evaluation#s2p4",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "（3）**答案相关性 (Answer Relevance)**\n- **评估目标：** 系统的端到端（End-to-End）表现。\n- **核心问题：** 最终生成的答案是否直接、完整且有效地回答了用户的原始问题？\n- **重要性：** 这是用户最直观的感受。一个答案可能完全基于上下文（高忠实度），但如果它答非所问，或者只回答了问题的一部分，那么这个答案的相关性就很低。例如，当用户问“法国在哪里，首都是哪里？”，如果答案只是“法国在西欧”，那么虽然忠实度高，但答案相关性很低。"
+            },
+            {
+              "id": "air-evaluation#s2p5",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "> 你可能觉得忠实度和答案相关性很相似，但它们的侧重点是不同的。忠实度更关注模型是否严格遵循了上下文，而答案相关性则更关注模型是否直接、完整且有效地回答了问题。"
+            },
+            {
+              "id": "air-evaluation#s2p7",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "一、RAG评估三元组",
+              "text": "> **需要注意：** RAG三元组是一种诊断视角，并不是完整的评估清单。实际项目通常还需要关注答案正确性与完整性、不可回答问题的拒答能力、鲁棒性，以及延迟、吞吐量和调用成本等系统指标。"
+            },
+            {
+              "id": "air-evaluation#s1p2",
+              "origin": "neighbor",
+              "rank": 3,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "第一节 评估介绍",
+              "text": "评估之所以关键，是因为它回答了RAG开发与应用中的一系列核心问题："
+            },
+            {
+              "id": "air-evaluation#s1p3",
+              "origin": "neighbor",
+              "rank": 3,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "第一节 评估介绍",
+              "text": "- **对于开发者：** 如何量化地追踪、迭代并提升RAG应用的性能？当系统出现“幻觉”或答非所问时，如何快速定位问题根源？\n- **对于用户或决策者：** 面对两个不同的RAG应用，如何客观地评判孰优孰劣？"
+            },
+            {
+              "id": "air-rag-intro#s14p1",
+              "origin": "neighbor",
+              "rank": 5,
+              "score": null,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "三、如何上手 RAG？ > 3.4 进阶与挑战",
+              "text": "当基础的 RAG 系统搭建完成后，下一步的进阶之路便聚焦于如何评估、诊断并突破其固有的瓶颈。"
+            },
+            {
+              "id": "air-rag-intro#s14p3",
+              "origin": "neighbor",
+              "rank": 5,
+              "score": null,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "三、如何上手 RAG？ > 3.4 进阶与挑战",
+              "text": "一套 RAG 系统的好坏，并不能仅凭感觉。业界通常会从几个维度进行量化评估，首先是**检索相关性**（找到的内容是否包含答案），其次是**生成质量**，这又可以细分为**语义准确性**（回答的意思是否正确）和**词汇匹配度**（专业术语是否使用得当）。"
+            },
+            {
+              "id": "air-rag-intro#s14p4",
+              "origin": "neighbor",
+              "rank": 5,
+              "score": null,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "三、如何上手 RAG？ > 3.4 进阶与挑战",
+              "text": "这些评估维度也直接对应了 RAG 当前面临的主要挑战。比如，**检索依赖性**问题——如果检索系统召回了错误信息，再强的 LLM 也会“一本正经地胡说八道”。此外，对于需要跨多个文档进行综合分析的**多跳推理**问题，常见的 RAG 架构也普遍感到吃力。"
+            }
+          ],
+          "answer": "RAG 评估三元组包含以下三个维度：\n\n1. **上下文相关性 (Context Relevance)**：评估检索器（Retriever）的性能，核心问题是检索到的上下文内容是否与用户的查询（Query）高度相关 [air-evaluation#s2p2]。\n\n2. **忠实度 / 可信度 (Faithfulness / Groundedness)**：评估生成器的可靠性，核心问题是生成的答案是否完全基于所提供的上下文信息 [air-evaluation#s2p3]。\n\n3. **答案相关性 (Answer Relevance)**：评估系统的端到端（End-to-End）表现，核心问题是最终生成的答案是否直接、完整且有效地回答了用户的原始问题 [air-evaluation#s2p4]。\n\n这三个维度共同构成了 RAG 三元组这一诊断视角，通过对它们的评估，可以初步判断问题主要来自检索还是生成环节 [air-evaluation#s2p6]。需要注意的是，RAG 三元组是一种诊断视角，并不是完整的评估清单，实际项目通常还需要关注答案正确性与完整性、不可回答问题的拒答能力、鲁棒性，以及延迟、吞吐量和调用成本等系统指标 [air-evaluation#s2p7]。",
+          "refs": [
+            "air-evaluation#s2p2",
+            "air-evaluation#s2p3",
+            "air-evaluation#s2p4",
+            "air-evaluation#s2p6",
+            "air-evaluation#s2p7"
+          ],
+          "ref_occurrences": 5,
+          "context_chars": {
+            "total": 1511,
+            "hit": 268,
+            "max": 4000,
+            "radius": 2
+          },
+          "elapsed_ms": {
+            "retrieve": null,
+            "generate": 3700
+          },
+          "recorded_from": "21 号证据 01-三元组.json（真实模型输出，逐字节写入）"
+        }
+      }
+    },
+    "power_grounding": {
+      "request": {
+        "question": "装设接地线的顺序是什么？",
+        "corpus_id": "power_demo",
+        "mode": "generate",
+        "top_k": 3
+      },
+      "recorded_top_k": 3,
+      "by_top_k": {
+        "1": {
+          "hits": [
+            {
+              "id": "示例语料-电力安全通用要点#P5",
+              "origin": "hit",
+              "rank": 1,
+              "score": 8.1315,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "装设接地线的规定\n装设接地线时，应先接接地端，后接导体端，拆除接地线的顺序与此相反。接地线应用多股软铜线组成，其截面不得小于25平方毫米，且不得有断股、散股现象。装设接地线必须由两人进行，其中一人操作、一人监护。"
+            }
+          ],
+          "neighbors": [
+            {
+              "id": "示例语料-电力安全通用要点#P3",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "停电的规定\n检修设备停电时，应把各方面的电源完全断开。禁止在只经断路器断开电源的设备上工作，应拉开隔离开关，使各方面至少有一个明显的断开点。与停电设备有关的变压器和电压互感器，也应在各侧断开，防止向停电设备反送电。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P4",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "验电的规定\n验电时，应使用相应电压等级而且合格的验电器，在设备进出线两侧各相分别验电。验电前，应先在有电设备上进行试验，确证验电器良好后再进行验电。验电时人体应与被验设备保持安全距离。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P6",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "安全距离\n人体与带电体之间必须保持足够的安全距离，电压等级越高，安全距离越大。常见电压等级的安全距离为：10千伏及以下为0.7米，35千伏为1.0米，110千伏为1.5米，220千伏为3.0米，500千伏为5.0米。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P7",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "工作票制度\n在电气设备上工作，应填用工作票或执行口头命令。工作票应明确工作负责人、工作班成员、工作内容、安全措施、工作地点和工作时间等。一张工作票只对一个工作地点有效，不得同时用于多处工作。"
+            }
+          ],
+          "answer": "装设接地线时，应先接接地端，后接导体端；拆除接地线的顺序与此相反。[来源：示例语料-电力安全通用要点#P5]",
+          "refs": [
+            "示例语料-电力安全通用要点#P5"
+          ],
+          "ref_occurrences": 1,
+          "context_chars": {
+            "total": 508,
+            "hit": 106,
+            "max": 4000,
+            "radius": 2
+          },
+          "elapsed_ms": {
+            "retrieve": null,
+            "generate": 1500
+          },
+          "recorded_from": "21 号证据 07-接地线.json（真实模型输出，逐字节写入）"
+        },
+        "2": {
+          "hits": [
+            {
+              "id": "示例语料-电力安全通用要点#P1",
+              "origin": "hit",
+              "rank": 2,
+              "score": 6.5567,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "保证安全的技术措施\n在全部停电或部分停电的电气设备上工作，必须完成停电、验电、装设接地线、悬挂标示牌和装设遮栏等技术措施，方可开始工作。这几项措施缺一不可，是防止人身触电的基本保证。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P5",
+              "origin": "hit",
+              "rank": 1,
+              "score": 8.1315,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "装设接地线的规定\n装设接地线时，应先接接地端，后接导体端，拆除接地线的顺序与此相反。接地线应用多股软铜线组成，其截面不得小于25平方毫米，且不得有断股、散股现象。装设接地线必须由两人进行，其中一人操作、一人监护。"
+            }
+          ],
+          "neighbors": [
+            {
+              "id": "示例语料-电力安全通用要点#P2",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "保证安全的组织措施\n在电气设备上工作，保证安全的组织措施包括：工作票制度、工作许可制度、工作监护制度，以及工作间断、转移和终结制度。组织措施与技术措施相互配合，共同保证作业安全。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P3",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "停电的规定\n检修设备停电时，应把各方面的电源完全断开。禁止在只经断路器断开电源的设备上工作，应拉开隔离开关，使各方面至少有一个明显的断开点。与停电设备有关的变压器和电压互感器，也应在各侧断开，防止向停电设备反送电。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P4",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "验电的规定\n验电时，应使用相应电压等级而且合格的验电器，在设备进出线两侧各相分别验电。验电前，应先在有电设备上进行试验，确证验电器良好后再进行验电。验电时人体应与被验设备保持安全距离。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P6",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "安全距离\n人体与带电体之间必须保持足够的安全距离，电压等级越高，安全距离越大。常见电压等级的安全距离为：10千伏及以下为0.7米，35千伏为1.0米，110千伏为1.5米，220千伏为3.0米，500千伏为5.0米。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P7",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "工作票制度\n在电气设备上工作，应填用工作票或执行口头命令。工作票应明确工作负责人、工作班成员、工作内容、安全措施、工作地点和工作时间等。一张工作票只对一个工作地点有效，不得同时用于多处工作。"
+            }
+          ],
+          "answer": "装设接地线时，应先接接地端，后接导体端；拆除接地线的顺序与此相反。[来源：示例语料-电力安全通用要点#P5]",
+          "refs": [
+            "示例语料-电力安全通用要点#P5"
+          ],
+          "ref_occurrences": 1,
+          "context_chars": {
+            "total": 688,
+            "hit": 197,
+            "max": 4000,
+            "radius": 2
+          },
+          "elapsed_ms": {
+            "retrieve": null,
+            "generate": 1500
+          },
+          "recorded_from": "21 号证据 07-接地线.json（真实模型输出，逐字节写入）"
+        },
+        "3": {
+          "hits": [
+            {
+              "id": "示例语料-电力安全通用要点#P1",
+              "origin": "hit",
+              "rank": 2,
+              "score": 6.5567,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "保证安全的技术措施\n在全部停电或部分停电的电气设备上工作，必须完成停电、验电、装设接地线、悬挂标示牌和装设遮栏等技术措施，方可开始工作。这几项措施缺一不可，是防止人身触电的基本保证。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P3",
+              "origin": "hit",
+              "rank": 3,
+              "score": 0.2272,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "停电的规定\n检修设备停电时，应把各方面的电源完全断开。禁止在只经断路器断开电源的设备上工作，应拉开隔离开关，使各方面至少有一个明显的断开点。与停电设备有关的变压器和电压互感器，也应在各侧断开，防止向停电设备反送电。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P5",
+              "origin": "hit",
+              "rank": 1,
+              "score": 8.1315,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "装设接地线的规定\n装设接地线时，应先接接地端，后接导体端，拆除接地线的顺序与此相反。接地线应用多股软铜线组成，其截面不得小于25平方毫米，且不得有断股、散股现象。装设接地线必须由两人进行，其中一人操作、一人监护。"
+            }
+          ],
+          "neighbors": [
+            {
+              "id": "示例语料-电力安全通用要点#P2",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "保证安全的组织措施\n在电气设备上工作，保证安全的组织措施包括：工作票制度、工作许可制度、工作监护制度，以及工作间断、转移和终结制度。组织措施与技术措施相互配合，共同保证作业安全。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P4",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "验电的规定\n验电时，应使用相应电压等级而且合格的验电器，在设备进出线两侧各相分别验电。验电前，应先在有电设备上进行试验，确证验电器良好后再进行验电。验电时人体应与被验设备保持安全距离。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P6",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "安全距离\n人体与带电体之间必须保持足够的安全距离，电压等级越高，安全距离越大。常见电压等级的安全距离为：10千伏及以下为0.7米，35千伏为1.0米，110千伏为1.5米，220千伏为3.0米，500千伏为5.0米。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P7",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "工作票制度\n在电气设备上工作，应填用工作票或执行口头命令。工作票应明确工作负责人、工作班成员、工作内容、安全措施、工作地点和工作时间等。一张工作票只对一个工作地点有效，不得同时用于多处工作。"
+            }
+          ],
+          "answer": "装设接地线时，应先接接地端，后接导体端；拆除接地线的顺序与此相反。[来源：示例语料-电力安全通用要点#P5]",
+          "refs": [
+            "示例语料-电力安全通用要点#P5"
+          ],
+          "ref_occurrences": 1,
+          "context_chars": {
+            "total": 688,
+            "hit": 304,
+            "max": 4000,
+            "radius": 2
+          },
+          "elapsed_ms": {
+            "retrieve": null,
+            "generate": 1500
+          },
+          "recorded_from": "21 号证据 07-接地线.json（真实模型输出，逐字节写入）"
+        },
+        "4": {
+          "hits": [
+            {
+              "id": "示例语料-电力安全通用要点#P1",
+              "origin": "hit",
+              "rank": 2,
+              "score": 6.5567,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "保证安全的技术措施\n在全部停电或部分停电的电气设备上工作，必须完成停电、验电、装设接地线、悬挂标示牌和装设遮栏等技术措施，方可开始工作。这几项措施缺一不可，是防止人身触电的基本保证。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P3",
+              "origin": "hit",
+              "rank": 3,
+              "score": 0.2272,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "停电的规定\n检修设备停电时，应把各方面的电源完全断开。禁止在只经断路器断开电源的设备上工作，应拉开隔离开关，使各方面至少有一个明显的断开点。与停电设备有关的变压器和电压互感器，也应在各侧断开，防止向停电设备反送电。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P5",
+              "origin": "hit",
+              "rank": 1,
+              "score": 8.1315,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "装设接地线的规定\n装设接地线时，应先接接地端，后接导体端，拆除接地线的顺序与此相反。接地线应用多股软铜线组成，其截面不得小于25平方毫米，且不得有断股、散股现象。装设接地线必须由两人进行，其中一人操作、一人监护。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P10",
+              "origin": "hit",
+              "rank": 4,
+              "score": 0.2254,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "高处作业\n凡在离地面2米及以上的地点进行的工作，均应视为高处作业。高处作业应使用安全带，安全带应挂在牢固的构件上，并做到高挂低用，不得挂在移动或不牢固的物件上。"
+            }
+          ],
+          "neighbors": [
+            {
+              "id": "示例语料-电力安全通用要点#P2",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "保证安全的组织措施\n在电气设备上工作，保证安全的组织措施包括：工作票制度、工作许可制度、工作监护制度，以及工作间断、转移和终结制度。组织措施与技术措施相互配合，共同保证作业安全。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P4",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "验电的规定\n验电时，应使用相应电压等级而且合格的验电器，在设备进出线两侧各相分别验电。验电前，应先在有电设备上进行试验，确证验电器良好后再进行验电。验电时人体应与被验设备保持安全距离。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P6",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "安全距离\n人体与带电体之间必须保持足够的安全距离，电压等级越高，安全距离越大。常见电压等级的安全距离为：10千伏及以下为0.7米，35千伏为1.0米，110千伏为1.5米，220千伏为3.0米，500千伏为5.0米。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P7",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "工作票制度\n在电气设备上工作，应填用工作票或执行口头命令。工作票应明确工作负责人、工作班成员、工作内容、安全措施、工作地点和工作时间等。一张工作票只对一个工作地点有效，不得同时用于多处工作。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P8",
+              "origin": "neighbor",
+              "rank": 4,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "工作许可制度\n工作许可人在完成现场安全措施后，应会同工作负责人到现场检查，确认安全措施已全部落实，并向工作负责人交待注意事项，方可发出许可工作的命令。未经许可，任何人不得开始工作。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P9",
+              "origin": "neighbor",
+              "rank": 4,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "工作监护制度\n工作期间，工作负责人或专责监护人应始终在工作现场，对工作班成员的安全认真监护，及时纠正不安全行为。工作负责人因故暂时离开现场时，应指定能胜任的人员临时代替，并将工作现场情况交待清楚。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P11",
+              "origin": "neighbor",
+              "rank": 4,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "低压带电作业\n低压带电作业应设专人监护，使用有绝缘柄的工具，并站在干燥的绝缘物上，戴绝缘手套和安全帽。工作时还应穿长袖衣服，严禁使用锉刀、金属尺等金属物品直接接触带电体。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P12",
+              "origin": "neighbor",
+              "rank": 4,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "触电急救\n发现有人触电，应首先使触电者迅速脱离电源，可立即断开电源开关，或用干燥的木棒、绝缘物挑开电线，严禁用手直接去拉触电者。触电者脱离电源后，如呼吸心跳停止，应立即进行心肺复苏，并尽快拨打急救电话送医。"
+            }
+          ],
+          "answer": "装设接地线时，应先接接地端，后接导体端；拆除接地线的顺序与此相反。[来源：示例语料-电力安全通用要点#P5]",
+          "refs": [
+            "示例语料-电力安全通用要点#P5"
+          ],
+          "ref_occurrences": 1,
+          "context_chars": {
+            "total": 1144,
+            "hit": 384,
+            "max": 4000,
+            "radius": 2
+          },
+          "elapsed_ms": {
+            "retrieve": null,
+            "generate": 1500
+          },
+          "recorded_from": "21 号证据 07-接地线.json（真实模型输出，逐字节写入）"
+        },
+        "5": {
+          "hits": [
+            {
+              "id": "示例语料-电力安全通用要点#P1",
+              "origin": "hit",
+              "rank": 2,
+              "score": 6.5567,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "保证安全的技术措施\n在全部停电或部分停电的电气设备上工作，必须完成停电、验电、装设接地线、悬挂标示牌和装设遮栏等技术措施，方可开始工作。这几项措施缺一不可，是防止人身触电的基本保证。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P2",
+              "origin": "hit",
+              "rank": 5,
+              "score": 0.1804,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "保证安全的组织措施\n在电气设备上工作，保证安全的组织措施包括：工作票制度、工作许可制度、工作监护制度，以及工作间断、转移和终结制度。组织措施与技术措施相互配合，共同保证作业安全。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P3",
+              "origin": "hit",
+              "rank": 3,
+              "score": 0.2272,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "停电的规定\n检修设备停电时，应把各方面的电源完全断开。禁止在只经断路器断开电源的设备上工作，应拉开隔离开关，使各方面至少有一个明显的断开点。与停电设备有关的变压器和电压互感器，也应在各侧断开，防止向停电设备反送电。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P5",
+              "origin": "hit",
+              "rank": 1,
+              "score": 8.1315,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "装设接地线的规定\n装设接地线时，应先接接地端，后接导体端，拆除接地线的顺序与此相反。接地线应用多股软铜线组成，其截面不得小于25平方毫米，且不得有断股、散股现象。装设接地线必须由两人进行，其中一人操作、一人监护。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P10",
+              "origin": "hit",
+              "rank": 4,
+              "score": 0.2254,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "高处作业\n凡在离地面2米及以上的地点进行的工作，均应视为高处作业。高处作业应使用安全带，安全带应挂在牢固的构件上，并做到高挂低用，不得挂在移动或不牢固的物件上。"
+            }
+          ],
+          "neighbors": [
+            {
+              "id": "示例语料-电力安全通用要点#P4",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "验电的规定\n验电时，应使用相应电压等级而且合格的验电器，在设备进出线两侧各相分别验电。验电前，应先在有电设备上进行试验，确证验电器良好后再进行验电。验电时人体应与被验设备保持安全距离。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P6",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "安全距离\n人体与带电体之间必须保持足够的安全距离，电压等级越高，安全距离越大。常见电压等级的安全距离为：10千伏及以下为0.7米，35千伏为1.0米，110千伏为1.5米，220千伏为3.0米，500千伏为5.0米。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P7",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "工作票制度\n在电气设备上工作，应填用工作票或执行口头命令。工作票应明确工作负责人、工作班成员、工作内容、安全措施、工作地点和工作时间等。一张工作票只对一个工作地点有效，不得同时用于多处工作。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P8",
+              "origin": "neighbor",
+              "rank": 4,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "工作许可制度\n工作许可人在完成现场安全措施后，应会同工作负责人到现场检查，确认安全措施已全部落实，并向工作负责人交待注意事项，方可发出许可工作的命令。未经许可，任何人不得开始工作。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P9",
+              "origin": "neighbor",
+              "rank": 4,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "工作监护制度\n工作期间，工作负责人或专责监护人应始终在工作现场，对工作班成员的安全认真监护，及时纠正不安全行为。工作负责人因故暂时离开现场时，应指定能胜任的人员临时代替，并将工作现场情况交待清楚。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P11",
+              "origin": "neighbor",
+              "rank": 4,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "低压带电作业\n低压带电作业应设专人监护，使用有绝缘柄的工具，并站在干燥的绝缘物上，戴绝缘手套和安全帽。工作时还应穿长袖衣服，严禁使用锉刀、金属尺等金属物品直接接触带电体。"
+            },
+            {
+              "id": "示例语料-电力安全通用要点#P12",
+              "origin": "neighbor",
+              "rank": 4,
+              "score": null,
+              "source_id": "示例语料-电力安全通用要点",
+              "source_title": "示例语料-电力安全通用要点",
+              "source_org": "",
+              "source_url": "",
+              "section": "",
+              "text": "触电急救\n发现有人触电，应首先使触电者迅速脱离电源，可立即断开电源开关，或用干燥的木棒、绝缘物挑开电线，严禁用手直接去拉触电者。触电者脱离电源后，如呼吸心跳停止，应立即进行心肺复苏，并尽快拨打急救电话送医。"
+            }
+          ],
+          "answer": "装设接地线时，应先接接地端，后接导体端；拆除接地线的顺序与此相反。[来源：示例语料-电力安全通用要点#P5]",
+          "refs": [
+            "示例语料-电力安全通用要点#P5"
+          ],
+          "ref_occurrences": 1,
+          "context_chars": {
+            "total": 1144,
+            "hit": 473,
+            "max": 4000,
+            "radius": 2
+          },
+          "elapsed_ms": {
+            "retrieve": null,
+            "generate": 1500
+          },
+          "recorded_from": "21 号证据 07-接地线.json（真实模型输出，逐字节写入）"
+        }
+      }
+    },
+    "learning_no_refs": {
+      "request": {
+        "question": "红烧肉怎么做？",
+        "corpus_id": "rag_learning",
+        "mode": "generate",
+        "top_k": 3
+      },
+      "recorded_top_k": 3,
+      "by_top_k": {
+        "1": {
+          "hits": [
+            {
+              "id": "air-vector-embedding#s21p1",
+              "origin": "hit",
+              "rank": 1,
+              "score": 6.7806,
+              "source_id": "air-vector-embedding",
+              "source_title": "第一节 向量嵌入",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter3/06_vector_embedding.md",
+              "section": "四、嵌入模型选型指南 > 4.3 迭代测试与优化",
+              "text": "> 不要只依赖公开榜单做最终决定。"
+            }
+          ],
+          "neighbors": [
+            {
+              "id": "air-vector-embedding#s21p2",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "air-vector-embedding",
+              "source_title": "第一节 向量嵌入",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter3/06_vector_embedding.md",
+              "section": "四、嵌入模型选型指南 > 4.3 迭代测试与优化",
+              "text": "（1）**确定基线 (Baseline)** ：根据上述维度，选择几个符合要求的模型作为你的初始基准模型。"
+            },
+            {
+              "id": "air-vector-embedding#s21p3",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "air-vector-embedding",
+              "source_title": "第一节 向量嵌入",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter3/06_vector_embedding.md",
+              "section": "四、嵌入模型选型指南 > 4.3 迭代测试与优化",
+              "text": "（2）**构建私有评测集** ：根据真实业务数据，手动创建一批高质量的评测样本，每个样本包含一个典型用户问题和它对应的标准答案（或最相关的文档块）。"
+            }
+          ],
+          "answer": "资料中未找到相关依据。",
+          "refs": [],
+          "ref_occurrences": 0,
+          "context_chars": {
+            "total": 144,
+            "hit": 17,
+            "max": 4000,
+            "radius": 2
+          },
+          "elapsed_ms": {
+            "retrieve": null,
+            "generate": 2400
+          },
+          "recorded_from": "21 号证据 03-红烧肉.json（真实模型输出，逐字节写入）"
+        },
+        "2": {
+          "hits": [
+            {
+              "id": "air-vector-embedding#s21p1",
+              "origin": "hit",
+              "rank": 1,
+              "score": 6.7806,
+              "source_id": "air-vector-embedding",
+              "source_title": "第一节 向量嵌入",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter3/06_vector_embedding.md",
+              "section": "四、嵌入模型选型指南 > 4.3 迭代测试与优化",
+              "text": "> 不要只依赖公开榜单做最终决定。"
+            },
+            {
+              "id": "air-text-chunking#s8p4",
+              "origin": "hit",
+              "rank": 2,
+              "score": 5.0887,
+              "source_id": "air-text-chunking",
+              "source_title": "第二节 文本分块",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter2/05_text_chunking.md",
+              "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.3 主题稀释导致检索失败",
+              "text": "- **糟糕的分块策略**：将“技能介绍”、“推荐出装”和“背景故事”这三个完全不同主题的内容，全部放在一个巨大的文本块里。\n    - 当玩家查询“鲁班七号怎么出装？”时，这个大块虽然包含了出装信息，但由于被技能说明和英雄故事等无关主题严重稀释，其整体的检索相关性得分可能会很低，导致无法被召回。\n- **优秀的分块策略**：将“技能”、“出装”和“故事”分别切分为三个独立的、主题聚焦的块。\n    - 当玩家再次查询时，“推荐出装”这个块会因为与查询高度相关而获得极高的分数，从而被精准地检索出来。"
+            }
+          ],
+          "neighbors": [
+            {
+              "id": "air-vector-embedding#s21p2",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "air-vector-embedding",
+              "source_title": "第一节 向量嵌入",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter3/06_vector_embedding.md",
+              "section": "四、嵌入模型选型指南 > 4.3 迭代测试与优化",
+              "text": "（1）**确定基线 (Baseline)** ：根据上述维度，选择几个符合要求的模型作为你的初始基准模型。"
+            },
+            {
+              "id": "air-vector-embedding#s21p3",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "air-vector-embedding",
+              "source_title": "第一节 向量嵌入",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter3/06_vector_embedding.md",
+              "section": "四、嵌入模型选型指南 > 4.3 迭代测试与优化",
+              "text": "（2）**构建私有评测集** ：根据真实业务数据，手动创建一批高质量的评测样本，每个样本包含一个典型用户问题和它对应的标准答案（或最相关的文档块）。"
+            },
+            {
+              "id": "air-text-chunking#s8p2",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-text-chunking",
+              "source_title": "第二节 文本分块",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter2/05_text_chunking.md",
+              "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.3 主题稀释导致检索失败",
+              "text": "**举个栗子🌰：**"
+            },
+            {
+              "id": "air-text-chunking#s8p3",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-text-chunking",
+              "source_title": "第二节 文本分块",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter2/05_text_chunking.md",
+              "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.3 主题稀释导致检索失败",
+              "text": "假设有一个关于《王者荣耀》英雄鲁班七号的攻略文档。"
+            },
+            {
+              "id": "air-text-chunking#s8p5",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-text-chunking",
+              "source_title": "第二节 文本分块",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter2/05_text_chunking.md",
+              "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.3 主题稀释导致检索失败",
+              "text": "通过合理分块，可以有效提升检索的信噪比，确保了后续生成环节能得到最优质、最相关的上下文。"
+            }
+          ],
+          "answer": "资料中未找到相关依据。",
+          "refs": [],
+          "ref_occurrences": 0,
+          "context_chars": {
+            "total": 475,
+            "hit": 269,
+            "max": 4000,
+            "radius": 2
+          },
+          "elapsed_ms": {
+            "retrieve": null,
+            "generate": 2400
+          },
+          "recorded_from": "21 号证据 03-红烧肉.json（真实模型输出，逐字节写入）"
+        },
+        "3": {
+          "hits": [
+            {
+              "id": "air-vector-embedding#s21p1",
+              "origin": "hit",
+              "rank": 1,
+              "score": 6.7806,
+              "source_id": "air-vector-embedding",
+              "source_title": "第一节 向量嵌入",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter3/06_vector_embedding.md",
+              "section": "四、嵌入模型选型指南 > 4.3 迭代测试与优化",
+              "text": "> 不要只依赖公开榜单做最终决定。"
+            },
+            {
+              "id": "air-text-chunking#s8p4",
+              "origin": "hit",
+              "rank": 2,
+              "score": 5.0887,
+              "source_id": "air-text-chunking",
+              "source_title": "第二节 文本分块",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter2/05_text_chunking.md",
+              "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.3 主题稀释导致检索失败",
+              "text": "- **糟糕的分块策略**：将“技能介绍”、“推荐出装”和“背景故事”这三个完全不同主题的内容，全部放在一个巨大的文本块里。\n    - 当玩家查询“鲁班七号怎么出装？”时，这个大块虽然包含了出装信息，但由于被技能说明和英雄故事等无关主题严重稀释，其整体的检索相关性得分可能会很低，导致无法被召回。\n- **优秀的分块策略**：将“技能”、“出装”和“故事”分别切分为三个独立的、主题聚焦的块。\n    - 当玩家再次查询时，“推荐出装”这个块会因为与查询高度相关而获得极高的分数，从而被精准地检索出来。"
+            },
+            {
+              "id": "air-rag-intro#s15p5",
+              "origin": "hit",
+              "rank": 3,
+              "score": 4.8889,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "四、RAG 已死？",
+              "text": "所以，“RAG 已死”是一个伪命题。相反，**RAG 作为一个概念活得很好**，它正在像 Transformer 一样，成为一个不断吸收新技术、不断进化的基础架构范式。它的生命力，正在于它的“面目全非”和“包罗万象”。而**本教程的目标，就是绘制出这张描绘 RAG 全貌的清晰地图，当我们可以解构它的每一个模块、理解它的每一种可能性时，RAG 也好，LKE 也罢，这些都无关紧要**。我们要做的就是通过 RAG 这道经典例题来学习和拓展（将 LLM 的内在参数化知识与外部非参数化知识相结合）这类题型的解题思路。"
+            }
+          ],
+          "neighbors": [
+            {
+              "id": "air-vector-embedding#s21p2",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "air-vector-embedding",
+              "source_title": "第一节 向量嵌入",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter3/06_vector_embedding.md",
+              "section": "四、嵌入模型选型指南 > 4.3 迭代测试与优化",
+              "text": "（1）**确定基线 (Baseline)** ：根据上述维度，选择几个符合要求的模型作为你的初始基准模型。"
+            },
+            {
+              "id": "air-vector-embedding#s21p3",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "air-vector-embedding",
+              "source_title": "第一节 向量嵌入",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter3/06_vector_embedding.md",
+              "section": "四、嵌入模型选型指南 > 4.3 迭代测试与优化",
+              "text": "（2）**构建私有评测集** ：根据真实业务数据，手动创建一批高质量的评测样本，每个样本包含一个典型用户问题和它对应的标准答案（或最相关的文档块）。"
+            },
+            {
+              "id": "air-text-chunking#s8p2",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-text-chunking",
+              "source_title": "第二节 文本分块",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter2/05_text_chunking.md",
+              "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.3 主题稀释导致检索失败",
+              "text": "**举个栗子🌰：**"
+            },
+            {
+              "id": "air-text-chunking#s8p3",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-text-chunking",
+              "source_title": "第二节 文本分块",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter2/05_text_chunking.md",
+              "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.3 主题稀释导致检索失败",
+              "text": "假设有一个关于《王者荣耀》英雄鲁班七号的攻略文档。"
+            },
+            {
+              "id": "air-text-chunking#s8p5",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-text-chunking",
+              "source_title": "第二节 文本分块",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter2/05_text_chunking.md",
+              "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.3 主题稀释导致检索失败",
+              "text": "通过合理分块，可以有效提升检索的信噪比，确保了后续生成环节能得到最优质、最相关的上下文。"
+            },
+            {
+              "id": "air-rag-intro#s15p3",
+              "origin": "neighbor",
+              "rank": 3,
+              "score": null,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "四、RAG 已死？",
+              "text": "> 笔者在此并非要创造一个新词，不过为什么要起 LKE 这个名字？它代表了三个核心要素：\n> -   **L（Large Language Model）**：强调系统的驱动力是大语言模型。\n> -   **K（Knowledge Management）**：寓意着系统就像一个知识管理员，精准地为我们找到（**检索**）所需要的知识，辅助我们后续利用大模型进行更高阶应用。\n> -   **E（Expert）**：说明系统能像专家一样，通过路由、分析、融合、修正等一系列步骤，最终给出答案（**生成**）、解决问题。"
+            },
+            {
+              "id": "air-rag-intro#s15p4",
+              "origin": "neighbor",
+              "rank": 3,
+              "score": null,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "四、RAG 已死？",
+              "text": "可以类比 **Transformer**。今天无论是以 GPT 为代表的 Decoder-only 还是以 BERT 为代表的 Encoder-only，我们都习惯称之为“基于 Transformer 架构”，尽管它们与最初论文中的完整形态差异巨大。但是 Transformer 这个标签抓住了一次技术范式的核心飞跃，并成为了一个技术时代的象征。同理，**RAG 的核心在于“将 LLM 的内在参数化知识与外部非参数化知识相结合”**。只要这个思想或需求不变，无论我们为其增加多少模块——查询转换、多路召回或者自我修正等等，它本质上依然是在这个框架下的演进。"
+            },
+            {
+              "id": "air-rag-intro#s15p6",
+              "origin": "neighbor",
+              "rank": 3,
+              "score": null,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "四、RAG 已死？",
+              "text": "> RAG 技术仍在快速发展中，可以持续关注学术和工业界的最新进展！"
+            }
+          ],
+          "answer": "资料中未找到相关依据。",
+          "refs": [],
+          "ref_occurrences": 0,
+          "context_chars": {
+            "total": 1302,
+            "hit": 525,
+            "max": 4000,
+            "radius": 2
+          },
+          "elapsed_ms": {
+            "retrieve": null,
+            "generate": 2400
+          },
+          "recorded_from": "21 号证据 03-红烧肉.json（真实模型输出，逐字节写入）"
+        },
+        "4": {
+          "hits": [
+            {
+              "id": "air-vector-embedding#s21p1",
+              "origin": "hit",
+              "rank": 1,
+              "score": 6.7806,
+              "source_id": "air-vector-embedding",
+              "source_title": "第一节 向量嵌入",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter3/06_vector_embedding.md",
+              "section": "四、嵌入模型选型指南 > 4.3 迭代测试与优化",
+              "text": "> 不要只依赖公开榜单做最终决定。"
+            },
+            {
+              "id": "air-text-chunking#s8p4",
+              "origin": "hit",
+              "rank": 2,
+              "score": 5.0887,
+              "source_id": "air-text-chunking",
+              "source_title": "第二节 文本分块",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter2/05_text_chunking.md",
+              "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.3 主题稀释导致检索失败",
+              "text": "- **糟糕的分块策略**：将“技能介绍”、“推荐出装”和“背景故事”这三个完全不同主题的内容，全部放在一个巨大的文本块里。\n    - 当玩家查询“鲁班七号怎么出装？”时，这个大块虽然包含了出装信息，但由于被技能说明和英雄故事等无关主题严重稀释，其整体的检索相关性得分可能会很低，导致无法被召回。\n- **优秀的分块策略**：将“技能”、“出装”和“故事”分别切分为三个独立的、主题聚焦的块。\n    - 当玩家再次查询时，“推荐出装”这个块会因为与查询高度相关而获得极高的分数，从而被精准地检索出来。"
+            },
+            {
+              "id": "air-rag-intro#s15p5",
+              "origin": "hit",
+              "rank": 3,
+              "score": 4.8889,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "四、RAG 已死？",
+              "text": "所以，“RAG 已死”是一个伪命题。相反，**RAG 作为一个概念活得很好**，它正在像 Transformer 一样，成为一个不断吸收新技术、不断进化的基础架构范式。它的生命力，正在于它的“面目全非”和“包罗万象”。而**本教程的目标，就是绘制出这张描绘 RAG 全貌的清晰地图，当我们可以解构它的每一个模块、理解它的每一种可能性时，RAG 也好，LKE 也罢，这些都无关紧要**。我们要做的就是通过 RAG 这道经典例题来学习和拓展（将 LLM 的内在参数化知识与外部非参数化知识相结合）这类题型的解题思路。"
+            },
+            {
+              "id": "air-rag-intro#s7p4",
+              "origin": "hit",
+              "rank": 4,
+              "score": 4.6391,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调",
+              "text": "基于此，我们的选择路径就清晰了：\n- **先尝试提示工程**：通过精心设计提示词来引导模型，适用于任务简单、模型已有相关知识的场景。\n- **再选择 RAG**：如果模型缺乏特定或实时知识而无法回答，则使用 RAG，通过外挂知识库为其提供上下文信息。\n- **最后考虑微调**：当目标是改变模型“如何做”（行为/风格/格式）而不是“知道什么”（知识）时，微调是最终且最合适的选择。例如，让模型学会严格遵循某种独特的输出格式、模仿特定人物的对话风格，或者将极其复杂的指令“蒸馏”进模型权重中。"
+            }
+          ],
+          "neighbors": [
+            {
+              "id": "air-vector-embedding#s21p2",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "air-vector-embedding",
+              "source_title": "第一节 向量嵌入",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter3/06_vector_embedding.md",
+              "section": "四、嵌入模型选型指南 > 4.3 迭代测试与优化",
+              "text": "（1）**确定基线 (Baseline)** ：根据上述维度，选择几个符合要求的模型作为你的初始基准模型。"
+            },
+            {
+              "id": "air-vector-embedding#s21p3",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "air-vector-embedding",
+              "source_title": "第一节 向量嵌入",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter3/06_vector_embedding.md",
+              "section": "四、嵌入模型选型指南 > 4.3 迭代测试与优化",
+              "text": "（2）**构建私有评测集** ：根据真实业务数据，手动创建一批高质量的评测样本，每个样本包含一个典型用户问题和它对应的标准答案（或最相关的文档块）。"
+            },
+            {
+              "id": "air-text-chunking#s8p2",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-text-chunking",
+              "source_title": "第二节 文本分块",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter2/05_text_chunking.md",
+              "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.3 主题稀释导致检索失败",
+              "text": "**举个栗子🌰：**"
+            },
+            {
+              "id": "air-text-chunking#s8p3",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-text-chunking",
+              "source_title": "第二节 文本分块",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter2/05_text_chunking.md",
+              "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.3 主题稀释导致检索失败",
+              "text": "假设有一个关于《王者荣耀》英雄鲁班七号的攻略文档。"
+            },
+            {
+              "id": "air-text-chunking#s8p5",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-text-chunking",
+              "source_title": "第二节 文本分块",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter2/05_text_chunking.md",
+              "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.3 主题稀释导致检索失败",
+              "text": "通过合理分块，可以有效提升检索的信噪比，确保了后续生成环节能得到最优质、最相关的上下文。"
+            },
+            {
+              "id": "air-rag-intro#s15p3",
+              "origin": "neighbor",
+              "rank": 3,
+              "score": null,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "四、RAG 已死？",
+              "text": "> 笔者在此并非要创造一个新词，不过为什么要起 LKE 这个名字？它代表了三个核心要素：\n> -   **L（Large Language Model）**：强调系统的驱动力是大语言模型。\n> -   **K（Knowledge Management）**：寓意着系统就像一个知识管理员，精准地为我们找到（**检索**）所需要的知识，辅助我们后续利用大模型进行更高阶应用。\n> -   **E（Expert）**：说明系统能像专家一样，通过路由、分析、融合、修正等一系列步骤，最终给出答案（**生成**）、解决问题。"
+            },
+            {
+              "id": "air-rag-intro#s15p4",
+              "origin": "neighbor",
+              "rank": 3,
+              "score": null,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "四、RAG 已死？",
+              "text": "可以类比 **Transformer**。今天无论是以 GPT 为代表的 Decoder-only 还是以 BERT 为代表的 Encoder-only，我们都习惯称之为“基于 Transformer 架构”，尽管它们与最初论文中的完整形态差异巨大。但是 Transformer 这个标签抓住了一次技术范式的核心飞跃，并成为了一个技术时代的象征。同理，**RAG 的核心在于“将 LLM 的内在参数化知识与外部非参数化知识相结合”**。只要这个思想或需求不变，无论我们为其增加多少模块——查询转换、多路召回或者自我修正等等，它本质上依然是在这个框架下的演进。"
+            },
+            {
+              "id": "air-rag-intro#s15p6",
+              "origin": "neighbor",
+              "rank": 3,
+              "score": null,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "四、RAG 已死？",
+              "text": "> RAG 技术仍在快速发展中，可以持续关注学术和工业界的最新进展！"
+            },
+            {
+              "id": "air-rag-intro#s7p2",
+              "origin": "neighbor",
+              "rank": 4,
+              "score": null,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调",
+              "text": "我们可以从两个维度来理解这些技术的区别。如图 1-3 所示，**横轴代表“LLM 优化”**，即对模型本身进行多大程度的修改。从左到右，优化的程度越来越深，其中提示工程和 RAG 完全不改变模型权重，而微调则直接修改模型参数。**纵轴代表“上下文优化”**，是对输入给模型的信息进行多大程度的增强。从下到上，增强的程度越来越高，其中提示工程只是优化提问方式，而 RAG 则通过引入外部知识库，极大地丰富了上下文信息。"
+            },
+            {
+              "id": "air-rag-intro#s7p3",
+              "origin": "neighbor",
+              "rank": 4,
+              "score": null,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调",
+              "text": "图 1-3 选型路径图"
+            },
+            {
+              "id": "air-rag-intro#s7p5",
+              "origin": "neighbor",
+              "rank": 4,
+              "score": null,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调",
+              "text": "RAG 的出现填补了通用模型与专业领域之间的鸿沟，它在解决如表 1-2 所示 LLM 局限时尤其有效："
+            },
+            {
+              "id": "air-rag-intro#s7p6",
+              "origin": "neighbor",
+              "rank": 4,
+              "score": null,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调",
+              "text": "| 问题 | RAG的解决方案 |\n| 静态知识局限 | 实时检索外部知识库，支持动态更新 |\n| 幻觉（Hallucination） | 基于检索内容生成，错误率降低 |\n| 领域专业性不足 | 引入领域特定知识库（如医疗/法律） |\n| 数据隐私风险 | 本地化部署知识库，避免敏感数据泄露 |\n表 1-2 RAG 对 LLM 局限的解决方案"
+            }
+          ],
+          "answer": "资料中未找到相关依据。",
+          "refs": [],
+          "ref_occurrences": 0,
+          "context_chars": {
+            "total": 1990,
+            "hit": 770,
+            "max": 4000,
+            "radius": 2
+          },
+          "elapsed_ms": {
+            "retrieve": null,
+            "generate": 2400
+          },
+          "recorded_from": "21 号证据 03-红烧肉.json（真实模型输出，逐字节写入）"
+        },
+        "5": {
+          "hits": [
+            {
+              "id": "air-vector-embedding#s21p1",
+              "origin": "hit",
+              "rank": 1,
+              "score": 6.7806,
+              "source_id": "air-vector-embedding",
+              "source_title": "第一节 向量嵌入",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter3/06_vector_embedding.md",
+              "section": "四、嵌入模型选型指南 > 4.3 迭代测试与优化",
+              "text": "> 不要只依赖公开榜单做最终决定。"
+            },
+            {
+              "id": "air-text-chunking#s8p4",
+              "origin": "hit",
+              "rank": 2,
+              "score": 5.0887,
+              "source_id": "air-text-chunking",
+              "source_title": "第二节 文本分块",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter2/05_text_chunking.md",
+              "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.3 主题稀释导致检索失败",
+              "text": "- **糟糕的分块策略**：将“技能介绍”、“推荐出装”和“背景故事”这三个完全不同主题的内容，全部放在一个巨大的文本块里。\n    - 当玩家查询“鲁班七号怎么出装？”时，这个大块虽然包含了出装信息，但由于被技能说明和英雄故事等无关主题严重稀释，其整体的检索相关性得分可能会很低，导致无法被召回。\n- **优秀的分块策略**：将“技能”、“出装”和“故事”分别切分为三个独立的、主题聚焦的块。\n    - 当玩家再次查询时，“推荐出装”这个块会因为与查询高度相关而获得极高的分数，从而被精准地检索出来。"
+            },
+            {
+              "id": "air-rag-intro#s15p5",
+              "origin": "hit",
+              "rank": 3,
+              "score": 4.8889,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "四、RAG 已死？",
+              "text": "所以，“RAG 已死”是一个伪命题。相反，**RAG 作为一个概念活得很好**，它正在像 Transformer 一样，成为一个不断吸收新技术、不断进化的基础架构范式。它的生命力，正在于它的“面目全非”和“包罗万象”。而**本教程的目标，就是绘制出这张描绘 RAG 全貌的清晰地图，当我们可以解构它的每一个模块、理解它的每一种可能性时，RAG 也好，LKE 也罢，这些都无关紧要**。我们要做的就是通过 RAG 这道经典例题来学习和拓展（将 LLM 的内在参数化知识与外部非参数化知识相结合）这类题型的解题思路。"
+            },
+            {
+              "id": "air-rag-intro#s7p4",
+              "origin": "hit",
+              "rank": 4,
+              "score": 4.6391,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调",
+              "text": "基于此，我们的选择路径就清晰了：\n- **先尝试提示工程**：通过精心设计提示词来引导模型，适用于任务简单、模型已有相关知识的场景。\n- **再选择 RAG**：如果模型缺乏特定或实时知识而无法回答，则使用 RAG，通过外挂知识库为其提供上下文信息。\n- **最后考虑微调**：当目标是改变模型“如何做”（行为/风格/格式）而不是“知道什么”（知识）时，微调是最终且最合适的选择。例如，让模型学会严格遵循某种独特的输出格式、模仿特定人物的对话风格，或者将极其复杂的指令“蒸馏”进模型权重中。"
+            },
+            {
+              "id": "air-evaluation#s1p3",
+              "origin": "hit",
+              "rank": 5,
+              "score": 3.5819,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "第一节 评估介绍",
+              "text": "- **对于开发者：** 如何量化地追踪、迭代并提升RAG应用的性能？当系统出现“幻觉”或答非所问时，如何快速定位问题根源？\n- **对于用户或决策者：** 面对两个不同的RAG应用，如何客观地评判孰优孰劣？"
+            }
+          ],
+          "neighbors": [
+            {
+              "id": "air-vector-embedding#s21p2",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "air-vector-embedding",
+              "source_title": "第一节 向量嵌入",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter3/06_vector_embedding.md",
+              "section": "四、嵌入模型选型指南 > 4.3 迭代测试与优化",
+              "text": "（1）**确定基线 (Baseline)** ：根据上述维度，选择几个符合要求的模型作为你的初始基准模型。"
+            },
+            {
+              "id": "air-vector-embedding#s21p3",
+              "origin": "neighbor",
+              "rank": 1,
+              "score": null,
+              "source_id": "air-vector-embedding",
+              "source_title": "第一节 向量嵌入",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter3/06_vector_embedding.md",
+              "section": "四、嵌入模型选型指南 > 4.3 迭代测试与优化",
+              "text": "（2）**构建私有评测集** ：根据真实业务数据，手动创建一批高质量的评测样本，每个样本包含一个典型用户问题和它对应的标准答案（或最相关的文档块）。"
+            },
+            {
+              "id": "air-text-chunking#s8p2",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-text-chunking",
+              "source_title": "第二节 文本分块",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter2/05_text_chunking.md",
+              "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.3 主题稀释导致检索失败",
+              "text": "**举个栗子🌰：**"
+            },
+            {
+              "id": "air-text-chunking#s8p3",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-text-chunking",
+              "source_title": "第二节 文本分块",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter2/05_text_chunking.md",
+              "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.3 主题稀释导致检索失败",
+              "text": "假设有一个关于《王者荣耀》英雄鲁班七号的攻略文档。"
+            },
+            {
+              "id": "air-text-chunking#s8p5",
+              "origin": "neighbor",
+              "rank": 2,
+              "score": null,
+              "source_id": "air-text-chunking",
+              "source_title": "第二节 文本分块",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter2/05_text_chunking.md",
+              "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.3 主题稀释导致检索失败",
+              "text": "通过合理分块，可以有效提升检索的信噪比，确保了后续生成环节能得到最优质、最相关的上下文。"
+            },
+            {
+              "id": "air-rag-intro#s15p3",
+              "origin": "neighbor",
+              "rank": 3,
+              "score": null,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "四、RAG 已死？",
+              "text": "> 笔者在此并非要创造一个新词，不过为什么要起 LKE 这个名字？它代表了三个核心要素：\n> -   **L（Large Language Model）**：强调系统的驱动力是大语言模型。\n> -   **K（Knowledge Management）**：寓意着系统就像一个知识管理员，精准地为我们找到（**检索**）所需要的知识，辅助我们后续利用大模型进行更高阶应用。\n> -   **E（Expert）**：说明系统能像专家一样，通过路由、分析、融合、修正等一系列步骤，最终给出答案（**生成**）、解决问题。"
+            },
+            {
+              "id": "air-rag-intro#s15p4",
+              "origin": "neighbor",
+              "rank": 3,
+              "score": null,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "四、RAG 已死？",
+              "text": "可以类比 **Transformer**。今天无论是以 GPT 为代表的 Decoder-only 还是以 BERT 为代表的 Encoder-only，我们都习惯称之为“基于 Transformer 架构”，尽管它们与最初论文中的完整形态差异巨大。但是 Transformer 这个标签抓住了一次技术范式的核心飞跃，并成为了一个技术时代的象征。同理，**RAG 的核心在于“将 LLM 的内在参数化知识与外部非参数化知识相结合”**。只要这个思想或需求不变，无论我们为其增加多少模块——查询转换、多路召回或者自我修正等等，它本质上依然是在这个框架下的演进。"
+            },
+            {
+              "id": "air-rag-intro#s15p6",
+              "origin": "neighbor",
+              "rank": 3,
+              "score": null,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "四、RAG 已死？",
+              "text": "> RAG 技术仍在快速发展中，可以持续关注学术和工业界的最新进展！"
+            },
+            {
+              "id": "air-rag-intro#s7p2",
+              "origin": "neighbor",
+              "rank": 4,
+              "score": null,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调",
+              "text": "我们可以从两个维度来理解这些技术的区别。如图 1-3 所示，**横轴代表“LLM 优化”**，即对模型本身进行多大程度的修改。从左到右，优化的程度越来越深，其中提示工程和 RAG 完全不改变模型权重，而微调则直接修改模型参数。**纵轴代表“上下文优化”**，是对输入给模型的信息进行多大程度的增强。从下到上，增强的程度越来越高，其中提示工程只是优化提问方式，而 RAG 则通过引入外部知识库，极大地丰富了上下文信息。"
+            },
+            {
+              "id": "air-rag-intro#s7p3",
+              "origin": "neighbor",
+              "rank": 4,
+              "score": null,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调",
+              "text": "图 1-3 选型路径图"
+            },
+            {
+              "id": "air-rag-intro#s7p5",
+              "origin": "neighbor",
+              "rank": 4,
+              "score": null,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调",
+              "text": "RAG 的出现填补了通用模型与专业领域之间的鸿沟，它在解决如表 1-2 所示 LLM 局限时尤其有效："
+            },
+            {
+              "id": "air-rag-intro#s7p6",
+              "origin": "neighbor",
+              "rank": 4,
+              "score": null,
+              "source_id": "air-rag-intro",
+              "source_title": "第一节 RAG 简介",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter1/01_RAG_intro.md",
+              "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调",
+              "text": "| 问题 | RAG的解决方案 |\n| 静态知识局限 | 实时检索外部知识库，支持动态更新 |\n| 幻觉（Hallucination） | 基于检索内容生成，错误率降低 |\n| 领域专业性不足 | 引入领域特定知识库（如医疗/法律） |\n| 数据隐私风险 | 本地化部署知识库，避免敏感数据泄露 |\n表 1-2 RAG 对 LLM 局限的解决方案"
+            },
+            {
+              "id": "air-evaluation#s1p1",
+              "origin": "neighbor",
+              "rank": 5,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "第一节 评估介绍",
+              "text": "> 构建RAG系统后，下一个关键问题是：如何科学地评估其表现？"
+            },
+            {
+              "id": "air-evaluation#s1p2",
+              "origin": "neighbor",
+              "rank": 5,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "第一节 评估介绍",
+              "text": "评估之所以关键，是因为它回答了RAG开发与应用中的一系列核心问题："
+            },
+            {
+              "id": "air-evaluation#s1p4",
+              "origin": "neighbor",
+              "rank": 5,
+              "score": null,
+              "source_id": "air-evaluation",
+              "source_title": "第一节 评估介绍",
+              "source_org": "Datawhale · all-in-rag 教程项目",
+              "source_url": "https://github.com/datawhalechina/all-in-rag/blob/583a61b09869bc3afc4552289171f6ec188f2c76/docs/chapter6/18_system_evaluation.md",
+              "section": "第一节 评估介绍",
+              "text": "本节将探讨RAG评估的理念与方法：先用 **“RAG三元组（RAG Triad）”** 理解核心质量维度，再给出一套可以持续迭代的工程化评估工作流。"
+            }
+          ],
+          "answer": "资料中未找到相关依据。",
+          "refs": [],
+          "ref_occurrences": 0,
+          "context_chars": {
+            "total": 2232,
+            "hit": 874,
+            "max": 4000,
+            "radius": 2
+          },
+          "elapsed_ms": {
+            "retrieve": null,
+            "generate": 2400
+          },
+          "recorded_from": "21 号证据 03-红烧肉.json（真实模型输出，逐字节写入）"
+        }
+      }
+    },
+    "power_zero": {
+      "request": {
+        "question": "红烧肉怎么做？",
+        "corpus_id": "power_demo",
+        "mode": "generate",
+        "top_k": 3
+      },
+      "recorded_top_k": 3,
+      "by_top_k": {
+        "1": {
+          "hits": [],
+          "neighbors": [],
+          "answer": null,
+          "refs": [],
+          "ref_occurrences": 0,
+          "context_chars": {
+            "total": 0,
+            "hit": 0,
+            "max": 4000,
+            "radius": 2
+          },
+          "elapsed_ms": {
+            "retrieve": null,
+            "generate": null
+          },
+          "recorded_from": ""
+        },
+        "2": {
+          "hits": [],
+          "neighbors": [],
+          "answer": null,
+          "refs": [],
+          "ref_occurrences": 0,
+          "context_chars": {
+            "total": 0,
+            "hit": 0,
+            "max": 4000,
+            "radius": 2
+          },
+          "elapsed_ms": {
+            "retrieve": null,
+            "generate": null
+          },
+          "recorded_from": ""
+        },
+        "3": {
+          "hits": [],
+          "neighbors": [],
+          "answer": null,
+          "refs": [],
+          "ref_occurrences": 0,
+          "context_chars": {
+            "total": 0,
+            "hit": 0,
+            "max": 4000,
+            "radius": 2
+          },
+          "elapsed_ms": {
+            "retrieve": null,
+            "generate": null
+          },
+          "recorded_from": ""
+        },
+        "4": {
+          "hits": [],
+          "neighbors": [],
+          "answer": null,
+          "refs": [],
+          "ref_occurrences": 0,
+          "context_chars": {
+            "total": 0,
+            "hit": 0,
+            "max": 4000,
+            "radius": 2
+          },
+          "elapsed_ms": {
+            "retrieve": null,
+            "generate": null
+          },
+          "recorded_from": ""
+        },
+        "5": {
+          "hits": [],
+          "neighbors": [],
+          "answer": null,
+          "refs": [],
+          "ref_occurrences": 0,
+          "context_chars": {
+            "total": 0,
+            "hit": 0,
+            "max": 4000,
+            "radius": 2
+          },
+          "elapsed_ms": {
+            "retrieve": null,
+            "generate": null
+          },
+          "recorded_from": ""
+        }
+      }
+    }
+  },
+  "answers_source": "21-证据-8例真实复测"
+}

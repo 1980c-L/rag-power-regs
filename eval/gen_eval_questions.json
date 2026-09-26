@@ -1,0 +1,237 @@
+{
+  "note": "生成侧最小评测题集（15 题：12 道沿用既有题目，3 道新增资料外题）。用途：判据 A 层机器判（引用有效性 / 拒答短语）、B 层人工三档判（是否被资料支持、要点是否覆盖）。",
+  "target_corpus": "rag_learning",
+  "top_k": 3,
+  "questions": [
+    {
+      "eval_id": "G01",
+      "source_question_id": "Q01",
+      "type": "定义",
+      "question": "Embedding（向量嵌入）是什么？",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-vector-embedding",
+          "section": "一、向量嵌入基础 > 1.1 基础概念 > 1.1.1 什么是 Embedding"
+        }
+      ],
+      "expected_points": "把文本等对象映射成高维数值向量，使语义相近的对象在向量空间中距离更近；是向量检索的基础。",
+      "note": "沿用既有 30 题的题面 / 标准证据 / 预期要点（逐字段搬运，未改写）"
+    },
+    {
+      "eval_id": "G02",
+      "source_question_id": "Q04",
+      "type": "定义",
+      "question": "RAG 评估三元组包含哪三个维度？",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-evaluation",
+          "section": "一、RAG评估三元组"
+        }
+      ],
+      "expected_points": "上下文相关性（检索器）、忠实度/可信度（生成器）、答案相关性（端到端）。",
+      "note": "沿用既有 30 题的题面 / 标准证据 / 预期要点（逐字段搬运，未改写）"
+    },
+    {
+      "eval_id": "G03",
+      "source_question_id": "Q08",
+      "type": "原理",
+      "question": "BM25 打分时为什么同时考虑词频、词的稀有度和文档长度？",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-hybrid-search",
+          "section": "一、稀疏向量 vs 密集向量 > 1.1 稀疏向量"
+        }
+      ],
+      "expected_points": "BM25 公式中 IDF 反映词的稀有度、f(q,D) 与 k1 控制词频饱和、|D|/avgdl 与 b 做文档长度归一化，避免长文档仅因更长而占优。",
+      "note": "沿用既有 30 题的题面 / 标准证据 / 预期要点（逐字段搬运，未改写）"
+    },
+    {
+      "eval_id": "G04",
+      "source_question_id": "Q12",
+      "type": "原理",
+      "question": "为什么重排序（Re-ranking）要放在初步检索之后做，而不是直接用重排模型扫全库？",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-rerank",
+          "section": "一、重排序 (Re-ranking) > 1.3 Cross-Encoder 重排"
+        },
+        {
+          "mode": "section_exact",
+          "source_id": "air-rerank",
+          "section": "一、重排序 (Re-ranking) > 1.4 ColBERT 重排"
+        }
+      ],
+      "expected_points": "重排模型精算但昂贵，先由初检（如向量或 BM25）快速缩小候选集，再对少量候选做精排，兼顾效果与成本。",
+      "note": "沿用既有 30 题的题面 / 标准证据 / 预期要点（逐字段搬运，未改写）"
+    },
+    {
+      "eval_id": "G05",
+      "source_question_id": "Q13",
+      "type": "比较",
+      "question": "稀疏向量和密集向量有什么区别？各自的优缺点是什么？",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-hybrid-search",
+          "section": "一、稀疏向量 vs 密集向量 > 1.1 稀疏向量"
+        },
+        {
+          "mode": "section_exact",
+          "source_id": "air-hybrid-search",
+          "section": "一、稀疏向量 vs 密集向量 > 1.2 密集向量"
+        }
+      ],
+      "expected_points": "稀疏向量基于词频统计、维度高且稀疏、可解释、擅长精确词匹配（BM25/TF-IDF），但无法理解同义与近义；密集向量能理解语义与上下文、泛化强，但可解释性差、依赖训练算力、对 OOV 处理更依赖子词切分。",
+      "note": "沿用既有 30 题的题面 / 标准证据 / 预期要点（逐字段搬运，未改写）"
+    },
+    {
+      "eval_id": "G06",
+      "source_question_id": "Q15",
+      "type": "比较",
+      "question": "LlamaIndex Evaluation、Ragas、Phoenix 这几个评估工具该怎么选？",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-eval-tools",
+          "section": "四、对比建议"
+        }
+      ],
+      "expected_points": "教程按使用场景给出对比建议：与 LlamaIndex 生态集成、轻量快速自建指标、需要可视化与生产可观测性时各有倾向。",
+      "note": "沿用既有 30 题的题面 / 标准证据 / 预期要点（逐字段搬运，未改写）"
+    },
+    {
+      "eval_id": "G07",
+      "source_question_id": "Q17",
+      "type": "取舍",
+      "question": "固定大小分块里的 chunk_overlap 起什么作用？块大小该怎么取舍？",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.1 固定大小分块"
+        }
+      ],
+      "expected_points": "chunk_overlap 通过重叠保持相邻块的上下文连续性，降低边界处信息被切断的风险；块大小需要在嵌入模型输入上限、上下文完整性与成本之间权衡，没有普适最优值。",
+      "note": "沿用既有 30 题的题面 / 标准证据 / 预期要点（逐字段搬运，未改写）"
+    },
+    {
+      "eval_id": "G08",
+      "source_question_id": "Q20",
+      "type": "同义改写",
+      "question": "把一整段话变成一串数字，让意思相近的文本在那个空间里靠得更近——这说的是哪个环节？",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_prefix",
+          "source_id": "air-vector-embedding",
+          "section": "一、向量嵌入基础 > 1.1 基础概念"
+        }
+      ],
+      "expected_points": "向量嵌入（Embedding）：把文本编码成高维向量，语义相近则向量距离更近，是语义检索的基础。",
+      "note": "沿用既有 30 题的题面 / 标准证据 / 预期要点（逐字段搬运，未改写）"
+    },
+    {
+      "eval_id": "G09",
+      "source_question_id": "Q21",
+      "type": "同义改写",
+      "question": "先拿便宜的算法粗筛一批候选，再用精细的模型对这批候选重新排序——这对应哪一类检索流程？",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-rerank",
+          "section": "一、重排序 (Re-ranking) > 1.3 Cross-Encoder 重排"
+        },
+        {
+          "mode": "section_exact",
+          "source_id": "air-rerank",
+          "section": "一、重排序 (Re-ranking) > 1.4 ColBERT 重排"
+        }
+      ],
+      "expected_points": "retrieve-and-rerank（召回 + 重排序）：初检负责召回，重排模型负责精排。",
+      "note": "沿用既有 30 题的题面 / 标准证据 / 预期要点（逐字段搬运，未改写）"
+    },
+    {
+      "eval_id": "G10",
+      "source_question_id": "Q24",
+      "type": "多证据",
+      "question": "一次完整的 RAG 系统评估通常要覆盖哪些环节和维度？",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-evaluation",
+          "section": "一、RAG评估三元组"
+        },
+        {
+          "mode": "section_prefix",
+          "source_id": "air-evaluation",
+          "section": "二、评估工作流"
+        }
+      ],
+      "expected_points": "既有质量维度（上下文相关性、忠实度、答案相关性），也有工程闭环：从目标定义、构建评测集，到检索评估与响应评估，再到回归测试，持续迭代。",
+      "note": "沿用既有 30 题的题面 / 标准证据 / 预期要点（逐字段搬运，未改写）"
+    },
+    {
+      "eval_id": "G11",
+      "source_question_id": "Q29",
+      "type": "无依据",
+      "question": "本项目在十万份文档规模下的检索延迟是多少毫秒？",
+      "should_refuse": true,
+      "expected_evidence": [],
+      "expected_points": "本项目只在约 10 份资料的语料上做过离线检索，没有十万份规模的压测数据，应明确回答资料中未找到相关依据。",
+      "note": "沿用既有 30 题的题面 / 标准证据 / 预期要点（逐字段搬运，未改写）"
+    },
+    {
+      "eval_id": "G12",
+      "source_question_id": "Q30",
+      "type": "无依据",
+      "question": "红烧肉怎么做才好吃？",
+      "should_refuse": true,
+      "expected_evidence": [],
+      "expected_points": "完全在知识库范围之外（库内是 RAG 技术教程），应回答资料中未找到相关依据，不得编造。",
+      "note": "沿用既有 30 题的题面 / 标准证据 / 预期要点（逐字段搬运，未改写）"
+    },
+    {
+      "eval_id": "G13",
+      "source_question_id": null,
+      "type": "项目事实（无依据）",
+      "question": "本项目用的 embedding 模型是哪个？向量维度是多少？",
+      "should_refuse": true,
+      "expected_evidence": [],
+      "expected_points": "本项目检索层只有 BM25 关键词检索，没有 embedding 与向量维度可答；正确行为是说明资料中没有该信息，而不是编一个模型名或维度。",
+      "note": "新增资料外题：与项目事实相关但资料里没有"
+    },
+    {
+      "eval_id": "G14",
+      "source_question_id": null,
+      "type": "无依据",
+      "question": "2026 年最新一代 GPU 的显存带宽是多少 GB/s？",
+      "should_refuse": true,
+      "expected_evidence": [],
+      "expected_points": "与 RAG 学习库内容无关；正确行为是回答资料中未找到相关依据。",
+      "note": "新增资料外题：完全库外"
+    },
+    {
+      "eval_id": "G15",
+      "source_question_id": null,
+      "type": "超出资料范围",
+      "question": "请给出一份可直接投产的 RAG 系统容量规划方案，包含具体服务器配置和压测数据。",
+      "should_refuse": true,
+      "expected_evidence": [],
+      "expected_points": "资料里没有服务器配置与压测数据；正确行为是说明资料未提供，不能凭空给出可投产参数。",
+      "note": "新增资料外题：要求超出资料范围的工程参数"
+    }
+  ]
+}

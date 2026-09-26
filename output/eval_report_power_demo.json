@@ -1,0 +1,1196 @@
+{
+  "corpus_id": "power_demo",
+  "corpus_name": "电力示例库",
+  "generated_at": "2026-09-19T18:17:40+08:00",
+  "corpus_version": "无版本（示例语料）",
+  "corpus_fingerprint": "db3e1521df212bae9707bf7c2783e38da24793bda6bee159ff39d8c31e85467a",
+  "tokenizer": "jieba",
+  "params": {
+    "chunk_max_chars": 400,
+    "top_k_default": 3,
+    "bm25_k1": 1.5,
+    "bm25_b": 0.75,
+    "eval_k": 5
+  },
+  "source_count": 1,
+  "chunk_count": 12,
+  "total_chars": 1144,
+  "question_count": 20,
+  "scored_question_count": 0,
+  "refuse_question_count": 0,
+  "proxy_only_question_count": 20,
+  "hit_at_1": null,
+  "hit_at_3": null,
+  "hit_at_5": null,
+  "mrr": null,
+  "keyword_proxy": {
+    "top_k": 3,
+    "count": 20,
+    "hit_rate": 1.0,
+    "note": "关键词是否出现在 Top-K 文本里的代理指标，非回答准确率"
+  },
+  "evidence_modes_in_use": [],
+  "notes": [
+    "Hit@K / MRR 判据是「标准证据 chunk」，用 chunk_id / section_exact / section_prefix 三种显式模式匹配，不使用子串匹配。",
+    "BM25 没有相关性阈值：只要查询词在全库出现就会返回结果。因此本轮**没有**可离线验证的拒答决策；拒答题只作观察记录，「无依据问题不会被伪造成有资料支持」这一场景标记为 NOT VALIDATED。",
+    "切分是固定字数（无 overlap、无句子边界），属已知局限，本轮不做切分实验。",
+    "本轮不对 400 字符或某个 Top-K 声称最优。"
+  ],
+  "failures": [],
+  "refuse_analysis": [],
+  "detail": [
+    {
+      "question_id": "",
+      "question": "在电气设备上工作时，保证安全的技术措施有哪些？",
+      "type": "",
+      "should_refuse": false,
+      "expected_evidence": [],
+      "evidence_modes": [],
+      "evidence_candidate_count": 0,
+      "evidence_candidates": [],
+      "expected_points": "",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "示例语料-电力安全通用要点#P2",
+          "score": 12.3982,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 2,
+          "id": "示例语料-电力安全通用要点#P1",
+          "score": 11.6569,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 3,
+          "id": "示例语料-电力安全通用要点#P11",
+          "score": 4.0373,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 4,
+          "id": "示例语料-电力安全通用要点#P3",
+          "score": 3.7673,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 5,
+          "id": "示例语料-电力安全通用要点#P9",
+          "score": 3.6857,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false,
+      "keywords": [
+        "停电",
+        "验电",
+        "接地线"
+      ],
+      "keyword_proxy_hit": true
+    },
+    {
+      "question_id": "",
+      "question": "保证安全的组织措施包括哪些制度？",
+      "type": "",
+      "should_refuse": false,
+      "expected_evidence": [],
+      "evidence_modes": [],
+      "evidence_candidate_count": 0,
+      "evidence_candidates": [],
+      "expected_points": "",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "示例语料-电力安全通用要点#P2",
+          "score": 15.4133,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 2,
+          "id": "示例语料-电力安全通用要点#P1",
+          "score": 6.3077,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 3,
+          "id": "示例语料-电力安全通用要点#P9",
+          "score": 2.4316,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 4,
+          "id": "示例语料-电力安全通用要点#P6",
+          "score": 1.7056,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 5,
+          "id": "示例语料-电力安全通用要点#P8",
+          "score": 1.2664,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false,
+      "keywords": [
+        "工作票",
+        "工作许可",
+        "工作监护"
+      ],
+      "keyword_proxy_hit": true
+    },
+    {
+      "question_id": "",
+      "question": "检修设备停电时，对电源有什么要求？",
+      "type": "",
+      "should_refuse": false,
+      "expected_evidence": [],
+      "evidence_modes": [],
+      "evidence_candidate_count": 0,
+      "evidence_candidates": [],
+      "expected_points": "",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "示例语料-电力安全通用要点#P3",
+          "score": 12.1399,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 2,
+          "id": "示例语料-电力安全通用要点#P4",
+          "score": 3.8146,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 3,
+          "id": "示例语料-电力安全通用要点#P1",
+          "score": 2.8652,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 4,
+          "id": "示例语料-电力安全通用要点#P9",
+          "score": 2.7409,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 5,
+          "id": "示例语料-电力安全通用要点#P11",
+          "score": 2.5257,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false,
+      "keywords": [
+        "明显",
+        "断开",
+        "隔离开关"
+      ],
+      "keyword_proxy_hit": true
+    },
+    {
+      "question_id": "",
+      "question": "验电时应该怎么做？",
+      "type": "",
+      "should_refuse": false,
+      "expected_evidence": [],
+      "evidence_modes": [],
+      "evidence_candidate_count": 0,
+      "evidence_candidates": [],
+      "expected_points": "",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "示例语料-电力安全通用要点#P4",
+          "score": 3.14,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false,
+      "keywords": [
+        "验电器",
+        "各相",
+        "试验"
+      ],
+      "keyword_proxy_hit": true
+    },
+    {
+      "question_id": "",
+      "question": "装设接地线的顺序是什么？",
+      "type": "",
+      "should_refuse": false,
+      "expected_evidence": [],
+      "evidence_modes": [],
+      "evidence_candidate_count": 0,
+      "evidence_candidates": [],
+      "expected_points": "",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "示例语料-电力安全通用要点#P5",
+          "score": 8.1315,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 2,
+          "id": "示例语料-电力安全通用要点#P1",
+          "score": 6.5567,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 3,
+          "id": "示例语料-电力安全通用要点#P3",
+          "score": 0.2272,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 4,
+          "id": "示例语料-电力安全通用要点#P10",
+          "score": 0.2254,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 5,
+          "id": "示例语料-电力安全通用要点#P2",
+          "score": 0.1804,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false,
+      "keywords": [
+        "接地端",
+        "导体端"
+      ],
+      "keyword_proxy_hit": true
+    },
+    {
+      "question_id": "",
+      "question": "接地线用什么材料制作，截面有什么要求？",
+      "type": "",
+      "should_refuse": false,
+      "expected_evidence": [],
+      "evidence_modes": [],
+      "evidence_candidate_count": 0,
+      "evidence_candidates": [],
+      "expected_points": "",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "示例语料-电力安全通用要点#P5",
+          "score": 5.3264,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 2,
+          "id": "示例语料-电力安全通用要点#P1",
+          "score": 1.771,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 3,
+          "id": "示例语料-电力安全通用要点#P11",
+          "score": 1.429,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 4,
+          "id": "示例语料-电力安全通用要点#P4",
+          "score": 1.4173,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 5,
+          "id": "示例语料-电力安全通用要点#P3",
+          "score": 1.2676,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false,
+      "keywords": [
+        "软铜线",
+        "25"
+      ],
+      "keyword_proxy_hit": true
+    },
+    {
+      "question_id": "",
+      "question": "10千伏及以下的安全距离是多少？",
+      "type": "",
+      "should_refuse": false,
+      "expected_evidence": [],
+      "evidence_modes": [],
+      "evidence_candidate_count": 0,
+      "evidence_candidates": [],
+      "expected_points": "",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "示例语料-电力安全通用要点#P6",
+          "score": 14.4701,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 2,
+          "id": "示例语料-电力安全通用要点#P1",
+          "score": 3.33,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 3,
+          "id": "示例语料-电力安全通用要点#P4",
+          "score": 2.7503,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 4,
+          "id": "示例语料-电力安全通用要点#P10",
+          "score": 1.9156,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 5,
+          "id": "示例语料-电力安全通用要点#P2",
+          "score": 1.6474,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false,
+      "keywords": [
+        "0.7"
+      ],
+      "keyword_proxy_hit": true
+    },
+    {
+      "question_id": "",
+      "question": "220千伏的安全距离是多少？",
+      "type": "",
+      "should_refuse": false,
+      "expected_evidence": [],
+      "evidence_modes": [],
+      "evidence_candidate_count": 0,
+      "evidence_candidates": [],
+      "expected_points": "",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "示例语料-电力安全通用要点#P6",
+          "score": 10.8116,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 2,
+          "id": "示例语料-电力安全通用要点#P1",
+          "score": 3.33,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 3,
+          "id": "示例语料-电力安全通用要点#P4",
+          "score": 2.7503,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 4,
+          "id": "示例语料-电力安全通用要点#P2",
+          "score": 1.6474,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 5,
+          "id": "示例语料-电力安全通用要点#P9",
+          "score": 1.3878,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false,
+      "keywords": [
+        "3.0"
+      ],
+      "keyword_proxy_hit": true
+    },
+    {
+      "question_id": "",
+      "question": "工作票制度对工作票有哪些要求？",
+      "type": "",
+      "should_refuse": false,
+      "expected_evidence": [],
+      "evidence_modes": [],
+      "evidence_candidate_count": 0,
+      "evidence_candidates": [],
+      "expected_points": "",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "示例语料-电力安全通用要点#P7",
+          "score": 6.4015,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 2,
+          "id": "示例语料-电力安全通用要点#P2",
+          "score": 4.5145,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 3,
+          "id": "示例语料-电力安全通用要点#P9",
+          "score": 3.5365,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 4,
+          "id": "示例语料-电力安全通用要点#P8",
+          "score": 2.0039,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 5,
+          "id": "示例语料-电力安全通用要点#P1",
+          "score": 0.6215,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false,
+      "keywords": [
+        "工作票",
+        "工作负责人",
+        "一个"
+      ],
+      "keyword_proxy_hit": true
+    },
+    {
+      "question_id": "",
+      "question": "工作许可制度中，许可人什么时候才能发出许可命令？",
+      "type": "",
+      "should_refuse": false,
+      "expected_evidence": [],
+      "evidence_modes": [],
+      "evidence_candidate_count": 0,
+      "evidence_candidates": [],
+      "expected_points": "",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "示例语料-电力安全通用要点#P8",
+          "score": 11.3183,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 2,
+          "id": "示例语料-电力安全通用要点#P2",
+          "score": 4.5814,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 3,
+          "id": "示例语料-电力安全通用要点#P7",
+          "score": 3.7097,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 4,
+          "id": "示例语料-电力安全通用要点#P9",
+          "score": 1.9893,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 5,
+          "id": "示例语料-电力安全通用要点#P1",
+          "score": 0.6881,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false,
+      "keywords": [
+        "安全措施",
+        "现场",
+        "许可"
+      ],
+      "keyword_proxy_hit": true
+    },
+    {
+      "question_id": "",
+      "question": "工作监护制度要求谁在现场监护？",
+      "type": "",
+      "should_refuse": false,
+      "expected_evidence": [],
+      "evidence_modes": [],
+      "evidence_candidate_count": 0,
+      "evidence_candidates": [],
+      "expected_points": "",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "示例语料-电力安全通用要点#P9",
+          "score": 6.444,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 2,
+          "id": "示例语料-电力安全通用要点#P8",
+          "score": 4.8103,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 3,
+          "id": "示例语料-电力安全通用要点#P2",
+          "score": 4.2287,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 4,
+          "id": "示例语料-电力安全通用要点#P7",
+          "score": 2.3187,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 5,
+          "id": "示例语料-电力安全通用要点#P11",
+          "score": 1.8603,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false,
+      "keywords": [
+        "工作负责人",
+        "监护"
+      ],
+      "keyword_proxy_hit": true
+    },
+    {
+      "question_id": "",
+      "question": "高处作业在多少米以上要使用安全带？",
+      "type": "",
+      "should_refuse": false,
+      "expected_evidence": [],
+      "evidence_modes": [],
+      "evidence_candidate_count": 0,
+      "evidence_candidates": [],
+      "expected_points": "",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "示例语料-电力安全通用要点#P10",
+          "score": 15.3538,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 2,
+          "id": "示例语料-电力安全通用要点#P6",
+          "score": 3.1214,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 3,
+          "id": "示例语料-电力安全通用要点#P11",
+          "score": 2.2437,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 4,
+          "id": "示例语料-电力安全通用要点#P2",
+          "score": 2.046,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 5,
+          "id": "示例语料-电力安全通用要点#P4",
+          "score": 1.8013,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false,
+      "keywords": [
+        "2米",
+        "安全带"
+      ],
+      "keyword_proxy_hit": true
+    },
+    {
+      "question_id": "",
+      "question": "安全带应该怎么挂？",
+      "type": "",
+      "should_refuse": false,
+      "expected_evidence": [],
+      "evidence_modes": [],
+      "evidence_candidate_count": 0,
+      "evidence_candidates": [],
+      "expected_points": "",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "示例语料-电力安全通用要点#P10",
+          "score": 5.3539,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false,
+      "keywords": [
+        "高挂低用"
+      ],
+      "keyword_proxy_hit": true
+    },
+    {
+      "question_id": "",
+      "question": "低压带电作业要注意什么？",
+      "type": "",
+      "should_refuse": false,
+      "expected_evidence": [],
+      "evidence_modes": [],
+      "evidence_candidate_count": 0,
+      "evidence_candidates": [],
+      "expected_points": "",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "示例语料-电力安全通用要点#P11",
+          "score": 6.3176,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false,
+      "keywords": [
+        "绝缘",
+        "监护",
+        "手套"
+      ],
+      "keyword_proxy_hit": true
+    },
+    {
+      "question_id": "",
+      "question": "发现有人触电，第一步应该做什么？",
+      "type": "",
+      "should_refuse": false,
+      "expected_evidence": [],
+      "evidence_modes": [],
+      "evidence_candidate_count": 0,
+      "evidence_candidates": [],
+      "expected_points": "",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "示例语料-电力安全通用要点#P12",
+          "score": 7.3504,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 2,
+          "id": "示例语料-电力安全通用要点#P1",
+          "score": 1.771,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 3,
+          "id": "示例语料-电力安全通用要点#P5",
+          "score": 0.0778,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 4,
+          "id": "示例语料-电力安全通用要点#P6",
+          "score": 0.0774,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 5,
+          "id": "示例语料-电力安全通用要点#P8",
+          "score": 0.0774,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false,
+      "keywords": [
+        "脱离电源",
+        "断开"
+      ],
+      "keyword_proxy_hit": true
+    },
+    {
+      "question_id": "",
+      "question": "触电者脱离电源后，对呼吸心跳停止者应该怎么办？",
+      "type": "",
+      "should_refuse": false,
+      "expected_evidence": [],
+      "evidence_modes": [],
+      "evidence_candidate_count": 0,
+      "evidence_candidates": [],
+      "expected_points": "",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "示例语料-电力安全通用要点#P12",
+          "score": 19.4905,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 2,
+          "id": "示例语料-电力安全通用要点#P3",
+          "score": 2.2736,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 3,
+          "id": "示例语料-电力安全通用要点#P1",
+          "score": 1.771,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 4,
+          "id": "示例语料-电力安全通用要点#P7",
+          "score": 1.7047,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 5,
+          "id": "示例语料-电力安全通用要点#P9",
+          "score": 1.6971,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false,
+      "keywords": [
+        "心肺复苏",
+        "急救"
+      ],
+      "keyword_proxy_hit": true
+    },
+    {
+      "question_id": "",
+      "question": "能不能在只经断路器断开的设备上工作？",
+      "type": "",
+      "should_refuse": false,
+      "expected_evidence": [],
+      "evidence_modes": [],
+      "evidence_candidate_count": 0,
+      "evidence_candidates": [],
+      "expected_points": "",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "示例语料-电力安全通用要点#P3",
+          "score": 11.2055,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 2,
+          "id": "示例语料-电力安全通用要点#P4",
+          "score": 3.5955,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 3,
+          "id": "示例语料-电力安全通用要点#P9",
+          "score": 3.477,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 4,
+          "id": "示例语料-电力安全通用要点#P10",
+          "score": 1.9908,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 5,
+          "id": "示例语料-电力安全通用要点#P2",
+          "score": 1.9111,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false,
+      "keywords": [
+        "禁止",
+        "明显",
+        "隔离开关"
+      ],
+      "keyword_proxy_hit": true
+    },
+    {
+      "question_id": "",
+      "question": "验电器使用前要先做什么？",
+      "type": "",
+      "should_refuse": false,
+      "expected_evidence": [],
+      "evidence_modes": [],
+      "evidence_candidate_count": 0,
+      "evidence_candidates": [],
+      "expected_points": "",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "示例语料-电力安全通用要点#P4",
+          "score": 4.4852,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 2,
+          "id": "示例语料-电力安全通用要点#P11",
+          "score": 1.9194,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 3,
+          "id": "示例语料-电力安全通用要点#P10",
+          "score": 1.3452,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false,
+      "keywords": [
+        "试验",
+        "良好"
+      ],
+      "keyword_proxy_hit": true
+    },
+    {
+      "question_id": "",
+      "question": "拆除接地线的顺序是什么？",
+      "type": "",
+      "should_refuse": false,
+      "expected_evidence": [],
+      "evidence_modes": [],
+      "evidence_candidate_count": 0,
+      "evidence_candidates": [],
+      "expected_points": "",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "示例语料-电力安全通用要点#P5",
+          "score": 7.5285,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 2,
+          "id": "示例语料-电力安全通用要点#P1",
+          "score": 4.1451,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 3,
+          "id": "示例语料-电力安全通用要点#P3",
+          "score": 0.2272,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 4,
+          "id": "示例语料-电力安全通用要点#P10",
+          "score": 0.2254,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 5,
+          "id": "示例语料-电力安全通用要点#P2",
+          "score": 0.1804,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false,
+      "keywords": [
+        "导体端",
+        "接地端"
+      ],
+      "keyword_proxy_hit": true
+    },
+    {
+      "question_id": "",
+      "question": "一张工作票可以用于几个工作地点？",
+      "type": "",
+      "should_refuse": false,
+      "expected_evidence": [],
+      "evidence_modes": [],
+      "evidence_candidate_count": 0,
+      "evidence_candidates": [],
+      "expected_points": "",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "示例语料-电力安全通用要点#P7",
+          "score": 10.3661,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 2,
+          "id": "示例语料-电力安全通用要点#P2",
+          "score": 2.5491,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 3,
+          "id": "示例语料-电力安全通用要点#P10",
+          "score": 2.1257,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 4,
+          "id": "示例语料-电力安全通用要点#P9",
+          "score": 0.8706,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        },
+        {
+          "rank": 5,
+          "id": "示例语料-电力安全通用要点#P8",
+          "score": 0.8687,
+          "source_id": "示例语料-电力安全通用要点",
+          "section": "",
+          "title": "示例语料-电力安全通用要点"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false,
+      "keywords": [
+        "一个",
+        "工作地点"
+      ],
+      "keyword_proxy_hit": true
+    }
+  ]
+}

@@ -1,0 +1,324 @@
+[
+  {
+    "question_id": "Q01",
+    "type": "定义",
+    "question": "Embedding（向量嵌入）是什么？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_exact", "source_id": "air-vector-embedding", "section": "一、向量嵌入基础 > 1.1 基础概念 > 1.1.1 什么是 Embedding"}
+    ],
+    "expected_points": "把文本等对象映射成高维数值向量，使语义相近的对象在向量空间中距离更近；是向量检索的基础。"
+  },
+  {
+    "question_id": "Q02",
+    "type": "定义",
+    "question": "文本分块（Text Chunking）是什么？切出来的块用来做什么？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_exact", "source_id": "air-text-chunking", "section": "一、理解文本分块"}
+    ],
+    "expected_points": "把加载后的长文档切成更小、更易处理的单元；这些块是后续向量检索与模型处理的基本单位。"
+  },
+  {
+    "question_id": "Q03",
+    "type": "定义",
+    "question": "RRF（倒数排序融合）是什么？它是怎么给结果打分的？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_exact", "source_id": "air-hybrid-search", "section": "二、混合检索 > 2.1 技术原理与融合方法 > 2.1.1 倒数排序融合 (Reciprocal Rank Fusion, RRF)"},
+      {"mode": "section_exact", "source_id": "air-rerank", "section": "一、重排序 (Re-ranking) > 1.1 RRF (Reciprocal Rank Fusion)"}
+    ],
+    "expected_points": "Reciprocal Rank Fusion：按各路检索结果的排名取倒数并相加（1/(k+rank)），用排名而非分数做融合，避免不同检索的分数量纲不可比。",
+    "evidence_note": "RRF 在语料里有两处定义（混合检索 2.1.1 与 检索进阶 1.1），两处都直接讲「是什么 + 怎么打分」，故都列为证据。"
+  },
+  {
+    "question_id": "Q04",
+    "type": "定义",
+    "question": "RAG 评估三元组包含哪三个维度？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_exact", "source_id": "air-evaluation", "section": "一、RAG评估三元组"}
+    ],
+    "expected_points": "上下文相关性（检索器）、忠实度/可信度（生成器）、答案相关性（端到端）。"
+  },
+  {
+    "question_id": "Q05",
+    "type": "定义",
+    "question": "Function Calling 是什么？它在 RAG 里解决什么问题？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_exact", "source_id": "air-formatted-generation", "section": "三、Function Calling"},
+      {"mode": "section_exact", "source_id": "air-formatted-generation", "section": "三、Function Calling > 3.1 概念与工作流程"}
+    ],
+    "expected_points": "让模型按约定结构输出函数名与参数，把自然语言转成可被程序稳定解析的结构化调用，从而可靠地驱动后续流程。",
+    "evidence_note": "父节「三、Function Calling」的正文就是定义本身；子节「3.1 概念与工作流程」讲得更细。两者都用 section_exact 精确匹配：父节正文只匹配 section 完全等于「三、Function Calling」的 chunk，不会把 3.2/3.3 等子节的 chunk 算进来（上一版用子串匹配时正是这里误判）。复审判定该题首命中名次为 5，即 Hit@5 命中、Hit@1/Hit@3 不命中。"
+  },
+  {
+    "question_id": "Q06",
+    "type": "定义",
+    "question": "文档加载器在 RAG 的数据管道里一般要完成哪三个核心任务？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_exact", "source_id": "air-data-load", "section": "一、文档加载器 > 1.1 主要功能"}
+    ],
+    "expected_points": "解析不同格式的原始文档为纯文本；抽取来源、页码、作者等元数据；整理成统一的数据结构供后续切分、向量化和入库。"
+  },
+  {
+    "question_id": "Q07",
+    "type": "定义",
+    "question": "构建一个最小可用的 RAG 系统大致分哪几步？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_exact", "source_id": "air-rag-intro", "section": "三、如何上手 RAG？ > 3.2 四步构建最小可行系统（MVP）"},
+      {"mode": "section_exact", "source_id": "air-get-start", "section": "三、基于 LangChain 框架的 RAG 实现"}
+    ],
+    "expected_points": "教程给出的四步构建最小可行系统（MVP）的流程：准备数据/知识库、切分与向量化建索引、检索、交给模型生成。",
+    "evidence_note": "「第三节 四步构建RAG」的正文（air-get-start）开篇就写明「四步分别是数据准备、索引构建、检索优化和生成集成」，直接回答本题，故补入。"
+  },
+  {
+    "question_id": "Q08",
+    "type": "原理",
+    "question": "BM25 打分时为什么同时考虑词频、词的稀有度和文档长度？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_exact", "source_id": "air-hybrid-search", "section": "一、稀疏向量 vs 密集向量 > 1.1 稀疏向量"}
+    ],
+    "expected_points": "BM25 公式中 IDF 反映词的稀有度、f(q,D) 与 k1 控制词频饱和、|D|/avgdl 与 b 做文档长度归一化，避免长文档仅因更长而占优。"
+  },
+  {
+    "question_id": "Q09",
+    "type": "原理",
+    "question": "为什么文本块不是越大越好？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_prefix", "source_id": "air-text-chunking", "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好"}
+    ],
+    "expected_points": "块过大有三类代价：嵌入压缩导致信息损失、长上下文里的信息被淹没（Lost in the Middle）、主题稀释导致检索匹配变差。",
+    "evidence_note": "该节下有三个子节分别讲这三类代价，故用 section_prefix（本节及其子节）。"
+  },
+  {
+    "question_id": "Q10",
+    "type": "原理",
+    "question": "为什么需要格式化生成？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_exact", "source_id": "air-formatted-generation", "section": "一、为什么需要格式化生成？"}
+    ],
+    "expected_points": "自然语言输出难以被程序稳定解析；格式化生成让下游能可靠拿到结构化字段，便于系统集成与后续处理。"
+  },
+  {
+    "question_id": "Q11",
+    "type": "原理",
+    "question": "嵌入模型通常用什么训练任务来训练？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_prefix", "source_id": "air-vector-embedding", "section": "三、嵌入模型训练原理 > 3.1 主要训练任务"}
+    ],
+    "expected_points": "掩码语言模型（MLM）与下一句预测（NSP）等预训练任务，配合对比学习一类的效果增强策略。",
+    "evidence_note": "MLM 与 NSP 各占一个子节，故用 section_prefix。"
+  },
+  {
+    "question_id": "Q12",
+    "type": "原理",
+    "question": "为什么重排序（Re-ranking）要放在初步检索之后做，而不是直接用重排模型扫全库？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_exact", "source_id": "air-rerank", "section": "一、重排序 (Re-ranking) > 1.3 Cross-Encoder 重排"},
+      {"mode": "section_exact", "source_id": "air-rerank", "section": "一、重排序 (Re-ranking) > 1.4 ColBERT 重排"}
+    ],
+    "expected_points": "重排模型精算但昂贵，先由初检（如向量或 BM25）快速缩小候选集，再对少量候选做精排，兼顾效果与成本。",
+    "evidence_note": "答案在第 1.3 节（明确写出「初步检索召回前 50 篇 → 逐一评分 → 需要 N 次独立推理所以延迟高」）与第 1.4 节（在高精度与高效率之间取平衡）。1.1/1.2/1.5 讲的是各方法本身与对比表，不回答「为什么放在初检之后」，故不作为证据。"
+  },
+  {
+    "question_id": "Q13",
+    "type": "比较",
+    "question": "稀疏向量和密集向量有什么区别？各自的优缺点是什么？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_exact", "source_id": "air-hybrid-search", "section": "一、稀疏向量 vs 密集向量 > 1.1 稀疏向量"},
+      {"mode": "section_exact", "source_id": "air-hybrid-search", "section": "一、稀疏向量 vs 密集向量 > 1.2 密集向量"}
+    ],
+    "evidence_note": "「优缺点」分别写在 1.1 与 1.2 两节；父节正文只是一句引言，1.3 实例对比主要是表示法示例，都不作为证据，因此不使用子树匹配。",
+    "expected_points": "稀疏向量基于词频统计、维度高且稀疏、可解释、擅长精确词匹配（BM25/TF-IDF），但无法理解同义与近义；密集向量能理解语义与上下文、泛化强，但可解释性差、依赖训练算力、对 OOV 处理更依赖子词切分。"
+  },
+  {
+    "question_id": "Q14",
+    "type": "比较",
+    "question": "固定大小分块、递归字符分块、语义分块有什么区别？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_exact", "source_id": "air-text-chunking", "section": "三、基础分块策略 > 3.1 固定大小分块"},
+      {"mode": "section_exact", "source_id": "air-text-chunking", "section": "三、基础分块策略 > 3.2 递归字符分块"},
+      {"mode": "section_exact", "source_id": "air-text-chunking", "section": "三、基础分块策略 > 3.3 语义分块"}
+    ],
+    "expected_points": "固定大小按字数硬切并可叠加 overlap；递归字符分块按分隔符优先级逐层尝试、尽量在自然边界切开；语义分块依据句子间语义断点切分，块内更连贯但成本更高。",
+    "evidence_note": "题目点名的三种策略各占一节，逐个列出；「3.4 基于文档结构的分块」不在题目询问范围内，不列为证据。"
+  },
+  {
+    "question_id": "Q15",
+    "type": "比较",
+    "question": "LlamaIndex Evaluation、Ragas、Phoenix 这几个评估工具该怎么选？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_exact", "source_id": "air-eval-tools", "section": "四、对比建议"}
+    ],
+    "expected_points": "教程按使用场景给出对比建议：与 LlamaIndex 生态集成、轻量快速自建指标、需要可视化与生产可观测性时各有倾向。",
+    "evidence_note": "本轮唯一已知的真实检索失败题：Top-5 内没有出现「四、对比建议」章节，如实保留。"
+  },
+  {
+    "question_id": "Q16",
+    "type": "比较",
+    "question": "RAG 和微调（Fine-tuning）应该怎么选？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_exact", "source_id": "air-rag-intro", "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调"}
+    ],
+    "expected_points": "两者并非互相替代：RAG 适合知识频繁更新、需要引用出处的场景；微调适合改变模型行为风格或领域能力，但知识更新成本高。应按需组合而非二选一。"
+  },
+  {
+    "question_id": "Q17",
+    "type": "取舍",
+    "question": "固定大小分块里的 chunk_overlap 起什么作用？块大小该怎么取舍？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_exact", "source_id": "air-text-chunking", "section": "三、基础分块策略 > 3.1 固定大小分块"}
+    ],
+    "expected_points": "chunk_overlap 通过重叠保持相邻块的上下文连续性，降低边界处信息被切断的风险；块大小需要在嵌入模型输入上限、上下文完整性与成本之间权衡，没有普适最优值。"
+  },
+  {
+    "question_id": "Q18",
+    "type": "取舍",
+    "question": "混合检索的优势和局限分别是什么？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_exact", "source_id": "air-hybrid-search", "section": "二、混合检索 > 2.2 优势与局限"}
+    ],
+    "expected_points": "优势是同时捕获关键词与语义、召回率与准确率更高；局限是需要维护并查询两套索引，计算与存储资源消耗更大，融合策略也需要额外设计。"
+  },
+  {
+    "question_id": "Q19",
+    "type": "取舍",
+    "question": "给嵌入模型选型时，应该看哪些维度？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_exact", "source_id": "air-vector-embedding", "section": "四、嵌入模型选型指南 > 4.2 关键评估维度"}
+    ],
+    "expected_points": "模型参数量、最大 token 数（直接约束分块策略）、评测得分与发布机构、成本（API 调用或自部署的显存/运维成本）。"
+  },
+  {
+    "question_id": "Q20",
+    "type": "同义改写",
+    "question": "把一整段话变成一串数字，让意思相近的文本在那个空间里靠得更近——这说的是哪个环节？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_prefix", "source_id": "air-vector-embedding", "section": "一、向量嵌入基础 > 1.1 基础概念"}
+    ],
+    "evidence_note": "「1.1.1 什么是 Embedding」与「1.1.2 向量空间的语义表示」都直接对应这句改写，故用该节及其子节；「1.2 Embedding 在 RAG 中的作用」讲的是用途而非定义，不列入。",
+    "expected_points": "向量嵌入（Embedding）：把文本编码成高维向量，语义相近则向量距离更近，是语义检索的基础。"
+  },
+  {
+    "question_id": "Q21",
+    "type": "同义改写",
+    "question": "先拿便宜的算法粗筛一批候选，再用精细的模型对这批候选重新排序——这对应哪一类检索流程？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_exact", "source_id": "air-rerank", "section": "一、重排序 (Re-ranking) > 1.3 Cross-Encoder 重排"},
+      {"mode": "section_exact", "source_id": "air-rerank", "section": "一、重排序 (Re-ranking) > 1.4 ColBERT 重排"}
+    ],
+    "expected_points": "retrieve-and-rerank（召回 + 重排序）：初检负责召回，重排模型负责精排。",
+    "evidence_note": "「初步检索召回 → 逐一评分」这一两阶段描述写在 1.3；1.4 讲精排与效率的平衡。与 Q12 同一组证据。"
+  },
+  {
+    "question_id": "Q22",
+    "type": "同义改写",
+    "question": "长文档检索时，如果块切得太碎，常常是词能对上但拼起来上下文不连贯，一般靠什么机制缓解？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_exact", "source_id": "air-text-chunking", "section": "三、基础分块策略 > 3.1 固定大小分块"}
+    ],
+    "expected_points": "通过块之间的重叠（chunk_overlap）保留上下文连续性；也可用按标题/结构分块、句子窗口等思路。"
+  },
+  {
+    "question_id": "Q23",
+    "type": "多证据",
+    "question": "文本块的大小会同时怎样影响检索召回、上下文完整性和系统成本？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_prefix", "source_id": "air-text-chunking", "section": "二、文本分块重要性"},
+      {"mode": "section_exact", "source_id": "air-text-chunking", "section": "三、基础分块策略 > 3.1 固定大小分块"}
+    ],
+    "expected_points": "块太小易丢上下文、检索到的片段不完整；块太大则嵌入信息被稀释、主题被稀释、长上下文里信息被淹没；块越多，索引与存储、检索和生成成本越高。要综合权衡。",
+    "evidence_note": "多证据题，任一命中即可。「二、文本分块重要性」下每一节都在讲块大小的代价，故用其子树；「三、基础分块策略」只在 3.1 里讨论 chunk_size 与 overlap 的取舍，故只取 3.1。"
+  },
+  {
+    "question_id": "Q24",
+    "type": "多证据",
+    "question": "一次完整的 RAG 系统评估通常要覆盖哪些环节和维度？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_exact", "source_id": "air-evaluation", "section": "一、RAG评估三元组"},
+      {"mode": "section_prefix", "source_id": "air-evaluation", "section": "二、评估工作流"}
+    ],
+    "expected_points": "既有质量维度（上下文相关性、忠实度、答案相关性），也有工程闭环：从目标定义、构建评测集，到检索评估与响应评估，再到回归测试，持续迭代。"
+  },
+  {
+    "question_id": "Q25",
+    "type": "错误前提",
+    "question": "只要把文本块切得足够大，信息就不会丢，对吗？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_exact", "source_id": "air-text-chunking", "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好"},
+      {"mode": "section_exact", "source_id": "air-text-chunking", "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.1 嵌入过程中的信息损失"}
+    ],
+    "expected_points": "不对。嵌入会把整个块压缩成一个向量，块越长语义点越多、单向量承载的信息越稀，关键细节会被模糊化，反而降低检索精度。",
+    "evidence_note": "父节正文直接给出否定判断（「答案是否定的。块的大小并非越大越好」），2.2.1 给出原因，两者都列为证据。"
+  },
+  {
+    "question_id": "Q26",
+    "type": "错误前提",
+    "question": "RAG 一定比微调效果好，这个说法对吗？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_exact", "source_id": "air-rag-intro", "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调"}
+    ],
+    "expected_points": "不对。两者解决的是不同问题，应按知识更新频率、是否需要引用出处、是否要改变模型行为等需求来选择或组合，而不是简单比较优劣。"
+  },
+  {
+    "question_id": "Q27",
+    "type": "错误前提",
+    "question": "向量检索一定比 BM25 更准确，所以混合检索没有必要，对吗？",
+    "should_refuse": false,
+    "expected_evidence": [
+      {"mode": "section_exact", "source_id": "air-hybrid-search", "section": "一、稀疏向量 vs 密集向量 > 1.1 稀疏向量"},
+      {"mode": "section_exact", "source_id": "air-hybrid-search", "section": "一、稀疏向量 vs 密集向量 > 1.2 密集向量"},
+      {"mode": "section_exact", "source_id": "air-hybrid-search", "section": "二、混合检索"},
+      {"mode": "section_exact", "source_id": "air-hybrid-search", "section": "二、混合检索 > 2.2 优势与局限"}
+    ],
+    "expected_points": "不对。稀疏与密集各有短板（精确词匹配 vs 语义泛化），混合检索正是为了优势互补；但它也带来双索引的成本，需要按场景权衡。",
+    "evidence_note": "「各有短板」在 1.1/1.2；「为什么要把两者结合」在「二、混合检索」正文（稀疏密集各有千秋 → 优势互补）；「混合也有成本」在 2.2 优势与局限。融合算法细节（2.1.x）不作为证据。"
+  },
+  {
+    "question_id": "Q28",
+    "type": "项目事实（无依据）",
+    "question": "本项目现在为什么把切分上限设成 400 字符？",
+    "should_refuse": true,
+    "expected_evidence": [],
+    "expected_points": "语料中没有关于本项目参数选择实验的内容。正确回答应说明：400 字符只是当前初始参数，本项目尚未做块大小对比实验，因此不能声称它最优。"
+  },
+  {
+    "question_id": "Q29",
+    "type": "无依据",
+    "question": "本项目在十万份文档规模下的检索延迟是多少毫秒？",
+    "should_refuse": true,
+    "expected_evidence": [],
+    "expected_points": "本项目只在约 10 份资料的语料上做过离线检索，没有十万份规模的压测数据，应明确回答资料中未找到相关依据。"
+  },
+  {
+    "question_id": "Q30",
+    "type": "无依据",
+    "question": "红烧肉怎么做才好吃？",
+    "should_refuse": true,
+    "expected_evidence": [],
+    "expected_points": "完全在知识库范围之外（库内是 RAG 技术教程），应回答资料中未找到相关依据，不得编造。"
+  }
+]

@@ -1,0 +1,2394 @@
+{
+  "corpus_id": "rag_learning",
+  "corpus_name": "RAG 技术学习库",
+  "generated_at": "2026-09-21T17:27:46+02:00",
+  "corpus_version": "583a61b（CC BY-NC-SA 4.0（署名-非商业性使用-相同方式共享 4.0 国际））",
+  "corpus_fingerprint": "2bcead7a60490003ea28cdbafac2bc8e6d43f3f289420809b7c5d244e0ebc82d",
+  "tokenizer": "jieba",
+  "params": {
+    "chunk_max_chars": 400,
+    "top_k_default": 3,
+    "bm25_k1": 1.5,
+    "bm25_b": 0.75,
+    "eval_k": 5
+  },
+  "source_count": 10,
+  "chunk_count": 471,
+  "total_chars": 71147,
+  "question_count": 30,
+  "scored_question_count": 27,
+  "refuse_question_count": 3,
+  "proxy_only_question_count": 0,
+  "hit_at_1": 0.7037,
+  "hit_at_3": 0.8889,
+  "hit_at_5": 0.963,
+  "mrr": 0.8111,
+  "keyword_proxy": null,
+  "evidence_modes_in_use": [
+    "section_exact",
+    "section_prefix"
+  ],
+  "notes": [
+    "Hit@K / MRR 判据是「标准证据 chunk」，用 chunk_id / section_exact / section_prefix 三种显式模式匹配，不使用子串匹配。",
+    "BM25 没有相关性阈值：只要查询词在全库出现就会返回结果。因此本轮**没有**可离线验证的拒答决策；拒答题只作观察记录，「无依据问题不会被伪造成有资料支持」这一场景标记为 NOT VALIDATED。",
+    "切分是固定字数（无 overlap、无句子边界），属已知局限，本轮不做切分实验。",
+    "本轮不对 400 字符或某个 Top-K 声称最优。"
+  ],
+  "failures": [
+    {
+      "question_id": "Q15",
+      "question": "LlamaIndex Evaluation、Ragas、Phoenix 这几个评估工具该怎么选？",
+      "expected": "air-eval-tools · 四、对比建议（section_exact）",
+      "top1": "air-eval-tools#s2p1"
+    }
+  ],
+  "refuse_analysis": [
+    {
+      "question_id": "Q28",
+      "question": "本项目现在为什么把切分上限设成 400 字符？",
+      "returned_result": true,
+      "top1": "air-data-load#s3p2",
+      "top1_section": "一、文档加载器 > 1.1 主要功能",
+      "top1_score": 10.8251,
+      "status": "NOT VALIDATED",
+      "note": "观察项：BM25 无相关性阈值，拒答题也会返回 Top-K；本轮没有可离线验证的拒答决策，故不构成本场景的通过证据。"
+    },
+    {
+      "question_id": "Q29",
+      "question": "本项目在十万份文档规模下的检索延迟是多少毫秒？",
+      "returned_result": true,
+      "top1": "air-get-start#s4p1",
+      "top1_section": "一、启动虚拟环境 > 1.2 切换到项目目录",
+      "top1_score": 13.5223,
+      "status": "NOT VALIDATED",
+      "note": "观察项：BM25 无相关性阈值，拒答题也会返回 Top-K；本轮没有可离线验证的拒答决策，故不构成本场景的通过证据。"
+    },
+    {
+      "question_id": "Q30",
+      "question": "红烧肉怎么做才好吃？",
+      "returned_result": true,
+      "top1": "air-vector-embedding#s21p1",
+      "top1_section": "四、嵌入模型选型指南 > 4.3 迭代测试与优化",
+      "top1_score": 6.7806,
+      "status": "NOT VALIDATED",
+      "note": "观察项：BM25 无相关性阈值，拒答题也会返回 Top-K；本轮没有可离线验证的拒答决策，故不构成本场景的通过证据。"
+    }
+  ],
+  "detail": [
+    {
+      "question_id": "Q01",
+      "question": "Embedding（向量嵌入）是什么？",
+      "type": "定义",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-vector-embedding",
+          "section": "一、向量嵌入基础 > 1.1 基础概念 > 1.1.1 什么是 Embedding"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact"
+      ],
+      "evidence_candidate_count": 3,
+      "evidence_candidates": [
+        "air-vector-embedding#s4p1",
+        "air-vector-embedding#s4p2",
+        "air-vector-embedding#s4p3"
+      ],
+      "expected_points": "把文本等对象映射成高维数值向量，使语义相近的对象在向量空间中距离更近；是向量检索的基础。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-vector-embedding#s4p1",
+          "score": 19.6785,
+          "source_id": "air-vector-embedding",
+          "section": "一、向量嵌入基础 > 1.1 基础概念 > 1.1.1 什么是 Embedding",
+          "title": "第一节 向量嵌入"
+        },
+        {
+          "rank": 2,
+          "id": "air-vector-embedding#s4p2",
+          "score": 15.359,
+          "source_id": "air-vector-embedding",
+          "section": "一、向量嵌入基础 > 1.1 基础概念 > 1.1.1 什么是 Embedding",
+          "title": "第一节 向量嵌入"
+        },
+        {
+          "rank": 3,
+          "id": "air-rag-intro#s4p2",
+          "score": 15.1194,
+          "source_id": "air-rag-intro",
+          "section": "一、什么是 RAG？ > 1.2 技术原理",
+          "title": "第一节 RAG 简介"
+        },
+        {
+          "rank": 4,
+          "id": "air-vector-embedding#s4p3",
+          "score": 15.0818,
+          "source_id": "air-vector-embedding",
+          "section": "一、向量嵌入基础 > 1.1 基础概念 > 1.1.1 什么是 Embedding",
+          "title": "第一节 向量嵌入"
+        },
+        {
+          "rank": 5,
+          "id": "air-vector-embedding#s9p1",
+          "score": 13.7931,
+          "source_id": "air-vector-embedding",
+          "section": "二、Embedding 技术发展",
+          "title": "第一节 向量嵌入"
+        }
+      ],
+      "first_evidence_rank": 1,
+      "matched_chunk_id": "air-vector-embedding#s4p1",
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q02",
+      "question": "文本分块（Text Chunking）是什么？切出来的块用来做什么？",
+      "type": "定义",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-text-chunking",
+          "section": "一、理解文本分块"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact"
+      ],
+      "evidence_candidate_count": 1,
+      "evidence_candidates": [
+        "air-text-chunking#s2p1"
+      ],
+      "expected_points": "把加载后的长文档切成更小、更易处理的单元；这些块是后续向量检索与模型处理的基本单位。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-text-chunking#s2p1",
+          "score": 23.4418,
+          "source_id": "air-text-chunking",
+          "section": "一、理解文本分块",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 2,
+          "id": "air-text-chunking#s9p1",
+          "score": 15.4972,
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 3,
+          "id": "air-text-chunking#s5p1",
+          "score": 15.3222,
+          "source_id": "air-text-chunking",
+          "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 4,
+          "id": "air-text-chunking#s12p1",
+          "score": 13.191,
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.3 语义分块",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 5,
+          "id": "air-text-chunking#s11p13",
+          "score": 12.9905,
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.2 递归字符分块",
+          "title": "第二节 文本分块"
+        }
+      ],
+      "first_evidence_rank": 1,
+      "matched_chunk_id": "air-text-chunking#s2p1",
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q03",
+      "question": "RRF（倒数排序融合）是什么？它是怎么给结果打分的？",
+      "type": "定义",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-hybrid-search",
+          "section": "二、混合检索 > 2.1 技术原理与融合方法 > 2.1.1 倒数排序融合 (Reciprocal Rank Fusion, RRF)"
+        },
+        {
+          "mode": "section_exact",
+          "source_id": "air-rerank",
+          "section": "一、重排序 (Re-ranking) > 1.1 RRF (Reciprocal Rank Fusion)"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact"
+      ],
+      "evidence_candidate_count": 6,
+      "evidence_candidates": [
+        "air-hybrid-search#s8p1",
+        "air-hybrid-search#s8p2",
+        "air-hybrid-search#s8p3",
+        "air-hybrid-search#s8p4",
+        "air-rerank#s3p1",
+        "air-rerank#s3p2"
+      ],
+      "expected_points": "Reciprocal Rank Fusion：按各路检索结果的排名取倒数并相加（1/(k+rank)），用排名而非分数做融合，避免不同检索的分数量纲不可比。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-rerank#s3p2",
+          "score": 25.1257,
+          "source_id": "air-rerank",
+          "section": "一、重排序 (Re-ranking) > 1.1 RRF (Reciprocal Rank Fusion)",
+          "title": "第五节 检索进阶"
+        },
+        {
+          "rank": 2,
+          "id": "air-hybrid-search#s8p1",
+          "score": 23.5241,
+          "source_id": "air-hybrid-search",
+          "section": "二、混合检索 > 2.1 技术原理与融合方法 > 2.1.1 倒数排序融合 (Reciprocal Rank Fusion, RRF)",
+          "title": "第一节 混合检索"
+        },
+        {
+          "rank": 3,
+          "id": "air-hybrid-search#s8p2",
+          "score": 20.2348,
+          "source_id": "air-hybrid-search",
+          "section": "二、混合检索 > 2.1 技术原理与融合方法 > 2.1.1 倒数排序融合 (Reciprocal Rank Fusion, RRF)",
+          "title": "第一节 混合检索"
+        },
+        {
+          "rank": 4,
+          "id": "air-hybrid-search#s8p4",
+          "score": 19.235,
+          "source_id": "air-hybrid-search",
+          "section": "二、混合检索 > 2.1 技术原理与融合方法 > 2.1.1 倒数排序融合 (Reciprocal Rank Fusion, RRF)",
+          "title": "第一节 混合检索"
+        },
+        {
+          "rank": 5,
+          "id": "air-hybrid-search#s8p3",
+          "score": 18.1509,
+          "source_id": "air-hybrid-search",
+          "section": "二、混合检索 > 2.1 技术原理与融合方法 > 2.1.1 倒数排序融合 (Reciprocal Rank Fusion, RRF)",
+          "title": "第一节 混合检索"
+        }
+      ],
+      "first_evidence_rank": 1,
+      "matched_chunk_id": "air-rerank#s3p2",
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q04",
+      "question": "RAG 评估三元组包含哪三个维度？",
+      "type": "定义",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-evaluation",
+          "section": "一、RAG评估三元组"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact"
+      ],
+      "evidence_candidate_count": 7,
+      "evidence_candidates": [
+        "air-evaluation#s2p1",
+        "air-evaluation#s2p2",
+        "air-evaluation#s2p3",
+        "air-evaluation#s2p4",
+        "air-evaluation#s2p5",
+        "air-evaluation#s2p6",
+        "air-evaluation#s2p7"
+      ],
+      "expected_points": "上下文相关性（检索器）、忠实度/可信度（生成器）、答案相关性（端到端）。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-evaluation#s2p1",
+          "score": 22.0627,
+          "source_id": "air-evaluation",
+          "section": "一、RAG评估三元组",
+          "title": "第一节 评估介绍"
+        },
+        {
+          "rank": 2,
+          "id": "air-evaluation#s2p6",
+          "score": 19.6277,
+          "source_id": "air-evaluation",
+          "section": "一、RAG评估三元组",
+          "title": "第一节 评估介绍"
+        },
+        {
+          "rank": 3,
+          "id": "air-evaluation#s1p4",
+          "score": 13.1323,
+          "source_id": "air-evaluation",
+          "section": "第一节 评估介绍",
+          "title": "第一节 评估介绍"
+        },
+        {
+          "rank": 4,
+          "id": "air-evaluation#s6p1",
+          "score": 11.0436,
+          "source_id": "air-evaluation",
+          "section": "二、评估工作流 > 2.3 响应评估",
+          "title": "第一节 评估介绍"
+        },
+        {
+          "rank": 5,
+          "id": "air-rag-intro#s14p2",
+          "score": 10.9305,
+          "source_id": "air-rag-intro",
+          "section": "三、如何上手 RAG？ > 3.4 进阶与挑战",
+          "title": "第一节 RAG 简介"
+        }
+      ],
+      "first_evidence_rank": 1,
+      "matched_chunk_id": "air-evaluation#s2p1",
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q05",
+      "question": "Function Calling 是什么？它在 RAG 里解决什么问题？",
+      "type": "定义",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-formatted-generation",
+          "section": "三、Function Calling"
+        },
+        {
+          "mode": "section_exact",
+          "source_id": "air-formatted-generation",
+          "section": "三、Function Calling > 3.1 概念与工作流程"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact"
+      ],
+      "evidence_candidate_count": 9,
+      "evidence_candidates": [
+        "air-formatted-generation#s7p1",
+        "air-formatted-generation#s7p2",
+        "air-formatted-generation#s8p1",
+        "air-formatted-generation#s8p2",
+        "air-formatted-generation#s8p3",
+        "air-formatted-generation#s8p4",
+        "air-formatted-generation#s8p5",
+        "air-formatted-generation#s8p6",
+        "air-formatted-generation#s8p7"
+      ],
+      "expected_points": "让模型按约定结构输出函数名与参数，把自然语言转成可被程序稳定解析的结构化调用，从而可靠地驱动后续流程。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-formatted-generation#s9p8",
+          "score": 14.3836,
+          "source_id": "air-formatted-generation",
+          "section": "三、Function Calling > 3.2 Function Calling 实践",
+          "title": "第一节 格式化生成"
+        },
+        {
+          "rank": 2,
+          "id": "air-rag-intro#s3p1",
+          "score": 13.7091,
+          "source_id": "air-rag-intro",
+          "section": "一、什么是 RAG？ > 1.1 核心定义",
+          "title": "第一节 RAG 简介"
+        },
+        {
+          "rank": 3,
+          "id": "air-rag-intro#s7p5",
+          "score": 13.5016,
+          "source_id": "air-rag-intro",
+          "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调",
+          "title": "第一节 RAG 简介"
+        },
+        {
+          "rank": 4,
+          "id": "air-formatted-generation#s10p2",
+          "score": 12.9355,
+          "source_id": "air-formatted-generation",
+          "section": "三、Function Calling > 3.3 Function Calling 的优势",
+          "title": "第一节 格式化生成"
+        },
+        {
+          "rank": 5,
+          "id": "air-formatted-generation#s7p1",
+          "score": 12.5662,
+          "source_id": "air-formatted-generation",
+          "section": "三、Function Calling",
+          "title": "第一节 格式化生成"
+        }
+      ],
+      "first_evidence_rank": 5,
+      "matched_chunk_id": "air-formatted-generation#s7p1",
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q06",
+      "question": "文档加载器在 RAG 的数据管道里一般要完成哪三个核心任务？",
+      "type": "定义",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-data-load",
+          "section": "一、文档加载器 > 1.1 主要功能"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact"
+      ],
+      "evidence_candidate_count": 2,
+      "evidence_candidates": [
+        "air-data-load#s3p1",
+        "air-data-load#s3p2"
+      ],
+      "expected_points": "解析不同格式的原始文档为纯文本；抽取来源、页码、作者等元数据；整理成统一的数据结构供后续切分、向量化和入库。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-data-load#s3p2",
+          "score": 33.0959,
+          "source_id": "air-data-load",
+          "section": "一、文档加载器 > 1.1 主要功能",
+          "title": "第一节 数据加载"
+        },
+        {
+          "rank": 2,
+          "id": "air-data-load#s4p1-2",
+          "score": 15.6827,
+          "source_id": "air-data-load",
+          "section": "一、文档加载器 > 1.2 当前主流RAG文档加载器",
+          "title": "第一节 数据加载"
+        },
+        {
+          "rank": 3,
+          "id": "air-data-load#s3p1",
+          "score": 15.5974,
+          "source_id": "air-data-load",
+          "section": "一、文档加载器 > 1.1 主要功能",
+          "title": "第一节 数据加载"
+        },
+        {
+          "rank": 4,
+          "id": "air-rag-intro#s15p3",
+          "score": 13.1438,
+          "source_id": "air-rag-intro",
+          "section": "四、RAG 已死？",
+          "title": "第一节 RAG 简介"
+        },
+        {
+          "rank": 5,
+          "id": "air-rerank#s11p4",
+          "score": 12.9518,
+          "source_id": "air-rerank",
+          "section": "二、压缩 (Compression) > 2.2 自定义重排器与压缩管道 > 代码示例",
+          "title": "第五节 检索进阶"
+        }
+      ],
+      "first_evidence_rank": 1,
+      "matched_chunk_id": "air-data-load#s3p2",
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q07",
+      "question": "构建一个最小可用的 RAG 系统大致分哪几步？",
+      "type": "定义",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-rag-intro",
+          "section": "三、如何上手 RAG？ > 3.2 四步构建最小可行系统（MVP）"
+        },
+        {
+          "mode": "section_exact",
+          "source_id": "air-get-start",
+          "section": "三、基于 LangChain 框架的 RAG 实现"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact"
+      ],
+      "evidence_candidate_count": 6,
+      "evidence_candidates": [
+        "air-get-start#s6p1",
+        "air-get-start#s6p2",
+        "air-rag-intro#s12p1",
+        "air-rag-intro#s12p2",
+        "air-rag-intro#s12p3",
+        "air-rag-intro#s12p4"
+      ],
+      "expected_points": "教程给出的四步构建最小可行系统（MVP）的流程：准备数据/知识库、切分与向量化建索引、检索、交给模型生成。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-get-start#s6p1",
+          "score": 15.9329,
+          "source_id": "air-get-start",
+          "section": "三、基于 LangChain 框架的 RAG 实现",
+          "title": "第三节 四步构建RAG"
+        },
+        {
+          "rank": 2,
+          "id": "air-rag-intro#s12p1",
+          "score": 14.257,
+          "source_id": "air-rag-intro",
+          "section": "三、如何上手 RAG？ > 3.2 四步构建最小可行系统（MVP）",
+          "title": "第一节 RAG 简介"
+        },
+        {
+          "rank": 3,
+          "id": "air-rag-intro#s12p2",
+          "score": 14.0732,
+          "source_id": "air-rag-intro",
+          "section": "三、如何上手 RAG？ > 3.2 四步构建最小可行系统（MVP）",
+          "title": "第一节 RAG 简介"
+        },
+        {
+          "rank": 4,
+          "id": "air-rag-intro#s12p4",
+          "score": 13.7379,
+          "source_id": "air-rag-intro",
+          "section": "三、如何上手 RAG？ > 3.2 四步构建最小可行系统（MVP）",
+          "title": "第一节 RAG 简介"
+        },
+        {
+          "rank": 5,
+          "id": "air-evaluation#s1p1",
+          "score": 13.6438,
+          "source_id": "air-evaluation",
+          "section": "第一节 评估介绍",
+          "title": "第一节 评估介绍"
+        }
+      ],
+      "first_evidence_rank": 1,
+      "matched_chunk_id": "air-get-start#s6p1",
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q08",
+      "question": "BM25 打分时为什么同时考虑词频、词的稀有度和文档长度？",
+      "type": "原理",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-hybrid-search",
+          "section": "一、稀疏向量 vs 密集向量 > 1.1 稀疏向量"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact"
+      ],
+      "evidence_candidate_count": 4,
+      "evidence_candidates": [
+        "air-hybrid-search#s3p1",
+        "air-hybrid-search#s3p2",
+        "air-hybrid-search#s3p3",
+        "air-hybrid-search#s3p4"
+      ],
+      "expected_points": "BM25 公式中 IDF 反映词的稀有度、f(q,D) 与 k1 控制词频饱和、|D|/avgdl 与 b 做文档长度归一化，避免长文档仅因更长而占优。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-hybrid-search#s3p3",
+          "score": 19.8367,
+          "source_id": "air-hybrid-search",
+          "section": "一、稀疏向量 vs 密集向量 > 1.1 稀疏向量",
+          "title": "第一节 混合检索"
+        },
+        {
+          "rank": 2,
+          "id": "air-hybrid-search#s3p1",
+          "score": 17.5676,
+          "source_id": "air-hybrid-search",
+          "section": "一、稀疏向量 vs 密集向量 > 1.1 稀疏向量",
+          "title": "第一节 混合检索"
+        },
+        {
+          "rank": 3,
+          "id": "air-rerank#s3p2",
+          "score": 15.4511,
+          "source_id": "air-rerank",
+          "section": "一、重排序 (Re-ranking) > 1.1 RRF (Reciprocal Rank Fusion)",
+          "title": "第五节 检索进阶"
+        },
+        {
+          "rank": 4,
+          "id": "air-hybrid-search#s4p3",
+          "score": 12.9067,
+          "source_id": "air-hybrid-search",
+          "section": "一、稀疏向量 vs 密集向量 > 1.2 密集向量",
+          "title": "第一节 混合检索"
+        },
+        {
+          "rank": 5,
+          "id": "air-vector-embedding#s11p1",
+          "score": 11.1184,
+          "source_id": "air-vector-embedding",
+          "section": "二、Embedding 技术发展 > 2.2 动态上下文嵌入",
+          "title": "第一节 向量嵌入"
+        }
+      ],
+      "first_evidence_rank": 1,
+      "matched_chunk_id": "air-hybrid-search#s3p3",
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q09",
+      "question": "为什么文本块不是越大越好？",
+      "type": "原理",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_prefix",
+          "source_id": "air-text-chunking",
+          "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好"
+        }
+      ],
+      "evidence_modes": [
+        "section_prefix"
+      ],
+      "evidence_candidate_count": 12,
+      "evidence_candidates": [
+        "air-text-chunking#s5p1",
+        "air-text-chunking#s6p1",
+        "air-text-chunking#s6p2",
+        "air-text-chunking#s6p3",
+        "air-text-chunking#s6p4",
+        "air-text-chunking#s7p1",
+        "air-text-chunking#s7p2",
+        "air-text-chunking#s8p1",
+        "air-text-chunking#s8p2",
+        "air-text-chunking#s8p3",
+        "air-text-chunking#s8p4",
+        "air-text-chunking#s8p5"
+      ],
+      "expected_points": "块过大有三类代价：嵌入压缩导致信息损失、长上下文里的信息被淹没（Lost in the Middle）、主题稀释导致检索匹配变差。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-text-chunking#s5p1",
+          "score": 21.9797,
+          "source_id": "air-text-chunking",
+          "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 2,
+          "id": "air-text-chunking#s8p2",
+          "score": 18.6125,
+          "source_id": "air-text-chunking",
+          "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.3 主题稀释导致检索失败",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 3,
+          "id": "air-text-chunking#s8p1",
+          "score": 18.2177,
+          "source_id": "air-text-chunking",
+          "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.3 主题稀释导致检索失败",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 4,
+          "id": "air-text-chunking#s6p1",
+          "score": 17.7673,
+          "source_id": "air-text-chunking",
+          "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.1 嵌入过程中的信息损失",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 5,
+          "id": "air-text-chunking#s8p3",
+          "score": 17.7673,
+          "source_id": "air-text-chunking",
+          "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.3 主题稀释导致检索失败",
+          "title": "第二节 文本分块"
+        }
+      ],
+      "first_evidence_rank": 1,
+      "matched_chunk_id": "air-text-chunking#s5p1",
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q10",
+      "question": "为什么需要格式化生成？",
+      "type": "原理",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-formatted-generation",
+          "section": "一、为什么需要格式化生成？"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact"
+      ],
+      "evidence_candidate_count": 3,
+      "evidence_candidates": [
+        "air-formatted-generation#s2p1",
+        "air-formatted-generation#s2p2",
+        "air-formatted-generation#s2p3"
+      ],
+      "expected_points": "自然语言输出难以被程序稳定解析；格式化生成让下游能可靠拿到结构化字段，便于系统集成与后续处理。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-formatted-generation#s2p1",
+          "score": 18.295,
+          "source_id": "air-formatted-generation",
+          "section": "一、为什么需要格式化生成？",
+          "title": "第一节 格式化生成"
+        },
+        {
+          "rank": 2,
+          "id": "air-formatted-generation#s2p3",
+          "score": 17.29,
+          "source_id": "air-formatted-generation",
+          "section": "一、为什么需要格式化生成？",
+          "title": "第一节 格式化生成"
+        },
+        {
+          "rank": 3,
+          "id": "air-formatted-generation#s2p2",
+          "score": 9.8258,
+          "source_id": "air-formatted-generation",
+          "section": "一、为什么需要格式化生成？",
+          "title": "第一节 格式化生成"
+        },
+        {
+          "rank": 4,
+          "id": "air-formatted-generation#s5p3",
+          "score": 8.6219,
+          "source_id": "air-formatted-generation",
+          "section": "二、格式化生成的实现方法 > 2.2 LlamaIndex 的输出解析",
+          "title": "第一节 格式化生成"
+        },
+        {
+          "rank": 5,
+          "id": "air-formatted-generation#s8p3",
+          "score": 8.1246,
+          "source_id": "air-formatted-generation",
+          "section": "三、Function Calling > 3.1 概念与工作流程",
+          "title": "第一节 格式化生成"
+        }
+      ],
+      "first_evidence_rank": 1,
+      "matched_chunk_id": "air-formatted-generation#s2p1",
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q11",
+      "question": "嵌入模型通常用什么训练任务来训练？",
+      "type": "原理",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_prefix",
+          "source_id": "air-vector-embedding",
+          "section": "三、嵌入模型训练原理 > 3.1 主要训练任务"
+        }
+      ],
+      "evidence_modes": [
+        "section_prefix"
+      ],
+      "evidence_candidate_count": 4,
+      "evidence_candidates": [
+        "air-vector-embedding#s14p1",
+        "air-vector-embedding#s15p1",
+        "air-vector-embedding#s16p1",
+        "air-vector-embedding#s16p2"
+      ],
+      "expected_points": "掩码语言模型（MLM）与下一句预测（NSP）等预训练任务，配合对比学习一类的效果增强策略。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-vector-embedding#s13p1",
+          "score": 17.7549,
+          "source_id": "air-vector-embedding",
+          "section": "三、嵌入模型训练原理",
+          "title": "第一节 向量嵌入"
+        },
+        {
+          "rank": 2,
+          "id": "air-vector-embedding#s16p2",
+          "score": 15.736,
+          "source_id": "air-vector-embedding",
+          "section": "三、嵌入模型训练原理 > 3.1 主要训练任务 > 任务二：下一句预测 (Next Sentence Prediction, NSP)",
+          "title": "第一节 向量嵌入"
+        },
+        {
+          "rank": 3,
+          "id": "air-vector-embedding#s14p1",
+          "score": 15.5174,
+          "source_id": "air-vector-embedding",
+          "section": "三、嵌入模型训练原理 > 3.1 主要训练任务",
+          "title": "第一节 向量嵌入"
+        },
+        {
+          "rank": 4,
+          "id": "air-vector-embedding#s15p1",
+          "score": 15.2941,
+          "source_id": "air-vector-embedding",
+          "section": "三、嵌入模型训练原理 > 3.1 主要训练任务 > 任务一：掩码语言模型 (Masked Language Model, MLM)",
+          "title": "第一节 向量嵌入"
+        },
+        {
+          "rank": 5,
+          "id": "air-vector-embedding#s17p1",
+          "score": 14.7226,
+          "source_id": "air-vector-embedding",
+          "section": "三、嵌入模型训练原理 > 3.2 效果增强策略",
+          "title": "第一节 向量嵌入"
+        }
+      ],
+      "first_evidence_rank": 2,
+      "matched_chunk_id": "air-vector-embedding#s16p2",
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q12",
+      "question": "为什么重排序（Re-ranking）要放在初步检索之后做，而不是直接用重排模型扫全库？",
+      "type": "原理",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-rerank",
+          "section": "一、重排序 (Re-ranking) > 1.3 Cross-Encoder 重排"
+        },
+        {
+          "mode": "section_exact",
+          "source_id": "air-rerank",
+          "section": "一、重排序 (Re-ranking) > 1.4 ColBERT 重排"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact"
+      ],
+      "evidence_candidate_count": 9,
+      "evidence_candidates": [
+        "air-rerank#s5p1",
+        "air-rerank#s5p2",
+        "air-rerank#s5p3",
+        "air-rerank#s5p4",
+        "air-rerank#s5p5",
+        "air-rerank#s6p1",
+        "air-rerank#s6p2",
+        "air-rerank#s6p3",
+        "air-rerank#s6p4"
+      ],
+      "expected_points": "重排模型精算但昂贵，先由初检（如向量或 BM25）快速缩小候选集，再对少量候选做精排，兼顾效果与成本。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-rerank#s4p1",
+          "score": 32.7055,
+          "source_id": "air-rerank",
+          "section": "一、重排序 (Re-ranking) > 1.2 RankLLM / LLM-based Reranker",
+          "title": "第五节 检索进阶"
+        },
+        {
+          "rank": 2,
+          "id": "air-rerank#s5p4",
+          "score": 25.644,
+          "source_id": "air-rerank",
+          "section": "一、重排序 (Re-ranking) > 1.3 Cross-Encoder 重排",
+          "title": "第五节 检索进阶"
+        },
+        {
+          "rank": 3,
+          "id": "air-rerank#s6p2",
+          "score": 24.9529,
+          "source_id": "air-rerank",
+          "section": "一、重排序 (Re-ranking) > 1.4 ColBERT 重排",
+          "title": "第五节 检索进阶"
+        },
+        {
+          "rank": 4,
+          "id": "air-rerank#s6p1",
+          "score": 24.4639,
+          "source_id": "air-rerank",
+          "section": "一、重排序 (Re-ranking) > 1.4 ColBERT 重排",
+          "title": "第五节 检索进阶"
+        },
+        {
+          "rank": 5,
+          "id": "air-rerank#s5p2",
+          "score": 24.3869,
+          "source_id": "air-rerank",
+          "section": "一、重排序 (Re-ranking) > 1.3 Cross-Encoder 重排",
+          "title": "第五节 检索进阶"
+        }
+      ],
+      "first_evidence_rank": 2,
+      "matched_chunk_id": "air-rerank#s5p4",
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q13",
+      "question": "稀疏向量和密集向量有什么区别？各自的优缺点是什么？",
+      "type": "比较",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-hybrid-search",
+          "section": "一、稀疏向量 vs 密集向量 > 1.1 稀疏向量"
+        },
+        {
+          "mode": "section_exact",
+          "source_id": "air-hybrid-search",
+          "section": "一、稀疏向量 vs 密集向量 > 1.2 密集向量"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact"
+      ],
+      "evidence_candidate_count": 7,
+      "evidence_candidates": [
+        "air-hybrid-search#s3p1",
+        "air-hybrid-search#s3p2",
+        "air-hybrid-search#s3p3",
+        "air-hybrid-search#s3p4",
+        "air-hybrid-search#s4p1",
+        "air-hybrid-search#s4p2",
+        "air-hybrid-search#s4p3"
+      ],
+      "expected_points": "稀疏向量基于词频统计、维度高且稀疏、可解释、擅长精确词匹配（BM25/TF-IDF），但无法理解同义与近义；密集向量能理解语义与上下文、泛化强，但可解释性差、依赖训练算力、对 OOV 处理更依赖子词切分。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-hybrid-search#s5p2",
+          "score": 16.0503,
+          "source_id": "air-hybrid-search",
+          "section": "一、稀疏向量 vs 密集向量 > 1.3 实例对比",
+          "title": "第一节 混合检索"
+        },
+        {
+          "rank": 2,
+          "id": "air-hybrid-search#s1p1",
+          "score": 14.2324,
+          "source_id": "air-hybrid-search",
+          "section": "第一节 混合检索",
+          "title": "第一节 混合检索"
+        },
+        {
+          "rank": 3,
+          "id": "air-hybrid-search#s6p1",
+          "score": 14.1449,
+          "source_id": "air-hybrid-search",
+          "section": "二、混合检索",
+          "title": "第一节 混合检索"
+        },
+        {
+          "rank": 4,
+          "id": "air-hybrid-search#s5p6",
+          "score": 13.4924,
+          "source_id": "air-hybrid-search",
+          "section": "一、稀疏向量 vs 密集向量 > 1.3 实例对比",
+          "title": "第一节 混合检索"
+        },
+        {
+          "rank": 5,
+          "id": "air-hybrid-search#s3p4",
+          "score": 13.3968,
+          "source_id": "air-hybrid-search",
+          "section": "一、稀疏向量 vs 密集向量 > 1.1 稀疏向量",
+          "title": "第一节 混合检索"
+        }
+      ],
+      "first_evidence_rank": 5,
+      "matched_chunk_id": "air-hybrid-search#s3p4",
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q14",
+      "question": "固定大小分块、递归字符分块、语义分块有什么区别？",
+      "type": "比较",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.1 固定大小分块"
+        },
+        {
+          "mode": "section_exact",
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.2 递归字符分块"
+        },
+        {
+          "mode": "section_exact",
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.3 语义分块"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact"
+      ],
+      "evidence_candidate_count": 39,
+      "evidence_candidates": [
+        "air-text-chunking#s10p1",
+        "air-text-chunking#s10p2",
+        "air-text-chunking#s10p3",
+        "air-text-chunking#s10p4",
+        "air-text-chunking#s10p5",
+        "air-text-chunking#s10p6",
+        "air-text-chunking#s10p7",
+        "air-text-chunking#s10p8-1",
+        "air-text-chunking#s10p8-2",
+        "air-text-chunking#s10p9",
+        "air-text-chunking#s11p1",
+        "air-text-chunking#s11p2",
+        "air-text-chunking#s11p3",
+        "air-text-chunking#s11p4",
+        "air-text-chunking#s11p5",
+        "air-text-chunking#s11p6",
+        "air-text-chunking#s11p7",
+        "air-text-chunking#s11p8-1",
+        "air-text-chunking#s11p8-2",
+        "air-text-chunking#s11p9",
+        "air-text-chunking#s11p10",
+        "air-text-chunking#s11p11",
+        "air-text-chunking#s11p12",
+        "air-text-chunking#s11p13",
+        "air-text-chunking#s12p1",
+        "air-text-chunking#s12p2",
+        "air-text-chunking#s12p3",
+        "air-text-chunking#s12p4",
+        "air-text-chunking#s12p5",
+        "air-text-chunking#s12p6",
+        "air-text-chunking#s12p7",
+        "air-text-chunking#s12p8",
+        "air-text-chunking#s12p9",
+        "air-text-chunking#s12p10",
+        "air-text-chunking#s12p11-1",
+        "air-text-chunking#s12p11-2",
+        "air-text-chunking#s12p12",
+        "air-text-chunking#s12p13-1",
+        "air-text-chunking#s12p13-2"
+      ],
+      "expected_points": "固定大小按字数硬切并可叠加 overlap；递归字符分块按分隔符优先级逐层尝试、尽量在自然边界切开；语义分块依据句子间语义断点切分，块内更连贯但成本更高。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-text-chunking#s11p6",
+          "score": 24.2441,
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.2 递归字符分块",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 2,
+          "id": "air-text-chunking#s11p13",
+          "score": 21.5527,
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.2 递归字符分块",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 3,
+          "id": "air-text-chunking#s11p1",
+          "score": 18.9554,
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.2 递归字符分块",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 4,
+          "id": "air-text-chunking#s10p9",
+          "score": 16.6111,
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.1 固定大小分块",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 5,
+          "id": "air-text-chunking#s11p3",
+          "score": 15.3386,
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.2 递归字符分块",
+          "title": "第二节 文本分块"
+        }
+      ],
+      "first_evidence_rank": 1,
+      "matched_chunk_id": "air-text-chunking#s11p6",
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q15",
+      "question": "LlamaIndex Evaluation、Ragas、Phoenix 这几个评估工具该怎么选？",
+      "type": "比较",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-eval-tools",
+          "section": "四、对比建议"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact"
+      ],
+      "evidence_candidate_count": 2,
+      "evidence_candidates": [
+        "air-eval-tools#s12p1",
+        "air-eval-tools#s12p2"
+      ],
+      "expected_points": "教程按使用场景给出对比建议：与 LlamaIndex 生态集成、轻量快速自建指标、需要可视化与生产可观测性时各有倾向。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-eval-tools#s2p1",
+          "score": 13.7868,
+          "source_id": "air-eval-tools",
+          "section": "一、LlamaIndex Evaluation",
+          "title": "第二节 评估常用工具"
+        },
+        {
+          "rank": 2,
+          "id": "air-eval-tools#s1p1",
+          "score": 12.7173,
+          "source_id": "air-eval-tools",
+          "section": "第二节 评估常用工具",
+          "title": "第二节 评估常用工具"
+        },
+        {
+          "rank": 3,
+          "id": "air-eval-tools#s10p1",
+          "score": 12.1448,
+          "source_id": "air-eval-tools",
+          "section": "三、Phoenix (Arize Phoenix) > 3.1 核心理念",
+          "title": "第二节 评估常用工具"
+        },
+        {
+          "rank": 4,
+          "id": "air-evaluation#s4p5",
+          "score": 12.1162,
+          "source_id": "air-evaluation",
+          "section": "二、评估工作流 > 2.1 从目标到回归的评估闭环",
+          "title": "第一节 评估介绍"
+        },
+        {
+          "rank": 5,
+          "id": "air-rag-intro#s11p1",
+          "score": 11.4155,
+          "source_id": "air-rag-intro",
+          "section": "三、如何上手 RAG？ > 3.1 基础工具链选择",
+          "title": "第一节 RAG 简介"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false
+    },
+    {
+      "question_id": "Q16",
+      "question": "RAG 和微调（Fine-tuning）应该怎么选？",
+      "type": "比较",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-rag-intro",
+          "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact"
+      ],
+      "evidence_candidate_count": 6,
+      "evidence_candidates": [
+        "air-rag-intro#s7p1",
+        "air-rag-intro#s7p2",
+        "air-rag-intro#s7p3",
+        "air-rag-intro#s7p4",
+        "air-rag-intro#s7p5",
+        "air-rag-intro#s7p6"
+      ],
+      "expected_points": "两者并非互相替代：RAG 适合知识频繁更新、需要引用出处的场景；微调适合改变模型行为风格或领域能力，但知识更新成本高。应按需组合而非二选一。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-rag-intro#s7p1",
+          "score": 25.3796,
+          "source_id": "air-rag-intro",
+          "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调",
+          "title": "第一节 RAG 简介"
+        },
+        {
+          "rank": 2,
+          "id": "air-data-load#s9p5",
+          "score": 12.4513,
+          "source_id": "air-data-load",
+          "section": "三、从 LangChain 封装到原始 Unstructured > 3.1 代码示例",
+          "title": "第一节 数据加载"
+        },
+        {
+          "rank": 3,
+          "id": "air-rag-intro#s7p3",
+          "score": 12.4001,
+          "source_id": "air-rag-intro",
+          "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调",
+          "title": "第一节 RAG 简介"
+        },
+        {
+          "rank": 4,
+          "id": "air-rag-intro#s7p4",
+          "score": 12.0415,
+          "source_id": "air-rag-intro",
+          "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调",
+          "title": "第一节 RAG 简介"
+        },
+        {
+          "rank": 5,
+          "id": "air-rag-intro#s7p6",
+          "score": 11.5204,
+          "source_id": "air-rag-intro",
+          "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调",
+          "title": "第一节 RAG 简介"
+        }
+      ],
+      "first_evidence_rank": 1,
+      "matched_chunk_id": "air-rag-intro#s7p1",
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q17",
+      "question": "固定大小分块里的 chunk_overlap 起什么作用？块大小该怎么取舍？",
+      "type": "取舍",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.1 固定大小分块"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact"
+      ],
+      "evidence_candidate_count": 10,
+      "evidence_candidates": [
+        "air-text-chunking#s10p1",
+        "air-text-chunking#s10p2",
+        "air-text-chunking#s10p3",
+        "air-text-chunking#s10p4",
+        "air-text-chunking#s10p5",
+        "air-text-chunking#s10p6",
+        "air-text-chunking#s10p7",
+        "air-text-chunking#s10p8-1",
+        "air-text-chunking#s10p8-2",
+        "air-text-chunking#s10p9"
+      ],
+      "expected_points": "chunk_overlap 通过重叠保持相邻块的上下文连续性，降低边界处信息被切断的风险；块大小需要在嵌入模型输入上限、上下文完整性与成本之间权衡，没有普适最优值。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-text-chunking#s10p3",
+          "score": 26.8742,
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.1 固定大小分块",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 2,
+          "id": "air-text-chunking#s10p5",
+          "score": 24.2572,
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.1 固定大小分块",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 3,
+          "id": "air-text-chunking#s10p8-1",
+          "score": 23.1086,
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.1 固定大小分块",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 4,
+          "id": "air-text-chunking#s10p8-2",
+          "score": 18.8973,
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.1 固定大小分块",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 5,
+          "id": "air-get-start#s8p1-2",
+          "score": 17.0192,
+          "source_id": "air-get-start",
+          "section": "三、基于 LangChain 框架的 RAG 实现 > 3.2 数据准备",
+          "title": "第三节 四步构建RAG"
+        }
+      ],
+      "first_evidence_rank": 1,
+      "matched_chunk_id": "air-text-chunking#s10p3",
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q18",
+      "question": "混合检索的优势和局限分别是什么？",
+      "type": "取舍",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-hybrid-search",
+          "section": "二、混合检索 > 2.2 优势与局限"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact"
+      ],
+      "evidence_candidate_count": 1,
+      "evidence_candidates": [
+        "air-hybrid-search#s10p1"
+      ],
+      "expected_points": "优势是同时捕获关键词与语义、召回率与准确率更高；局限是需要维护并查询两套索引，计算与存储资源消耗更大，融合策略也需要额外设计。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-hybrid-search#s10p1",
+          "score": 15.6204,
+          "source_id": "air-hybrid-search",
+          "section": "二、混合检索 > 2.2 优势与局限",
+          "title": "第一节 混合检索"
+        },
+        {
+          "rank": 2,
+          "id": "air-hybrid-search#s1p1",
+          "score": 11.0899,
+          "source_id": "air-hybrid-search",
+          "section": "第一节 混合检索",
+          "title": "第一节 混合检索"
+        },
+        {
+          "rank": 3,
+          "id": "air-data-load#s6p1",
+          "score": 10.5099,
+          "source_id": "air-data-load",
+          "section": "二、Unstructured文档处理库 > 2.1 Unstructured 的核心优势",
+          "title": "第一节 数据加载"
+        },
+        {
+          "rank": 4,
+          "id": "air-rag-intro#s7p6",
+          "score": 10.2278,
+          "source_id": "air-rag-intro",
+          "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调",
+          "title": "第一节 RAG 简介"
+        },
+        {
+          "rank": 5,
+          "id": "air-rag-intro#s4p4",
+          "score": 9.7081,
+          "source_id": "air-rag-intro",
+          "section": "一、什么是 RAG？ > 1.2 技术原理",
+          "title": "第一节 RAG 简介"
+        }
+      ],
+      "first_evidence_rank": 1,
+      "matched_chunk_id": "air-hybrid-search#s10p1",
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q19",
+      "question": "给嵌入模型选型时，应该看哪些维度？",
+      "type": "取舍",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-vector-embedding",
+          "section": "四、嵌入模型选型指南 > 4.2 关键评估维度"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact"
+      ],
+      "evidence_candidate_count": 3,
+      "evidence_candidates": [
+        "air-vector-embedding#s20p1",
+        "air-vector-embedding#s20p2-1",
+        "air-vector-embedding#s20p2-2"
+      ],
+      "expected_points": "模型参数量、最大 token 数（直接约束分块策略）、评测得分与发布机构、成本（API 调用或自部署的显存/运维成本）。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-vector-embedding#s20p1",
+          "score": 18.5894,
+          "source_id": "air-vector-embedding",
+          "section": "四、嵌入模型选型指南 > 4.2 关键评估维度",
+          "title": "第一节 向量嵌入"
+        },
+        {
+          "rank": 2,
+          "id": "air-vector-embedding#s19p2",
+          "score": 17.2592,
+          "source_id": "air-vector-embedding",
+          "section": "四、嵌入模型选型指南 > 4.1 从 MTEB 排行榜开始",
+          "title": "第一节 向量嵌入"
+        },
+        {
+          "rank": 3,
+          "id": "air-vector-embedding#s18p1",
+          "score": 14.576,
+          "source_id": "air-vector-embedding",
+          "section": "四、嵌入模型选型指南",
+          "title": "第一节 向量嵌入"
+        },
+        {
+          "rank": 4,
+          "id": "air-evaluation#s3p1",
+          "score": 14.1611,
+          "source_id": "air-evaluation",
+          "section": "二、评估工作流",
+          "title": "第一节 评估介绍"
+        },
+        {
+          "rank": 5,
+          "id": "air-vector-embedding#s21p2",
+          "score": 13.7351,
+          "source_id": "air-vector-embedding",
+          "section": "四、嵌入模型选型指南 > 4.3 迭代测试与优化",
+          "title": "第一节 向量嵌入"
+        }
+      ],
+      "first_evidence_rank": 1,
+      "matched_chunk_id": "air-vector-embedding#s20p1",
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q20",
+      "question": "把一整段话变成一串数字，让意思相近的文本在那个空间里靠得更近——这说的是哪个环节？",
+      "type": "同义改写",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_prefix",
+          "source_id": "air-vector-embedding",
+          "section": "一、向量嵌入基础 > 1.1 基础概念"
+        }
+      ],
+      "evidence_modes": [
+        "section_prefix"
+      ],
+      "evidence_candidate_count": 5,
+      "evidence_candidates": [
+        "air-vector-embedding#s4p1",
+        "air-vector-embedding#s4p2",
+        "air-vector-embedding#s4p3",
+        "air-vector-embedding#s5p1",
+        "air-vector-embedding#s5p2"
+      ],
+      "expected_points": "向量嵌入（Embedding）：把文本编码成高维向量，语义相近则向量距离更近，是语义检索的基础。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-evaluation#s8p16-1",
+          "score": 19.0762,
+          "source_id": "air-evaluation",
+          "section": "二、评估工作流 > 2.3 响应评估 > 2.3.2 主要评估方法",
+          "title": "第一节 评估介绍"
+        },
+        {
+          "rank": 2,
+          "id": "air-vector-embedding#s5p2",
+          "score": 17.7944,
+          "source_id": "air-vector-embedding",
+          "section": "一、向量嵌入基础 > 1.1 基础概念 > 1.1.2 向量空间的语义表示",
+          "title": "第一节 向量嵌入"
+        },
+        {
+          "rank": 3,
+          "id": "air-rag-intro#s3p2",
+          "score": 17.3605,
+          "source_id": "air-rag-intro",
+          "section": "一、什么是 RAG？ > 1.1 核心定义",
+          "title": "第一节 RAG 简介"
+        },
+        {
+          "rank": 4,
+          "id": "air-evaluation#s8p16-2",
+          "score": 13.9969,
+          "source_id": "air-evaluation",
+          "section": "二、评估工作流 > 2.3 响应评估 > 2.3.2 主要评估方法",
+          "title": "第一节 评估介绍"
+        },
+        {
+          "rank": 5,
+          "id": "air-rag-intro#s15p2",
+          "score": 13.9842,
+          "source_id": "air-rag-intro",
+          "section": "四、RAG 已死？",
+          "title": "第一节 RAG 简介"
+        }
+      ],
+      "first_evidence_rank": 2,
+      "matched_chunk_id": "air-vector-embedding#s5p2",
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q21",
+      "question": "先拿便宜的算法粗筛一批候选，再用精细的模型对这批候选重新排序——这对应哪一类检索流程？",
+      "type": "同义改写",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-rerank",
+          "section": "一、重排序 (Re-ranking) > 1.3 Cross-Encoder 重排"
+        },
+        {
+          "mode": "section_exact",
+          "source_id": "air-rerank",
+          "section": "一、重排序 (Re-ranking) > 1.4 ColBERT 重排"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact"
+      ],
+      "evidence_candidate_count": 9,
+      "evidence_candidates": [
+        "air-rerank#s5p1",
+        "air-rerank#s5p2",
+        "air-rerank#s5p3",
+        "air-rerank#s5p4",
+        "air-rerank#s5p5",
+        "air-rerank#s6p1",
+        "air-rerank#s6p2",
+        "air-rerank#s6p3",
+        "air-rerank#s6p4"
+      ],
+      "expected_points": "retrieve-and-rerank（召回 + 重排序）：初检负责召回，重排模型负责精排。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-rag-intro#s8p4",
+          "score": 15.5534,
+          "source_id": "air-rag-intro",
+          "section": "二、为什么要使用 RAG？ > 2.2 关键优势",
+          "title": "第一节 RAG 简介"
+        },
+        {
+          "rank": 2,
+          "id": "air-rerank#s5p3",
+          "score": 14.2142,
+          "source_id": "air-rerank",
+          "section": "一、重排序 (Re-ranking) > 1.3 Cross-Encoder 重排",
+          "title": "第五节 检索进阶"
+        },
+        {
+          "rank": 3,
+          "id": "air-rerank#s4p1",
+          "score": 14.0796,
+          "source_id": "air-rerank",
+          "section": "一、重排序 (Re-ranking) > 1.2 RankLLM / LLM-based Reranker",
+          "title": "第五节 检索进阶"
+        },
+        {
+          "rank": 4,
+          "id": "air-vector-embedding#s21p3",
+          "score": 13.5606,
+          "source_id": "air-vector-embedding",
+          "section": "四、嵌入模型选型指南 > 4.3 迭代测试与优化",
+          "title": "第一节 向量嵌入"
+        },
+        {
+          "rank": 5,
+          "id": "air-rag-intro#s14p4",
+          "score": 13.2072,
+          "source_id": "air-rag-intro",
+          "section": "三、如何上手 RAG？ > 3.4 进阶与挑战",
+          "title": "第一节 RAG 简介"
+        }
+      ],
+      "first_evidence_rank": 2,
+      "matched_chunk_id": "air-rerank#s5p3",
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q22",
+      "question": "长文档检索时，如果块切得太碎，常常是词能对上但拼起来上下文不连贯，一般靠什么机制缓解？",
+      "type": "同义改写",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.1 固定大小分块"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact"
+      ],
+      "evidence_candidate_count": 10,
+      "evidence_candidates": [
+        "air-text-chunking#s10p1",
+        "air-text-chunking#s10p2",
+        "air-text-chunking#s10p3",
+        "air-text-chunking#s10p4",
+        "air-text-chunking#s10p5",
+        "air-text-chunking#s10p6",
+        "air-text-chunking#s10p7",
+        "air-text-chunking#s10p8-1",
+        "air-text-chunking#s10p8-2",
+        "air-text-chunking#s10p9"
+      ],
+      "expected_points": "通过块之间的重叠（chunk_overlap）保留上下文连续性；也可用按标题/结构分块、句子窗口等思路。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-text-chunking#s10p5",
+          "score": 13.1116,
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.1 固定大小分块",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 2,
+          "id": "air-evaluation#s2p2",
+          "score": 12.6888,
+          "source_id": "air-evaluation",
+          "section": "一、RAG评估三元组",
+          "title": "第一节 评估介绍"
+        },
+        {
+          "rank": 3,
+          "id": "air-rag-intro#s5p3",
+          "score": 12.4954,
+          "source_id": "air-rag-intro",
+          "section": "一、什么是 RAG？ > 1.3 技术演进分类",
+          "title": "第一节 RAG 简介"
+        },
+        {
+          "rank": 4,
+          "id": "air-rag-intro#s15p1",
+          "score": 12.4263,
+          "source_id": "air-rag-intro",
+          "section": "四、RAG 已死？",
+          "title": "第一节 RAG 简介"
+        },
+        {
+          "rank": 5,
+          "id": "air-text-chunking#s7p1",
+          "score": 12.178,
+          "source_id": "air-text-chunking",
+          "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.2 生成过程的“大海捞针” (Lost in the Middle)",
+          "title": "第二节 文本分块"
+        }
+      ],
+      "first_evidence_rank": 1,
+      "matched_chunk_id": "air-text-chunking#s10p5",
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q23",
+      "question": "文本块的大小会同时怎样影响检索召回、上下文完整性和系统成本？",
+      "type": "多证据",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_prefix",
+          "source_id": "air-text-chunking",
+          "section": "二、文本分块重要性"
+        },
+        {
+          "mode": "section_exact",
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.1 固定大小分块"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact",
+        "section_prefix"
+      ],
+      "evidence_candidate_count": 25,
+      "evidence_candidates": [
+        "air-text-chunking#s4p1",
+        "air-text-chunking#s4p2",
+        "air-text-chunking#s4p3",
+        "air-text-chunking#s5p1",
+        "air-text-chunking#s6p1",
+        "air-text-chunking#s6p2",
+        "air-text-chunking#s6p3",
+        "air-text-chunking#s6p4",
+        "air-text-chunking#s7p1",
+        "air-text-chunking#s7p2",
+        "air-text-chunking#s8p1",
+        "air-text-chunking#s8p2",
+        "air-text-chunking#s8p3",
+        "air-text-chunking#s8p4",
+        "air-text-chunking#s8p5",
+        "air-text-chunking#s10p1",
+        "air-text-chunking#s10p2",
+        "air-text-chunking#s10p3",
+        "air-text-chunking#s10p4",
+        "air-text-chunking#s10p5",
+        "air-text-chunking#s10p6",
+        "air-text-chunking#s10p7",
+        "air-text-chunking#s10p8-1",
+        "air-text-chunking#s10p8-2",
+        "air-text-chunking#s10p9"
+      ],
+      "expected_points": "块太小易丢上下文、检索到的片段不完整；块太大则嵌入信息被稀释、主题被稀释、长上下文里信息被淹没；块越多，索引与存储、检索和生成成本越高。要综合权衡。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-text-chunking#s5p1",
+          "score": 22.5888,
+          "source_id": "air-text-chunking",
+          "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 2,
+          "id": "air-text-chunking#s11p13",
+          "score": 20.1115,
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.2 递归字符分块",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 3,
+          "id": "air-text-chunking#s10p5",
+          "score": 19.5313,
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.1 固定大小分块",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 4,
+          "id": "air-text-chunking#s10p9",
+          "score": 19.3434,
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.1 固定大小分块",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 5,
+          "id": "air-get-start#s8p1-2",
+          "score": 17.3909,
+          "source_id": "air-get-start",
+          "section": "三、基于 LangChain 框架的 RAG 实现 > 3.2 数据准备",
+          "title": "第三节 四步构建RAG"
+        }
+      ],
+      "first_evidence_rank": 1,
+      "matched_chunk_id": "air-text-chunking#s5p1",
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q24",
+      "question": "一次完整的 RAG 系统评估通常要覆盖哪些环节和维度？",
+      "type": "多证据",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-evaluation",
+          "section": "一、RAG评估三元组"
+        },
+        {
+          "mode": "section_prefix",
+          "source_id": "air-evaluation",
+          "section": "二、评估工作流"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact",
+        "section_prefix"
+      ],
+      "evidence_candidate_count": 50,
+      "evidence_candidates": [
+        "air-evaluation#s2p1",
+        "air-evaluation#s2p2",
+        "air-evaluation#s2p3",
+        "air-evaluation#s2p4",
+        "air-evaluation#s2p5",
+        "air-evaluation#s2p6",
+        "air-evaluation#s2p7",
+        "air-evaluation#s3p1",
+        "air-evaluation#s4p1",
+        "air-evaluation#s4p2-1",
+        "air-evaluation#s4p2-2",
+        "air-evaluation#s4p3",
+        "air-evaluation#s4p4",
+        "air-evaluation#s4p5",
+        "air-evaluation#s5p1",
+        "air-evaluation#s5p2",
+        "air-evaluation#s5p3",
+        "air-evaluation#s5p4",
+        "air-evaluation#s5p5",
+        "air-evaluation#s5p6",
+        "air-evaluation#s5p7",
+        "air-evaluation#s5p8",
+        "air-evaluation#s5p9",
+        "air-evaluation#s5p10",
+        "air-evaluation#s5p11",
+        "air-evaluation#s5p12",
+        "air-evaluation#s5p13",
+        "air-evaluation#s5p14",
+        "air-evaluation#s5p15",
+        "air-evaluation#s6p1",
+        "air-evaluation#s7p1",
+        "air-evaluation#s7p2",
+        "air-evaluation#s8p1",
+        "air-evaluation#s8p2",
+        "air-evaluation#s8p3",
+        "air-evaluation#s8p4",
+        "air-evaluation#s8p5",
+        "air-evaluation#s8p6",
+        "air-evaluation#s8p7",
+        "air-evaluation#s8p8",
+        "air-evaluation#s8p9",
+        "air-evaluation#s8p10",
+        "air-evaluation#s8p11",
+        "air-evaluation#s8p12",
+        "air-evaluation#s8p13",
+        "air-evaluation#s8p14",
+        "air-evaluation#s8p15",
+        "air-evaluation#s8p16-1",
+        "air-evaluation#s8p16-2",
+        "air-evaluation#s9p1"
+      ],
+      "expected_points": "既有质量维度（上下文相关性、忠实度、答案相关性），也有工程闭环：从目标定义、构建评测集，到检索评估与响应评估，再到回归测试，持续迭代。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-evaluation#s6p1",
+          "score": 20.6026,
+          "source_id": "air-evaluation",
+          "section": "二、评估工作流 > 2.3 响应评估",
+          "title": "第一节 评估介绍"
+        },
+        {
+          "rank": 2,
+          "id": "air-evaluation#s2p7",
+          "score": 15.4765,
+          "source_id": "air-evaluation",
+          "section": "一、RAG评估三元组",
+          "title": "第一节 评估介绍"
+        },
+        {
+          "rank": 3,
+          "id": "air-evaluation#s2p6",
+          "score": 14.2554,
+          "source_id": "air-evaluation",
+          "section": "一、RAG评估三元组",
+          "title": "第一节 评估介绍"
+        },
+        {
+          "rank": 4,
+          "id": "air-rag-intro#s14p3",
+          "score": 14.0818,
+          "source_id": "air-rag-intro",
+          "section": "三、如何上手 RAG？ > 3.4 进阶与挑战",
+          "title": "第一节 RAG 简介"
+        },
+        {
+          "rank": 5,
+          "id": "air-evaluation#s3p1",
+          "score": 14.0435,
+          "source_id": "air-evaluation",
+          "section": "二、评估工作流",
+          "title": "第一节 评估介绍"
+        }
+      ],
+      "first_evidence_rank": 1,
+      "matched_chunk_id": "air-evaluation#s6p1",
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q25",
+      "question": "只要把文本块切得足够大，信息就不会丢，对吗？",
+      "type": "错误前提",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-text-chunking",
+          "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好"
+        },
+        {
+          "mode": "section_exact",
+          "source_id": "air-text-chunking",
+          "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.1 嵌入过程中的信息损失"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact"
+      ],
+      "evidence_candidate_count": 5,
+      "evidence_candidates": [
+        "air-text-chunking#s5p1",
+        "air-text-chunking#s6p1",
+        "air-text-chunking#s6p2",
+        "air-text-chunking#s6p3",
+        "air-text-chunking#s6p4"
+      ],
+      "expected_points": "不对。嵌入会把整个块压缩成一个向量，块越长语义点越多、单向量承载的信息越稀，关键细节会被模糊化，反而降低检索精度。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-text-chunking#s5p1",
+          "score": 13.2979,
+          "source_id": "air-text-chunking",
+          "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 2,
+          "id": "air-text-chunking#s7p2",
+          "score": 11.4658,
+          "source_id": "air-text-chunking",
+          "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.2 生成过程的“大海捞针” (Lost in the Middle)",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 3,
+          "id": "air-rag-intro#s15p1",
+          "score": 10.6215,
+          "source_id": "air-rag-intro",
+          "section": "四、RAG 已死？",
+          "title": "第一节 RAG 简介"
+        },
+        {
+          "rank": 4,
+          "id": "air-text-chunking#s6p4",
+          "score": 9.9518,
+          "source_id": "air-text-chunking",
+          "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.1 嵌入过程中的信息损失",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 5,
+          "id": "air-data-load#s3p2",
+          "score": 9.6873,
+          "source_id": "air-data-load",
+          "section": "一、文档加载器 > 1.1 主要功能",
+          "title": "第一节 数据加载"
+        }
+      ],
+      "first_evidence_rank": 1,
+      "matched_chunk_id": "air-text-chunking#s5p1",
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q26",
+      "question": "RAG 一定比微调效果好，这个说法对吗？",
+      "type": "错误前提",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-rag-intro",
+          "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact"
+      ],
+      "evidence_candidate_count": 6,
+      "evidence_candidates": [
+        "air-rag-intro#s7p1",
+        "air-rag-intro#s7p2",
+        "air-rag-intro#s7p3",
+        "air-rag-intro#s7p4",
+        "air-rag-intro#s7p5",
+        "air-rag-intro#s7p6"
+      ],
+      "expected_points": "不对。两者解决的是不同问题，应按知识更新频率、是否需要引用出处、是否要改变模型行为等需求来选择或组合，而不是简单比较优劣。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-rag-intro#s8p6",
+          "score": 10.9405,
+          "source_id": "air-rag-intro",
+          "section": "二、为什么要使用 RAG？ > 2.2 关键优势",
+          "title": "第一节 RAG 简介"
+        },
+        {
+          "rank": 2,
+          "id": "air-rag-intro#s7p3",
+          "score": 10.8757,
+          "source_id": "air-rag-intro",
+          "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调",
+          "title": "第一节 RAG 简介"
+        },
+        {
+          "rank": 3,
+          "id": "air-rag-intro#s7p2",
+          "score": 10.6307,
+          "source_id": "air-rag-intro",
+          "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调",
+          "title": "第一节 RAG 简介"
+        },
+        {
+          "rank": 4,
+          "id": "air-rag-intro#s7p6",
+          "score": 10.5312,
+          "source_id": "air-rag-intro",
+          "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调",
+          "title": "第一节 RAG 简介"
+        },
+        {
+          "rank": 5,
+          "id": "air-rag-intro#s7p5",
+          "score": 10.1205,
+          "source_id": "air-rag-intro",
+          "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调",
+          "title": "第一节 RAG 简介"
+        }
+      ],
+      "first_evidence_rank": 2,
+      "matched_chunk_id": "air-rag-intro#s7p3",
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q27",
+      "question": "向量检索一定比 BM25 更准确，所以混合检索没有必要，对吗？",
+      "type": "错误前提",
+      "should_refuse": false,
+      "expected_evidence": [
+        {
+          "mode": "section_exact",
+          "source_id": "air-hybrid-search",
+          "section": "一、稀疏向量 vs 密集向量 > 1.1 稀疏向量"
+        },
+        {
+          "mode": "section_exact",
+          "source_id": "air-hybrid-search",
+          "section": "一、稀疏向量 vs 密集向量 > 1.2 密集向量"
+        },
+        {
+          "mode": "section_exact",
+          "source_id": "air-hybrid-search",
+          "section": "二、混合检索"
+        },
+        {
+          "mode": "section_exact",
+          "source_id": "air-hybrid-search",
+          "section": "二、混合检索 > 2.2 优势与局限"
+        }
+      ],
+      "evidence_modes": [
+        "section_exact"
+      ],
+      "evidence_candidate_count": 10,
+      "evidence_candidates": [
+        "air-hybrid-search#s3p1",
+        "air-hybrid-search#s3p2",
+        "air-hybrid-search#s3p3",
+        "air-hybrid-search#s3p4",
+        "air-hybrid-search#s4p1",
+        "air-hybrid-search#s4p2",
+        "air-hybrid-search#s4p3",
+        "air-hybrid-search#s6p1",
+        "air-hybrid-search#s6p2",
+        "air-hybrid-search#s10p1"
+      ],
+      "expected_points": "不对。稀疏与密集各有短板（精确词匹配 vs 语义泛化），混合检索正是为了优势互补；但它也带来双索引的成本，需要按场景权衡。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-hybrid-search#s4p3",
+          "score": 17.1326,
+          "source_id": "air-hybrid-search",
+          "section": "一、稀疏向量 vs 密集向量 > 1.2 密集向量",
+          "title": "第一节 混合检索"
+        },
+        {
+          "rank": 2,
+          "id": "air-text-chunking#s10p6",
+          "score": 15.6336,
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.1 固定大小分块",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 3,
+          "id": "air-hybrid-search#s1p1",
+          "score": 15.0199,
+          "source_id": "air-hybrid-search",
+          "section": "第一节 混合检索",
+          "title": "第一节 混合检索"
+        },
+        {
+          "rank": 4,
+          "id": "air-rerank#s6p4",
+          "score": 11.4034,
+          "source_id": "air-rerank",
+          "section": "一、重排序 (Re-ranking) > 1.4 ColBERT 重排",
+          "title": "第五节 检索进阶"
+        },
+        {
+          "rank": 5,
+          "id": "air-hybrid-search#s5p7",
+          "score": 10.7307,
+          "source_id": "air-hybrid-search",
+          "section": "一、稀疏向量 vs 密集向量 > 1.3 实例对比",
+          "title": "第一节 混合检索"
+        }
+      ],
+      "first_evidence_rank": 1,
+      "matched_chunk_id": "air-hybrid-search#s4p3",
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "question_id": "Q28",
+      "question": "本项目现在为什么把切分上限设成 400 字符？",
+      "type": "项目事实（无依据）",
+      "should_refuse": true,
+      "expected_evidence": [],
+      "evidence_modes": [],
+      "evidence_candidate_count": 0,
+      "evidence_candidates": [],
+      "expected_points": "语料中没有关于本项目参数选择实验的内容。正确回答应说明：400 字符只是当前初始参数，本项目尚未做块大小对比实验，因此不能声称它最优。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-data-load#s3p2",
+          "score": 10.8251,
+          "source_id": "air-data-load",
+          "section": "一、文档加载器 > 1.1 主要功能",
+          "title": "第一节 数据加载"
+        },
+        {
+          "rank": 2,
+          "id": "air-vector-embedding#s18p1",
+          "score": 9.4113,
+          "source_id": "air-vector-embedding",
+          "section": "四、嵌入模型选型指南",
+          "title": "第一节 向量嵌入"
+        },
+        {
+          "rank": 3,
+          "id": "air-text-chunking#s11p3",
+          "score": 9.3028,
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.2 递归字符分块",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 4,
+          "id": "air-text-chunking#s11p1",
+          "score": 9.2456,
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.2 递归字符分块",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 5,
+          "id": "air-evaluation#s4p2-2",
+          "score": 8.9465,
+          "source_id": "air-evaluation",
+          "section": "二、评估工作流 > 2.1 从目标到回归的评估闭环",
+          "title": "第一节 评估介绍"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false,
+      "returned_result": true,
+      "top1_score": 10.8251
+    },
+    {
+      "question_id": "Q29",
+      "question": "本项目在十万份文档规模下的检索延迟是多少毫秒？",
+      "type": "无依据",
+      "should_refuse": true,
+      "expected_evidence": [],
+      "evidence_modes": [],
+      "evidence_candidate_count": 0,
+      "evidence_candidates": [],
+      "expected_points": "本项目只在约 10 份资料的语料上做过离线检索，没有十万份规模的压测数据，应明确回答资料中未找到相关依据。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-get-start#s4p1",
+          "score": 13.5223,
+          "source_id": "air-get-start",
+          "section": "一、启动虚拟环境 > 1.2 切换到项目目录",
+          "title": "第三节 四步构建RAG"
+        },
+        {
+          "rank": 2,
+          "id": "air-get-start#s4p2",
+          "score": 11.6298,
+          "source_id": "air-get-start",
+          "section": "一、启动虚拟环境 > 1.2 切换到项目目录",
+          "title": "第三节 四步构建RAG"
+        },
+        {
+          "rank": 3,
+          "id": "air-evaluation#s2p7",
+          "score": 11.5353,
+          "source_id": "air-evaluation",
+          "section": "一、RAG评估三元组",
+          "title": "第一节 评估介绍"
+        },
+        {
+          "rank": 4,
+          "id": "air-vector-embedding#s18p1",
+          "score": 9.78,
+          "source_id": "air-vector-embedding",
+          "section": "四、嵌入模型选型指南",
+          "title": "第一节 向量嵌入"
+        },
+        {
+          "rank": 5,
+          "id": "air-rag-intro#s15p4",
+          "score": 9.5701,
+          "source_id": "air-rag-intro",
+          "section": "四、RAG 已死？",
+          "title": "第一节 RAG 简介"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false,
+      "returned_result": true,
+      "top1_score": 13.5223
+    },
+    {
+      "question_id": "Q30",
+      "question": "红烧肉怎么做才好吃？",
+      "type": "无依据",
+      "should_refuse": true,
+      "expected_evidence": [],
+      "evidence_modes": [],
+      "evidence_candidate_count": 0,
+      "evidence_candidates": [],
+      "expected_points": "完全在知识库范围之外（库内是 RAG 技术教程），应回答资料中未找到相关依据，不得编造。",
+      "top_hits": [
+        {
+          "rank": 1,
+          "id": "air-vector-embedding#s21p1",
+          "score": 6.7806,
+          "source_id": "air-vector-embedding",
+          "section": "四、嵌入模型选型指南 > 4.3 迭代测试与优化",
+          "title": "第一节 向量嵌入"
+        },
+        {
+          "rank": 2,
+          "id": "air-text-chunking#s10p5",
+          "score": 5.304,
+          "source_id": "air-text-chunking",
+          "section": "三、基础分块策略 > 3.1 固定大小分块",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 3,
+          "id": "air-text-chunking#s8p4",
+          "score": 5.0887,
+          "source_id": "air-text-chunking",
+          "section": "二、文本分块重要性 > 2.2 为何“块”不是越大越好 > 2.2.3 主题稀释导致检索失败",
+          "title": "第二节 文本分块"
+        },
+        {
+          "rank": 4,
+          "id": "air-rag-intro#s15p5",
+          "score": 4.8889,
+          "source_id": "air-rag-intro",
+          "section": "四、RAG 已死？",
+          "title": "第一节 RAG 简介"
+        },
+        {
+          "rank": 5,
+          "id": "air-rag-intro#s7p4",
+          "score": 4.6391,
+          "source_id": "air-rag-intro",
+          "section": "二、为什么要使用 RAG？ > 2.1 技术选型：RAG vs. 微调",
+          "title": "第一节 RAG 简介"
+        }
+      ],
+      "first_evidence_rank": null,
+      "matched_chunk_id": null,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false,
+      "returned_result": true,
+      "top1_score": 6.7806
+    }
+  ]
+}
