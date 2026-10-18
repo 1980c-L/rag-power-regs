@@ -1,5 +1,4 @@
 import { RichText } from './RichText';
-import { UserLibraryPanel } from './UserLibraryPanel';
 import { DATA_SOURCE } from '../services';
 import type { CorpusId, GenerateMode, MetaResponse, Settings } from '../types';
 
@@ -8,12 +7,12 @@ interface Props {
   settings: Settings;
   onChange: (patch: Partial<Settings>) => void;
   locked: boolean;
-  /** 资料库增删后刷新 meta，让「我的资料库」选项即时出现/消失 */
-  onMetaRefresh?: () => void;
 }
 
-/** 右侧设置栏：知识库 / 生成模式 / Top-K 的唯一入口 + 资料与参数 + 使用提示 */
-export function SettingsPanel({ meta, settings, onChange, locked, onMetaRefresh }: Props) {
+/** 设置页：知识库 / 生成模式 / Top-K 的唯一入口 + 资料与参数 + 使用提示。
+    2026-09-28 重设计：由右侧栏升为独立「设置」页（.aside 类名保留以稳住验收契约）；
+    资料管理（UserLibraryPanel）升为独立「资料库」页，由 App 直接渲染。 */
+export function SettingsPanel({ meta, settings, onChange, locked }: Props) {
   const corpora = meta?.corpora ?? [];
   const corpus = corpora.find((c) => c.corpus_id === settings.corpus_id);
   // 注意用 ?? null 兜底：meta 还没到（api 模式接口不可达时永远不到）时字段是 undefined，
@@ -145,10 +144,7 @@ export function SettingsPanel({ meta, settings, onChange, locked, onMetaRefresh 
         )}
       </section>
 
-      {/* 我的资料库管理入口（仅 api 模式；mock 模式没有服务端，不假装能用） */}
-      {DATA_SOURCE === 'api' && (
-        <UserLibraryPanel meta={meta?.user_library ?? null} locked={locked} onChanged={onMetaRefresh} />
-      )}
+      {/* 资料管理已升为独立「资料库」页（App 按 DATA_SOURCE 渲染），此处不再重复放置 */}
 
       <section className="card aside-card">
         <h2 className="aside-card__title">使用提示</h2>

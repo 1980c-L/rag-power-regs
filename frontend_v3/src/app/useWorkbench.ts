@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { DATA_SOURCE, service } from '../services';
 import { ApiError } from '../services/apiService';
 import {
@@ -54,6 +54,8 @@ export interface Workbench {
   /** 资料导入/删除/重建后由资料管理面板调用：让「我的资料库」选项的出现与消失即时生效 */
   refreshMeta: () => void;
   ask: () => void;
+  /** v1.3：由界面直接给出问题文本发起一次检索（与 ask() 同一语义，供示例问题/重试使用） */
+  askQuestion: (q: string) => void;
 }
 
 export function useWorkbench(): Workbench {
@@ -109,9 +111,13 @@ export function useWorkbench(): Workbench {
       .catch(() => { setMeta(null); setMetaError(true); });
   }, [settings]);
 
-  const ask = useCallback(() => {
-    const q = question.trim();
-    if (!q) return;
+  // 70 号复审 R1：单题串行语义。在途请求未返回前，任何提问入口（Enter/按钮/示例/重试）
+  // 都不再发起新请求——否则慢响应的旧结果会覆盖后发起的问题。ref 保证同一渲染帧内也同步生效。
+  const inFlight = useRef(false);
+  const runQuery = useCallback((raw: string) => {
+    const q = raw.trim();
+    if (!q || inFlight.current) return;
+    inFlight.current = true;
     setTransport(null);
     setRun({ question: q, status: 'retrieving' });
     const wantGenerate = settings.mode === 'generate';
@@ -121,16 +127,22 @@ export function useWorkbench(): Workbench {
     service.query({ ...settings, question: q })
       .then((res) => {
         window.clearTimeout(t);
+        inFlight.current = false;
         setResponse(res);
         setRun({ question: q, status: res.status === 'error' ? 'error' : 'done' });
       })
       .catch((e: unknown) => {
         window.clearTimeout(t);
+        inFlight.current = false;
         setRun({ question: q, status: 'error' });
         // 传输层失败：保留上一次的结果（若有），但把"本次没有任何结果"说清楚
         setTransport(toTransportFailure(e));
       });
-  }, [question, settings]);
+  }, [settings]);
+
+  const ask = useCallback(() => runQuery(question), [runQuery, question]);
+  /** v1.3 对话流：由界面直接给出问题文本发起（语义与 ask() 完全一致） */
+  const askQuestion = useCallback((q: string) => runQuery(q), [runQuery]);
 
   const drift = useMemo<SettingsDrift>(() => {
     if (!response) return NO_DRIFT;
@@ -145,6 +157,6 @@ export function useWorkbench(): Workbench {
 
   return {
     meta, metaError, settings, question, setQuestion, run, response, transport,
-    forcedState, drift, updateSettings, refreshMeta, ask,
+    forcedState, drift, updateSettings, refreshMeta, ask, askQuestion,
   };
 }

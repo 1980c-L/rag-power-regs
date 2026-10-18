@@ -7,7 +7,8 @@ interface Props {
   response: QueryResponse | null;
 }
 
-function Row({ item, index }: { item: EvidenceItem; index: number }) {
+/** v1.3 对话流：Row 同时被证据披露框（ChatMessage）复用，故导出；结构不变 */
+export function Row({ item, index }: { item: EvidenceItem; index: number }) {
   const [open, setOpen] = useState(false);
   const isHit = item.origin === 'hit';
   return (

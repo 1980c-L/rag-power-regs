@@ -147,11 +147,23 @@ def start_stub(mode: str, log: Path) -> subprocess.Popen:
     raise RuntimeError("桩服务没起来")
 
 
-def start_api(with_key: bool, log: Path) -> subprocess.Popen:
+def start_api(with_key: bool, log: Path,
+              cors_origins: tuple | None = None) -> subprocess.Popen:
+    """cors_origins=None：与历轮完全一致。提供时用 -c 包装进程在运行期替换
+    api_v3.ALLOWED_ORIGINS 模块全局（api_v3.py 本体零改动，请求期读模块全局）——
+    用于预览端口不再是 5273 的场合（如正式 launcher 常驻占用默认端口，隔离回归换口）。"""
     env_extra = {"DEEPSEEK_API_KEY": SENTINEL_KEY} if with_key else {}
-    proc = spawn([sys.executable, "api_v3.py", "--port", str(API_PORT),
-                  "--llm-base-url", STUB_BASE, "--llm-model", "stub-model"],
-                 env_extra=env_extra, drop_env=("DEEPSEEK_API_KEY",) if not with_key else (),
+    argv = ["api_v3.py", "--port", str(API_PORT),
+            "--llm-base-url", STUB_BASE, "--llm-model", "stub-model"]
+    if cors_origins is None:
+        cmd = [sys.executable, *argv]
+    else:
+        origins = ", ".join(f"'{o}'" for o in cors_origins)
+        cmd = [sys.executable, "-c",
+               f"import sys; sys.argv = {argv!r}; import api_v3; "
+               f"api_v3.ALLOWED_ORIGINS = ({origins}); "
+               "raise SystemExit(api_v3.main(sys.argv[1:]))"]
+    proc = spawn(cmd, env_extra=env_extra, drop_env=("DEEPSEEK_API_KEY",) if not with_key else (),
                  log=log)
     if not wait_health(API_PORT):
         raise RuntimeError("api_v3 没起来")
