@@ -1,6 +1,6 @@
 # 评测结果与失败分析
 
-[返回首页](../README.md) · [项目复盘](PROJECT.md) · [本地运行](QUICKSTART.md)
+[返回首页](../README.md) · [项目复盘](PROJECT.md) · [政策语料回归评测](EVALUATION-REGRESSION.md) · [本地运行](QUICKSTART.md)
 
 ## 实验范围
 
